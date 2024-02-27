@@ -17,7 +17,7 @@
 <body>
     <div class="sidebar">
         <div class="logo-details">
-            <a href="../../index.php">
+            <a href="../../dashboard.php" class="logo_link">
                 <span class="logo_name">BakeryPro</span>
             </a>
             <i class='bx bx-menu' id="btn" ></i>

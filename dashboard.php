@@ -12,14 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="vista/style/styles.css">
     <link rel="shortcut icon" href="./vista/img/logo.svg" type="image/x-icon">
-    
 
 </head>
 <body>
   <form action="./dashboard.php" method="post">
-  <div class="sidebar">
+    <div class="sidebar">
         <div class="logo-details">
-            <a href="./index.php">
+            <a href="../../dashboard.php" class="logo_link">
                 <span class="logo_name">BakeryPro</span>
             </a>
             <i class='bx bx-menu' id="btn" ></i>

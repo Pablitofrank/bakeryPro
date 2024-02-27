@@ -18,7 +18,7 @@
 <form action="./dashboard.php" method="post">
   <div class="sidebar">
         <div class="logo-details">
-            <a href="../../dashboard.php">
+            <a href="../../dashboard.php" class="logo_link">
                 <span class="logo_name">BakeryPro</span>
             </a>
             <i class='bx bx-menu' id="btn" ></i>
@@ -130,5 +130,7 @@
     <br><a href="../../dashboard.php">VOLVER</a>
     </div>
     </section>
+
+    <script src="../../vista/js/main.js"></script>
 </body>
 </html>

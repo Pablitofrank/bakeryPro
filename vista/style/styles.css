@@ -240,7 +240,9 @@
     width: 50px;
     background: none;
 }
-
+.logo_link {
+    text-decoration: none;
+}
 .home-section{
     position: relative;
     background: #eeddd2;
@@ -265,11 +267,6 @@
     font-weight: 500;
     margin: 18px
 }
-@media (max-width: 420px) {
-    .sidebar li .tooltip{
-        display: none;
-    }
-}
 
 /* formularios */
 
@@ -280,15 +277,6 @@
     padding: 30px;
     border-radius: 20px;
 }
-
-.form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 35px;
-
-}
-
 .label {
     font-size: var(--sm);
     font-weight: bold;
@@ -322,14 +310,18 @@
 }
 
 .login {
-    background-color: var(--black);
-    width: 100%;
+    display: flex;
     height: 100vh;
-    display: grid;
-    place-items: center;
-
-    z-index: 2;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--black);
+}
+.login .title {
     position: absolute;
+    top: 200px;
+    font-size: 38px;
+    color: var(--white);
+
 }
 .form a {
     color: var(--hospital-green);
@@ -339,14 +331,12 @@
     margin-bottom: 52px;
 }
 .form-container {
-    display: grid;
+    display: flex;
     background: var(--white);
-    grid-template-rows: auto 1fr auto;
-    width: 300px;
+    width: 600px;
+    height: 300px;
     justify-items: center;
     border-radius: 14px;
-    position: absolute;
-    z-index: 4;
     box-shadow: #ffa500 0px 0px 20px 0px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
@@ -423,18 +413,6 @@
 }
 .login-button {
     margin: 14px 0px 32px;
-}
-
-
-@media (max-width: 640px) {
-    .logo {
-        display: block;
-    }
-    .secondary-button {
-        position: absolute;
-        bottom: 20px;
-        width: 300px;
-    }
 }
 
 /* formularios */
@@ -515,5 +493,22 @@ td {
 }
 
 tr:hover td { 
-    background: #d0dafd; color: #339; 
+    background: #d0dafd; color: rgb(105, 21, 21); 
+}
+
+
+@media (max-width: 640px) {
+    .logo {
+        display: block;
+    }
+    .secondary-button {
+        position: absolute;
+        bottom: 20px;
+        width: 300px;
+    }
+}
+@media (max-width: 420px) {
+    .sidebar li .tooltip{
+        display: none;
+    }
 }

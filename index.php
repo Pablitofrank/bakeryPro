@@ -13,8 +13,8 @@
     <div class="login">
         <div class="form-container">
             
-            <img src="" alt="">
-            <h1   h1 class="title">Iniciar Sesión</h1>
+            <h1 class="title">Iniciar Sesión</h1>
+            <img src="./vista/img/login.svg" alt="imagen de inicio de sesion" class="loginImg">
 
             <form action="controlador/login/validar.php" method="post" class="form">
                     <label for="password" class="label">Cedula</label>
