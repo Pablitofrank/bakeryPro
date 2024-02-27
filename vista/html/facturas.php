@@ -15,6 +15,7 @@
 
 </head>
 <body>
+    
     <div class="sidebar">
         <div class="logo-details">
             <a href="../../dashboard.php" class="logo_link">
@@ -88,17 +89,18 @@
      </div>
 
     <!-- Codigo PHP -->
+
     <section class="home-section">
      <div class="container">
         <div class="text">Agregar Factura</div>
-        <form action="../../controlador/facturas/insertar.php" method="post">
+        <form action="../../controlador/facturas/insertar.php" method="post" class="form">
          <?php
             include '../../modelo/conexion.php';
             $sql = "SELECT * FROM tblInsumos";
             $result = $conexion->query($sql);
             
             // Recorrer datos y crear options
-            echo "<label for='NombreInsumo' class='label'>Insumo:</label>
+            echo "<label for='NombreInsumo'>Insumo:</label>
             
             <select name='NombreInsumo' id='opcion' class='input'>";
             if ($result->num_rows > 0) {
@@ -135,7 +137,7 @@
             // Recorrer datos y crear options
             echo "<label for='insumo'>Insumo:</label>
             
-            <select name='insumo' id='opcion'>";
+            <select name='insumo' id='opcion' class='input'>";
             if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
@@ -158,7 +160,8 @@
                 }
             }
             ?>
-            ------------------------------
+
+
             <?php
             include '../../modelo/conexion.php';
             $sql = "SELECT * FROM tblProveedores";
@@ -167,7 +170,7 @@
             // Recorrer datos y crear options
             echo "<label for='razonSocial'>RazonSocial:</label>
             
-            <select name='insumo' id='opcion'>";
+            <select name='insumo' id='opcion' class='input'>";
             if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
@@ -198,13 +201,13 @@
             $result = $conexion->query($sql);
             
             // Recorrer datos y crear options
-            echo "<label for='medida'>medida:</label>
+            echo "<label for='medida' >medida:</label>
             
-            <select name='insumo' id='opcion'>";
+            <select name='insumo' id='opcion' class='input'>";
             if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row["IdUnidadMedida"] . "'>" . $row["medida"] . "</option>";
+                    echo "<option value='" . $row["IdUnidadMedida"] . "' class='input'>" . $row["medida"] . "</option>";
                 }
             } else {
                 echo "0 results";
@@ -223,7 +226,7 @@
                 }
             }
             ?>
-            <input type="submit" value="Agregar">
+            <input type="submit" value="Agregar" class="btn">
         </form>
     </section>
 
