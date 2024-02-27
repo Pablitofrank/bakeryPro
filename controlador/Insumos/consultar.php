@@ -11,6 +11,8 @@
     <?php
     include '../../modelo/conexion.php';
 
+
+
     if (isset($_POST['idInsumo'])) {
         $idInsumo = $_POST['idInsumo'];
         $sql = "SELECT * FROM tblinsumos INNER JOIN tblUnidadesMedidas ON tblinsumos.IdUnidadMedida = tblUnidadesMedidas.IdUnidadMedida WHERE IdInsumo=$idInsumo";
@@ -19,6 +21,9 @@
         echo "<p>FDGDFG.</p>";
         exit;
     }
+
+    if (!isset($_POST['buscar'])){$_POST['buscar']='';}
+    if (!isset($_POST['buscarcategoria'])){$_POST['buscarcategoria']='';}
     ?>
     <form class="form" name="form" method="POST"action="index.php">
         <div>
@@ -53,7 +58,47 @@
         <div class="col-1">
             <input type="submit" class="btn" value="ver">
         </div>
-
+        <?php  
+         if ($_POST['buscar']  == ''){$_POST ['buscar']= '';}
+         $aKeyword = explode(" ", $_POST['buscar']);
+         
+         if ($_POST["buscar"] == '' AND $_POST['buscacategoria'] == '') {
+            $query = "SELECT tblinsumos.*, tblcategorias.categoria 
+                      FROM tblinsumos 
+                      INNER JOIN tblcategorias ON tblinsumos.Idcategoria = tblcategorias.Idcategoria";
+        } else {
+            $query = "SELECT tblinsumos.*, tblcategorias.categoria 
+                      FROM tblinsumos 
+                      INNER JOIN tblcategorias ON tblinsumos.Idcategoria = tblcategorias.Idcategoria";
+        
+            if ($_POST["buscar"] != '') {
+                $aKeyword = explode(" ", $_POST["buscar"]);
+        
+                $query .= " WHERE (tblinsumos.NombreInsumo LIKE LOWER('%".$aKeyword[0]."%') OR tblcategorias.categoria LIKE LOWER('%".$aKeyword[0]."%'))";
+        
+                for ($i = 1; $i < count($aKeyword); $i++) {
+                    if (!empty($aKeyword[$i])) {
+                        $query .= " OR tblinsumos.NombreInsumo LIKE '%" . $aKeyword[$i] . "%' OR tblcategorias.categoria LIKE '%" . $aKeyword[$i] . "%'";
+                    }
+                }
+            }
+        
+            if ($_POST['buscacategoria'] != '') {
+                $categoria = $_POST['buscacategoria'];
+        
+                if ($_POST["buscar"] != '') {
+                    $query .= " AND ";
+                } else {
+                    $query .= " WHERE ";
+                }
+        
+                $query .= "tblcategorias.categoria LIKE '%" . $categoria . "%'";
+            }
+        }
+        
+        // Ejecutar la consulta $query
+          
+        ?>
         <p><i class="mdi mdi-file-document"></i>Resultados encontrados</p>
     </form>
 
