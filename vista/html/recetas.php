@@ -90,53 +90,19 @@
     <!-- Formulario para agregar un nuevo usuario -->
     <section class="home-section">
         <div class="container">
-        <div class="text">Agregar usuarios</div>
-            <form action="../../controlador/usuario/insertar.php" method="post" class="form">
-                
-            <label for="nombres" class="label">Nombres:</label><input type="text" name="nombres" required class="input"><br>
-                
-                <label for="apellidos" class="label">Apellidos:</label> <input type="text" name="apellidos" required class="input"><br>
-
-                <?php
-                include '../../modelo/conexion.php';
-                $sql = "SELECT * FROM tblroles";
-                $result = $conexion->query($sql);
-                
-                // Recorrer datos y crear options
-                echo "<label for='rol' class='label'>Rol:</label>
-                
-                <select name='rol' id='opcion' class='input'>";
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {
-                        echo "<option value='" . $row["IdRol"] . "'>" . $row["Rol"] . "</option>";
-                    }
-                } else {
-                    echo "0 results";
-                }
-                echo "</select><br>";
-                
-                // Actualizar valor del option en la base de datos
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    // Actualizar valor del option en la base de datos
-                    $sql = "UPDATE tblusuario SET IdRol = " . $_POST['rol'] . " WHERE IdUsuario = 1";
-
-                    if ($conexion->query($sql) === TRUE) {
-                        echo "Record updated successfully";
-                    } else {
-                        echo "Error updating record: " . $conexion->error;
-                    }
-                }
-                ?>
-        
-                    <label for="cedula" class="label">Cedula:</label> <input type="text" name="cedula" required class="input"><br>
-                    <label for="telefono" class="label">Telefono:</label> <input type="text" name="telefono" required class="input"><br>
-                    <input type="submit" value="Agregar" class="btn">
-                </form>
-            </div>
+            <div class="text">Agregar receta</div>
+            <form action="../../controlador/receta/insertar.php" method="post" class="form">
+                <label for="NombreReceta" class="label">Nombre Receta:</label> 
+                    <input type="text" name="NombreProducto" class="input" required><br>
+                <label for="cantidadInsumo" class="label">Cantidad Insumo:</label> 
+                    <input type="text" name="cantidadInsumo" class="input" required><br>
+                    <input type="submit" value="Agregar" class="btn"> <br>
+                    <input type="button" value="+" id="agregar">
+            </form>
         </div>
     </section>
 
-    <script src="../../vista/js/main.js"></script>
+    <script src="../../vista/js/input.js"></script>
+    <script src="../../vista/js/dom.js"></script>
 </body>
 </html>
