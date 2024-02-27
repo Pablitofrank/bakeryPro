@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
     <div class="sidebar">
         <div class="logo-details">
             <a href="../../index.php">
@@ -88,7 +89,7 @@
      </div>
 
     <section class="home-section">
-        <!-- Formulario para agregar un nuevo usuario -->
+        <!-- Formulario para agregar un nuevo insumo -->
       <div class="container">
         <div class="text">Agregar Insumos</div>
         <form action="../../controlador/insumos/insertar.php" method="post" class="form">
@@ -97,41 +98,35 @@
 
                 <label for="stock" class='label'>Stock:</label>
                 <input type="text" name="stock" required class="input"><br>
-
+                
                 <?php
                 include '../../modelo/conexion.php';
                 $sql = "SELECT * FROM tblunidadesmedidas";
                 $result = $conexion->query($sql);
                 
                 // Recorrer datos y crear options
-                echo "<label for='medida' class='label'>medida:</label>
+                echo "<label for='medida' class='label'>Medida:</label>
+                <select name='idUnidadMedida' id='medida' class='input'>";
                 
-                <select name='insumo' id='opcion' class='input'>";
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        echo "<option value='" . $row["IdUnidadMedida"] . "" . $row["medida"] . "</option>";
+                        echo "<option value='" . $row["IdUnidadMedida"] . "'>" . $row["medida"] . "</option>";
                     }
                 } else {
-                    echo "0 results";
+                    echo "<option value=''>No hay unidades de medida disponibles</option>";
                 }
                 echo "</select>";
-                
-                // Actualizar valor del option en la base de datos
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    // Actualizar valor del option en la base de datos
-                    $sql = "UPDATE tblunidadesmedidas SET IdUnidadMedida = " . $_POST['medida'] . " WHERE IdUnidadMedida = 1";
-
-                    if ($conexion->query($sql) === TRUE) {
-                        echo "Record updated successfully";
-                    } else {
-                        echo "Error updating record: " . $conexion->error;
-                    }
-                }
                 ?>
-            
                 <input type="submit" value="Agregar" class="btn">
             </form>
+            
+            <div class="consulta">
+                <h2>Consulta usuarios</h2>
+                <form action="../../controlador/insumos/consultar.php" method="post">
+                    <input type="submit" value="Consultar" class="btn">
+                </form>
+            </div>
         </div>
     </section>
 

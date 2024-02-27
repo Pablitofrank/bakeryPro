@@ -90,32 +90,38 @@
     <section class="home-section">
         <div class="container">
             <div class="text">Agregar Proveedores </div>
-                <form action="../../controlador/proveedores/insertar.php" method="post">
+                <form action="../../controlador/proveedores/insertar.php" method="post" class="form">
                 
-                <label for="nit">NIT:</label><input type="text" name="nit" required class="input"><br>
+                <label for="nit" class="label">NIT:</label>
+                    <input type="text" name="nit" required class="input"><br>
 
-                <label for="razonSocial">Razon social:</label><input type="text" name="razonSocial" required class="input"><br>
+                <label for="razonSocial" class="label">Razon social:</label>
+                    <input type="text" name="razonSocial" required class="input"><br>
 
-                <label for="contacto">Contacto:</label><input type="text" name="contacto" required class="input"><br>
+                <label for="contacto" class="label">Contacto:</label>
+                    <input type="text" name="contacto" required class="input"><br>
 
-                <label for="telefono">Telefono:</label><input type="text" name="telefono" required class="input"><br>
+                <label for="telefono" class="label">Telefono:</label>
+                    <input type="text" name="telefono" required class="input"><br>
 
-                <label for="correo">Correo:</label><input type="text" name="correo" required class="input"><br>
+                <label for="correo" class="label">Correo:</label>
+                    <input type="text" name="correo" required class="input"><br>
 
-                <label for="direccion">Direccion:</label><input type="text" name="direccion" required class="input"><br>
+                <label for="direccion" class="label">Direccion:</label>
+                    <input type="text" name="direccion" required class="input"><br>
 
                 <!-- Nuevo campo para el rol -->
-                <input type="submit" value="Agregar">
+                <input type="submit" value="Agregar" class="btn">
             </form>
-            </div>
-
             <div>
             <h2>Consulta Proveedores</h2>
             <form action="../../controlador/proveedores/consultar.php" method="post">
-                Ingrese el ID: <input type="text" name="id">
-                <input type="submit" value="Consultar">
+                <input type="submit" value="Consultar" class="btn">
             </form>
         </div>
+            </div>
+
+
     </section>
 
     <script src="../../vista/js/main.js"></script>
