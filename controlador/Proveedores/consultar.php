@@ -12,14 +12,17 @@
     <?php
     include '../../modelo/conexion.php';
 
-    if (isset($_POST['idProveedores'])) {
-        $id = $_POST['idProveedores'];
-        $sql = "SELECT * FROM tblproveedores INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol WHERE IdProveedores=$idProveedores";
+    // if (isset($_POST['idProveedores'])) {
+    //     $id = $_POST['idProveedores'];
+    //     $sql = "SELECT * FROM tblproveedores INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol WHERE IdProveedores=$idProveedores";
+    //     $resultado = $conexion->query($sql);
+    // } else {
+    //     echo "<p>Ingrese un ID para realizar la consulta.</p>";
+    //     exit;
+    // }
+
+        $sql = "SELECT * FROM tblproveedores";
         $resultado = $conexion->query($sql);
-    } else {
-        echo "<p>Ingrese un ID para realizar la consulta.</p>";
-        exit;
-    }
     ?>
 
     <?php if ($resultado->num_rows > 0) { ?>
