@@ -93,22 +93,22 @@
                 <form action="../../controlador/proveedores/insertar.php" method="post" class="form">
                 
                 <label for="nit" class="label">NIT:</label>
-                    <input type="text" name="nit" required class="input"><br>
+                    <input type="text" name="NIT" required class="input"><br>
 
                 <label for="razonSocial" class="label">Razon social:</label>
-                    <input type="text" name="razonSocial" required class="input"><br>
+                    <input type="text" name="RazonSocial" required class="input"><br>
 
                 <label for="contacto" class="label">Contacto:</label>
-                    <input type="text" name="contacto" required class="input"><br>
+                    <input type="text" name="Contacto" required class="input"><br>
 
                 <label for="telefono" class="label">Telefono:</label>
-                    <input type="text" name="telefono" required class="input"><br>
+                    <input type="text" name="Telefono" required class="input"><br>
 
                 <label for="correo" class="label">Correo:</label>
-                    <input type="text" name="correo" required class="input"><br>
+                    <input type="text" name="Correo" required class="input"><br>
 
                 <label for="direccion" class="label">Direccion:</label>
-                    <input type="text" name="direccion" required class="input"><br>
+                    <input type="text" name="Direccion" required class="input"><br>
 
                 <!-- Nuevo campo para el rol -->
                 <input type="submit" value="Agregar" class="btn">

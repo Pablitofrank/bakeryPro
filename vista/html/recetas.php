@@ -97,7 +97,6 @@
                 <label for="cantidadInsumo" class="label">Cantidad Insumo:</label> 
                     <input type="text" name="cantidadInsumo" class="input" required><br>
                     <input type="submit" value="Agregar" class="btn"> <br>
-                    <input type="button" value="+" id="agregar">
             </form>
         </div>
     </section>
