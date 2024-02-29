@@ -122,8 +122,8 @@
             </form>
             
             <div class="consulta">
-                <h2>Consulta usuarios</h2>
-                <form action="../../controlador/insumos/consultar.php" method="post">
+                <h2>Consulta insumos</h2>
+                <form action="../../controlador/Insumos/consultar.php" method="post">
                     <input type="submit" value="Consultar" class="btn">
                 </form>
             </div>
