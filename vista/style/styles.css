@@ -13,6 +13,14 @@
   --yellow: #ffa500;
   --black: #201e1c;
   --white: #ffffff;
+
+  /* Los siguientes son los colorares que se usaran en el proyecto */
+  --official-black:#1e1e1e;
+  --official-red:#ffa500;
+  --background-white:#f7f7f7;
+  --card-white:#ffffff;
+  --
+
 }
 *{
     margin: 0;
@@ -31,7 +39,7 @@
     top: 0;
     height: 100%;
     width: 78px;
-    background: var(--orange);
+    background: var(--official-black);
     padding: 6px 14px;
     z-index: 99;
     transition: all 0.5s ease;
@@ -77,7 +85,7 @@
     text-align: right;
 }
 .sidebar i{
-    color: #fff;
+    color: var(--official-red);
     height: 60px;
     min-width: 50px;
     font-size: 28px;
@@ -161,7 +169,6 @@
     align-items: center;
     text-decoration: none;
     transition: all 0.4s ease;
-    background: var(--white_trasnparent);
 }
 .sidebar li a:hover{
     background: #FFF;
@@ -245,7 +252,7 @@
 }
 .home-section{
     position: relative;
-    background: #eeddd2;
+    background: var(--background-white);
     min-height: 100vh;
     display: flex;
     top: 0;
@@ -261,22 +268,14 @@
     width: calc(100% - 250px);
 }
 .home-section .text{
-    display: inline-block;
-    color: #ffffff;
+    display: inline-ñ-block;
+    color: var(--official-black);
     font-size: 25px;
     font-weight: 500;
     margin: 18px
 }
 
 /* formularios */
-
-.container{
-    width: 40%;
-    height: auto;
-    background: #d4894c;
-    padding: 30px;
-    border-radius: 20px;
-}
 .label {
     font-size: var(--sm);
     font-weight: bold;
@@ -287,7 +286,7 @@
     background-color: var(--text-input-field);
     border: none;
     border-radius: 8px;
-    height: 32px;
+    height: 38px;
     font-size: var(--md);
     padding: 6px 12px;
 }
@@ -424,7 +423,7 @@
 .container{
     width: 40%;
     height: auto;
-    background: #d4894c;
+    background: var(--card-white);
     padding: 30px;
     border-radius: 20px;
 }
