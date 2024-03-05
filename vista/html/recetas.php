@@ -88,20 +88,23 @@
      </div>
 
     <!-- Formulario para agregar un nuevo usuario -->
+
     <section class="home-section">
-        <div class="container">
-            <div class="text">Agregar receta</div>
-            <form action="../../controlador/receta/insertar.php" method="post" class="form">
+    <div class="container">
+        <div class="text">Agregar receta</div>
+            <form action="../../controlador/recetas/insertar.php" method="post" class="form" id="receta-form">
                 <label for="NombreReceta" class="label">Nombre Receta:</label> 
                     <input type="text" name="NombreProducto" class="input" required><br>
-                <label for="cantidadInsumo" class="label">Cantidad Insumo:</label> 
-                    <input type="text" name="cantidadInsumo" class="input" required><br>
+                    
+                <div id="cantidadInsumo-container">
+                    <label for="cantidadInsumo" class="label">Cantidad Insumo:</label> 
+                    <input type="text" name="cantidadInsumo[]" class="input" required><br>
+                </div>
                     <input type="submit" value="Agregar" class="btn"> <br>
+                    <input type="button" value="+" class="btn" id="agregar-input"> <br>
             </form>
         </div>
     </section>
-
     <script src="../../vista/js/input.js"></script>
-    <script src="../../vista/js/dom.js"></script>
 </body>
 </html>
