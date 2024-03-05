@@ -132,7 +132,7 @@
                 <tr class="filters">
                     <th>
                         categoria
-                        <select name="" id="asignned-tutor-filter" id="buscacategoria" class="form-control mt-2">
+                        <select name="" id="asignned-tutor-filter" id="buscarcategoria" class="form-control mt-2">
                             <?php if ($_POST ["buscarcategoria"] !='' ){ ?>
                             <option value="<?php echo $_POST["buscarcategoria"]; ?>"><?php echo $_POST["buscarcategoria"]; ?></option> 
                             <?php }?>
@@ -154,7 +154,7 @@
          if ($_POST['buscar']  == ''){$_POST ['buscar']= '';}
          $aKeyword = explode(" ", $_POST['buscar']);
          
-         if ($_POST["buscar"] == '' AND $_POST['buscacategoria'] == '') {
+         if ($_POST["buscar"] == '' AND $_POST['buscarcategoria'] == '') {
             $query = "SELECT tblinsumos.*, tblcategorias.categoria 
                       FROM tblinsumos 
                       INNER JOIN tblcategorias ON tblinsumos.Idcategoria = tblcategorias.Idcategoria";
@@ -175,8 +175,8 @@
                 }
             }
         
-            if ($_POST['buscacategoria'] != '') {
-                $categoria = $_POST['buscacategoria'];
+            if ($_POST['buscarcategoria'] != '') {
+                $categoria = $_POST['buscarcategoria'];
         
                 if ($_POST["busc ar"] != '') {
                     $query .= " AND ";
@@ -187,7 +187,20 @@
                 $query .= "tblcategorias.categoria LIKE '%" . $categoria . "%'";
             }
         }
-        
+
+        if ($_POST["buscar"] != '' ){
+
+            $query .= " AND NombreInsumo = '".$_POST['buscar']."' ";
+
+     }
+
+     
+
+     if ($_POST["buscarcategoria"] != '' ){
+
+        $query .= " AND categoria = '".$_POST['buscarcategoria']."' ";
+
+ }
         // Ejecutar la consulta $query
           
         ?>
@@ -204,8 +217,8 @@
 
         <tbody>
             <tr>
-                <td><?php echo $rowsql["Nombre"];?></td>
-                <td><?php echo $rowsql["Categoria"];?></td>
+                    <td><?php echo $rowsql["Nombre"];?></td>
+                    <td><?php echo $rowsql["Categoria"];?></td>
             </tr>
         </tbody>
     </table>
