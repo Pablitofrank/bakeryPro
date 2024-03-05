@@ -2,14 +2,14 @@
 include '../../modelo/conexion.php';
 
 $idProveedores = $_POST['idProveedores']; 
-$nit = $_POST['nit']; 
-$razonSocial = $_POST['razonSocial']; 
-$contacto = $_POST['contacto']; 
-$telefono = $_POST['telefono']; 
-$correo = $_POST['correo']; 
-$direccion = $_POST['direccion']; 
+$nit = $_POST['NIT']; 
+$razonSocial = $_POST['RazonSocial']; 
+$contacto = $_POST['Contacto']; 
+$telefono = $_POST['Telefono']; 
+$correo = $_POST['Correo']; 
+$direccion = $_POST['Direccion']; 
 
-$sql = "INSERT INTO tblproveedores (idProveedores, nit, razonSocial, contacto, telefono, correo, direccion) VALUES ('$idProveedores', '$nit', '$razonSocial', '$contacto', '$telefono', '$correo', '$direccion')";
+$sql = "INSERT INTO tblproveedores (idProveedores,NIT, RazonSocial, Contacto, Telefono, Correo, Direccion) VALUES ('$idProveedores', '$nit', '$razonSocial', '$contacto', '$telefono', '$correo', '$direccion')";
 
 if ($conexion->query($sql) === TRUE) {
     header('Location: ../../vista/html/proveedores.php');
