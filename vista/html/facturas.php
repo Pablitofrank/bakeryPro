@@ -15,8 +15,7 @@
 
 </head>
 <body>
-    
-    <div class="sidebar">
+    <div class="sidebar open">
         <div class="logo-details">
             <a href="../../dashboard.php" class="logo_link">
                 <span class="logo_name">BakeryPro</span>
