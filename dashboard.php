@@ -16,7 +16,7 @@
 </head>
 <body>
   <form action="./dashboard.php" method="post">
-    <div class="sidebar">
+    <div class="sidebar open">
         <div class="logo-details">
             <a href="../../dashboard.php" class="logo_link">
                 <span class="logo_name">BakeryPro</span>
@@ -93,7 +93,7 @@
       <div class="text">Dashboard</div>
   </section>
 
-  <script src="vista/js/main.js"></script>
+  <script src="./vista/js/main.js"></script>
 </body>
 </html>
 

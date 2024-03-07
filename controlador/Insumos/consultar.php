@@ -187,6 +187,9 @@
                 $query .= "tblcategorias.categoria LIKE '%" . $categoria . "%'";
             }
         }
+        
+
+   
 
         if ($_POST["buscar"] != '' ){
 
@@ -198,7 +201,7 @@
 
      if ($_POST["buscarcategoria"] != '' ){
 
-        $query .= " AND categoria = '".$_POST['buscarcategoria']."' ";
+        $query .= " AND NombreInsumo = '".$_POST['buscarcategoria']."' ";
 
  }
         // Ejecutar la consulta $query

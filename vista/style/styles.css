@@ -17,7 +17,7 @@
   /* Los siguientes son los colorares que se usaran en el proyecto */
   --official-black:#1e1e1e;
   --official-red:#ffa500;
-  --background-white:#fafbfd;
+  --background-white:#f7f7f7;
   --card-white:#ffffff;
 
 }
@@ -285,7 +285,7 @@
     background-color: var(--text-input-field);
     border: none;
     border-radius: 8px;
-    height: 32px;
+    height: 38px;
     font-size: var(--md);
     padding: 6px 12px;
 }
