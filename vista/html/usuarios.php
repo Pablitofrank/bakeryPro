@@ -93,8 +93,11 @@
         <div class="container">
             <div class="text">Agregar usuarios</div>
             <form action="../../controlador/usuarios/insertar.php" method="post" class="form">
-                <label for="nombres" class="label">Nombres:</label><input type="text" name="nombres" required class="input"><br>     
-                <label for="apellidos" class="label">Apellidos:</label> <input type="text" name="apellidos" required class="input"><br>
+                <label for="nombres" class="label">Nombres:</label>
+                <input type="text" name="nombres" required class="input"><br> 
+
+                <label for="apellidos" class="label">Apellidos:</label>
+                <input type="text" name="apellidos" required class="input"><br>
 
                     <?php
                     include '../../modelo/conexion.php';
@@ -141,7 +144,6 @@
         </div>
     </section>
 
-    <script src="../../vista/js/main.js"></script>
 </body>
 </html>
 
