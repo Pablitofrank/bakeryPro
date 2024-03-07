@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <div class="sidebar open">
+    <div class="sidebar">
         <div class="logo-details">
             <a href="../../dashboard.php" class="logo_link">
                 <span class="logo_name">BakeryPro</span>
@@ -62,6 +62,7 @@
                 <i class='bx bx-pie-chart-alt-2' ></i>
                 <span class="links_name">Proveedores</span>
             </a>
+            
             <span class="tooltip">Proveedores</span>
         </li>
 
@@ -101,7 +102,11 @@
             <h2 class="titleContainer">Agregar usuarios</h2>
             <form action="../../controlador/usuarios/insertar.php" method="post" class="form">
                 <label for="nombres" class="label">Nombres:</label>
+<<<<<<< HEAD
                 <input type="text" name="nombres" required class="input"><br>  
+=======
+                <input type="text" name="nombres" required class="input"><br> 
+>>>>>>> 49865ca9160bf3b2de1c92735e1cdc6bc36ebaad
 
                 <label for="apellidos" class="label">Apellidos:</label>
                 <input type="text" name="apellidos" required class="input"><br>
@@ -151,7 +156,6 @@
         </div>
     </section>
 
-    <script src="../../vista/js/main.js"></script>
 </body>
 </html>
 
