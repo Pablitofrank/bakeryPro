@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <div class="sidebar open">
+    <div class="sidebar">
         <div class="logo-details">
             <a href="../../dashboard.php" class="logo_link">
                 <span class="logo_name">BakeryPro</span>
@@ -62,6 +62,7 @@
                 <i class='bx bx-pie-chart-alt-2' ></i>
                 <span class="links_name">Proveedores</span>
             </a>
+            
             <span class="tooltip">Proveedores</span>
         </li>
 

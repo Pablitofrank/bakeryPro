@@ -87,7 +87,7 @@
         </ul>
      </div>
 
-    <!-- Formulario para agregar un nuevo usuario -->
+    <!-- Formulario para agregar una nueva receta -->
 
     <section class="home-section">
     <div class="container">
@@ -96,15 +96,64 @@
                 <label for="NombreReceta" class="label">Nombre Receta:</label> 
                     <input type="text" name="NombreProducto" class="input" required><br>
                     
-                <div id="cantidadInsumo-container">
-                    <label for="cantidadInsumo" class="label">Cantidad Insumo:</label> 
-                    <input type="text" name="cantidadInsumo[]" class="input" required><br>
+                <div id="contenedor-insumos">
+                    <?php
+                        include '../../modelo/conexion.php';
+                        $sql = "SELECT * FROM tblInsumos";
+                        $result = $conexion->query($sql);
+                        
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo "<div>";
+                                echo "<select name='NombreInsumo[]' class='input'>";
+                                echo "<option value='" . $row["IdInsumo"] . "'>" . $row["NombreInsumo"] . "</option>";
+                                echo "</select>";
+                                echo "<input type='text' name='cantidadInsumo[]' placeholder='Cantidad' class='input' required>";
+                                echo "</div>";
+                            }
+                        } else {
+                            echo "0 results";
+                        }
+                    ?>
                 </div>
-                    <input type="submit" value="Agregar" class="btn"> <br>
-                    <input type="button" value="+" class="btn" id="agregar-input"> <br>
+                <button type="button" onclick="agregarElemento()">Agregar Insumo y Cantidad</button>
+                <br>
+                <br>
+                <input type="submit" value="Agregar" class="btn"> <br>
             </form>
         </div>
     </section>
-    <script src="../../vista/js/input.js"></script>
+
+    <script>
+    var index = <?php echo $result->num_rows + 1; ?>; // Inicializar el índice para los nuevos elementos
+
+    function agregarElemento() {
+        var contenedorInsumos = document.getElementById("contenedor-insumos");
+        var contenedorNuevoInsumo = document.createElement("div");
+
+        // Selector de insumo
+        var nuevoSelect = document.createElement("select");
+        nuevoSelect.name = "NombreInsumo[" + index + "]"; // Aquí se utiliza el índice
+        nuevoSelect.className = "input";
+        nuevoSelect.innerHTML = contenedorInsumos.querySelector("select").innerHTML;
+        contenedorNuevoInsumo.appendChild(nuevoSelect);
+
+        // Campo de cantidad
+        var nuevoInput = document.createElement("input");
+        nuevoInput.type = "text";
+        nuevoInput.name = "cantidadInsumo[" + index + "]"; // Aquí se utiliza el índice
+        nuevoInput.placeholder = "Cantidad";
+        nuevoInput.className = "input";
+        nuevoInput.required = true;
+        contenedorNuevoInsumo.appendChild(nuevoInput);
+
+        contenedorInsumos.appendChild(contenedorNuevoInsumo);
+        contenedorInsumos.appendChild(document.createElement("br"));
+
+        index++;
+    }
+</script>
+
 </body>
 </html>
+  
