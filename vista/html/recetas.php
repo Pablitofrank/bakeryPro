@@ -72,6 +72,14 @@
         <span class="tooltip">Facturas</span>
         </li>
 
+        <li>
+            <a href="./calculadora.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Calculadora</span>
+            </a>
+            <span class="tooltip">Calculadora</span>
+        </li>
+
 
         <li class="profile">
             <div class="profile-details">
@@ -91,7 +99,7 @@
 
     <section class="home-section">
     <div class="container">
-        <div class="text">Agregar receta</div>
+        <h2 class="titleContainer">Agregar Receta</h2>
             <form action="../../controlador/recetas/insertar.php" method="post" class="form" id="receta-form">
                 <label for="NombreReceta" class="label">Nombre Receta:</label> 
                     <input type="text" name="NombreProducto" class="input" required><br>

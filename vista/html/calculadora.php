@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facturas| BakeryPro</title>
+    <title>Calculadora| BakeryPro</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,19 +65,11 @@
         </li>
 
         <li>
-            <a href="./facturas.php">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Facturas</span>
-            </a>
-            <span class="tooltip">Facturas</span>
-        </li>
-
-        <li>
-            <a href="./calculadora.php">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Calculadora</span>
-            </a>
-            <span class="tooltip">Calculadora</span>
+        <a href="./facturas.php">
+            <i class='bx bx-user' ></i>
+            <span class="links_name">Facturas</span>
+        </a>
+        <span class="tooltip">Facturas</span>
         </li>
 
 
@@ -91,13 +83,20 @@
             </div>
             <i class='bx bx-log-out' id="log_out" ></i>
         </li>
+
+        <li>
+        <a href="./calculadora.php">
+            <i class='bx bx-user' ></i>
+            <span class="links_name">Calculadora</span>
+        </a>
+        <span class="tooltip">Calculadora</span>
+        </li>
+        
         
         </ul>
      </div>
-
-    <!-- Codigo PHP -->
-
-    <section class="home-section">
+    
+     <section class="home-section">
      <div class="container">
         <h2 class="titleContainer">Agregar Factura</h2>
         <form action="../../controlador/facturas/insertar.php" method="post" class="form">
@@ -238,5 +237,7 @@
     </section>
 
     <script src="../../vista/js/main.js"></script>
+
+     <script src="../../vista/js/main.js"></script>
 </body>
 </html>

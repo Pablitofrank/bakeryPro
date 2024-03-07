@@ -22,74 +22,82 @@
             </a>
             <i class='bx bx-menu' id="btn" ></i>
         </div>
-        <ul class="nav-list">
+            <ul class="nav-list">
         
-        <li>
-        <a href="./usuarios.php">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Usuario</span>
-        </a>
-        <span class="tooltip">Usuarios</span>
-        </li>
-
-        <li>
-            <a href="./insumos.php">
-                <i class='bx bx-cart-alt' ></i>
-                <span class="links_name">Insumos</span>
+            <li>
+            <a href="./usuarios.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Usuario</span>
             </a>
-            <span class="tooltip">Insumos</span>
-        </li>
+            <span class="tooltip">Usuarios</span>
+            </li>
 
-        <li>
-        <a href="./recetas.php">
-            <i class='bx bx-folder' ></i>
-            <span class="links_name">Recetas</span>
-        </a>
-        <span class="tooltip">Recetas</span>
-        </li>
+            <li>
+                <a href="./insumos.php">
+                    <i class='bx bx-cart-alt' ></i>
+                    <span class="links_name">Insumos</span>
+                </a>
+                <span class="tooltip">Insumos</span>
+            </li>
 
-        <li>
-            <a href="./productos.php">
-                <i class='bx bx-grid-alt'></i>
-                <span class="links_name">Productos</span>
+            <li>
+            <a href="./recetas.php">
+                <i class='bx bx-folder' ></i>
+                <span class="links_name">Recetas</span>
             </a>
-                <span class="tooltip">Productos</span>
-        </li>
+            <span class="tooltip">Recetas</span>
+            </li>
 
-        <li>
-            <a href="./proveedores.php">
-                <i class='bx bx-pie-chart-alt-2' ></i>
-                <span class="links_name">Proveedores</span>
+            <li>
+                <a href="./productos.php">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Productos</span>
+                </a>
+                    <span class="tooltip">Productos</span>
+            </li>
+
+            <li>
+                <a href="./proveedores.php">
+                    <i class='bx bx-pie-chart-alt-2' ></i>
+                    <span class="links_name">Proveedores</span>
+                </a>
+                <span class="tooltip">Proveedores</span>
+            </li>
+
+            <li>
+            <a href="./facturas.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Facturas</span>
             </a>
-            <span class="tooltip">Proveedores</span>
-        </li>
+            <span class="tooltip">Facturas</span>
+            </li>
 
-        <li>
-        <a href="./facturas.php">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Facturas</span>
-        </a>
-        <span class="tooltip">Facturas</span>
-        </li>
+            <li>
+            <a href="./calculadora.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Calculadora</span>
+            </a>
+            <span class="tooltip">Calculadora</span>
+            </li>
 
-
-        <li class="profile">
-            <div class="profile-details">
-            <img src="profile.jpg" alt="profileImg">
-            <div class="name_job">
-                <div class="name">Prem Shahi</div>
-                <div class="job">Web designer</div>
-            </div>
-            </div>
-            <i class='bx bx-log-out' id="log_out" ></i>
-        </li>
-        
-        </ul>
+            <li class="profile">
+                <div class="profile-details">
+                <img src="profile.jpg" alt="profileImg">
+                <div class="name_job">
+                    <div class="name">Prem Shahi</div>
+                    <div class="job">Web designer</div>
+                </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out" ></i>
+            </li>
+            
+            </ul>
+        </div>
      </div>
   
     <section class="home-section">
         <div class="container">
-            <div class="text">Agregar Proveedores </div>
+            <h2 class="titleContainer">Agregar Proveedores</h2>
                 <form action="../../controlador/proveedores/insertar.php" method="post" class="form">
                 
                 <label for="nit" class="label">NIT:</label>
@@ -114,7 +122,7 @@
                 <input type="submit" value="Agregar" class="btn">
             </form>
             <div>
-            <h2>Consulta Proveedores</h2>
+            <h2 class="titleContainer">Consulta Proveedores</h2>
             <form action="../../controlador/proveedores/consultar.php" method="post">
                 <input type="submit" value="Consultar" class="btn">
             </form>

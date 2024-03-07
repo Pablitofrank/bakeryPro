@@ -266,8 +266,7 @@
     left: 250px;
     width: calc(100% - 250px);
 }
-.home-section .text{
-    display: inline-ñ-block;
+.titleContainer{
     color: var(--official-black);
     font-size: 25px;
     font-weight: 500;
@@ -305,6 +304,16 @@
 
 .consulta{
     margin: 20px;
+}
+.volverConsultar{
+    height: 40px;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    background: var(--yellow);
+    border-radius: 5px;
+    align-items: center;
+    margin: auto;
 }
 
 .login {
@@ -420,7 +429,6 @@
 /* formularios */
 
 .container{
-    width: 40%;
     height: auto;
     background: var(--card-white);
     padding: 30px;
@@ -456,6 +464,7 @@
     height: 32px;
     font-size: var(--md);
     padding: 6px 12px;
+    width: 600px;
 }
 
 .btn{
@@ -490,8 +499,7 @@ th {
     font-size: 15px;
     font-weight: normal;
     padding: 8px;
-    background: #d4894c;
-    /* border-top: 4px solid #fee6aa; */
+    background: var(--official-black);
     border-bottom: 1px solid #fff;
     color: #fff;
     padding: 10px 30px;
@@ -509,6 +517,18 @@ tr:hover td {
     background: #d0dafd; color: rgb(105, 21, 21); 
 }
 
+/* Estilos para formulario de consultar */
+.consulta h2 {
+    margin-bottom: 22px;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+tbody tr td img {
+    margin: 0 6px;
+}
+
 /* Seletores para eliminar los botones de input number */
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -517,6 +537,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type=number] { -moz-appearance:textfield; }
+
 
 @media (max-width: 640px) {
     .logo {

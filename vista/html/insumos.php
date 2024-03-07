@@ -65,11 +65,19 @@
         </li>
 
         <li>
-        <a href="./facturas.php">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Facturas</span>
-        </a>
-        <span class="tooltip">Facturas</span>
+            <a href="./facturas.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Facturas</span>
+            </a>
+            <span class="tooltip">Facturas</span>
+        </li>
+
+        <li>
+            <a href="./calculadora.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Calculadora</span>
+            </a>
+            <span class="tooltip">Calculadora</span>
         </li>
 
 
@@ -90,7 +98,7 @@
     <section class="home-section">
         <!-- Formulario para agregar un nuevo insumo -->
       <div class="container">
-        <div class="text">Agregar Insumos</div>
+        <h2 class="titleContainer">Agregar Insumos</h2>
         <form action="../../controlador/insumos/insertar.php" method="post" class="form">
                 <label for="nombreInsumo" class='label'>Nombre Insumo:</label>
                 <input type="text" name="nombreInsumo" required class="input"><br>
@@ -99,29 +107,29 @@
                 <input type="text" name="stock" required class="input"><br>
                 
                 <?php
-                include '../../modelo/conexion.php';
-                $sql = "SELECT * FROM tblunidadesmedidas";
-                $result = $conexion->query($sql);
-                
-                // Recorrer datos y crear options
-                echo "<label for='medida' class='label'>Medida:</label>
-                <select name='idUnidadMedida' id='medida' class='input'>";
-                
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {
-                        echo "<option value='" . $row["IdUnidadMedida"] . "'>" . $row["medida"] . "</option>";
+                    include '../../modelo/conexion.php';
+                    $sql = "SELECT * FROM tblunidadesmedidas";
+                    $result = $conexion->query($sql);
+                    
+                    // Recorrer datos y crear options
+                    echo "<label for='medida' class='label'>Medida:</label>
+                    <select name='idUnidadMedida' id='medida' class='input'>";
+                    
+                    if ($result->num_rows > 0) {
+                        // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                            echo "<option value='" . $row["IdUnidadMedida"] . "'>" . $row["medida"] . "</option>";
+                        }
+                    } else {
+                        echo "<option value=''>No hay unidades de medida disponibles</option>";
                     }
-                } else {
-                    echo "<option value=''>No hay unidades de medida disponibles</option>";
-                }
-                echo "</select>";
+                    echo "</select>";
                 ?>
                 <input type="submit" value="Agregar" class="btn">
             </form>
             
             <div class="consulta">
-                <h2>Consulta insumos</h2>
+                <h2 class="titleContainer">Consulta Insumos</h2>
                 <form action="../../controlador/Insumos/consultar.php" method="post">
                     <input type="submit" value="Consultar" class="btn">
                 </form>

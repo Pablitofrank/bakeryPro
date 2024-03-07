@@ -18,7 +18,7 @@ include '../../modelo/conexion.php' ;
     <link rel="stylesheet" href="../../vista/style/styles.css">
     <link rel="shortcut icon" href="../../vista/img/logo.svg" type="image/x-icon">
 </head>
-    <div class="sidebar">
+    <div class="sidebar open">
         <div class="logo-details">
             <a href="../../dashboard.php">
                 <span class="logo_name">BakeryPro</span>
