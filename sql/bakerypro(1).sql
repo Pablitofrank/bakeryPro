@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-03-2024 a las 15:49:49
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 07-03-2024 a las 17:14:00
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,6 +42,19 @@ INSERT INTO `tblcategorias` (`IdCategoria`, `Categoria`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tblentradasinsumos`
+--
+
+CREATE TABLE `tblentradasinsumos` (
+  `IdEntradaInsumo` int(5) NOT NULL,
+  `fecha` date NOT NULL,
+  `IdInsumo` int(3) NOT NULL,
+  `cantidadInsumo` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tblfactura`
 --
 
@@ -50,9 +63,20 @@ CREATE TABLE `tblfactura` (
   `CantidadInsumo` decimal(5,0) NOT NULL,
   `NumeroFactura` varchar(20) NOT NULL,
   `Fecha` date NOT NULL,
-  `IdInsumo` int(3) NOT NULL,
   `IdProveedor` int(3) NOT NULL,
   `IdUnidadMedida` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tblinfac`
+--
+
+CREATE TABLE `tblinfac` (
+  `IdFactura` int(5) NOT NULL,
+  `IdInsumo` int(3) NOT NULL,
+  `CantidadInsumo` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -68,6 +92,13 @@ CREATE TABLE `tblinsumos` (
   `IdUnidadMedida` int(3) NOT NULL,
   `IdCategoria` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tblinsumos`
+--
+
+INSERT INTO `tblinsumos` (`IdInsumo`, `NombreInsumo`, `Stock`, `IdUnidadMedida`, `IdCategoria`) VALUES
+(8, 'leche', 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -138,6 +169,19 @@ INSERT INTO `tblroles` (`IdRol`, `Rol`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tblsalidasinsumos`
+--
+
+CREATE TABLE `tblsalidasinsumos` (
+  `IdSalidaInsumo` int(5) NOT NULL,
+  `fecha` date NOT NULL,
+  `IdInsumo` int(3) NOT NULL,
+  `cantidadInsumo` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tblunidadesmedidas`
 --
 
@@ -193,13 +237,27 @@ ALTER TABLE `tblcategorias`
   ADD PRIMARY KEY (`IdCategoria`);
 
 --
+-- Indices de la tabla `tblentradasinsumos`
+--
+ALTER TABLE `tblentradasinsumos`
+  ADD PRIMARY KEY (`IdEntradaInsumo`),
+  ADD KEY `entradasIns` (`IdInsumo`);
+
+--
 -- Indices de la tabla `tblfactura`
 --
 ALTER TABLE `tblfactura`
   ADD PRIMARY KEY (`IdFactura`),
-  ADD KEY `IdInsumo` (`IdInsumo`,`IdProveedor`,`IdUnidadMedida`),
+  ADD KEY `IdInsumo` (`IdProveedor`,`IdUnidadMedida`),
   ADD KEY `IdProveedor` (`IdProveedor`),
   ADD KEY `IdUnidadMedida` (`IdUnidadMedida`);
+
+--
+-- Indices de la tabla `tblinfac`
+--
+ALTER TABLE `tblinfac`
+  ADD KEY `fac` (`IdFactura`),
+  ADD KEY `ins` (`IdInsumo`);
 
 --
 -- Indices de la tabla `tblinsumos`
@@ -235,6 +293,13 @@ ALTER TABLE `tblroles`
   ADD PRIMARY KEY (`IdRol`);
 
 --
+-- Indices de la tabla `tblsalidasinsumos`
+--
+ALTER TABLE `tblsalidasinsumos`
+  ADD PRIMARY KEY (`IdSalidaInsumo`),
+  ADD KEY `salidasIns` (`IdInsumo`);
+
+--
 -- Indices de la tabla `tblunidadesmedidas`
 --
 ALTER TABLE `tblunidadesmedidas`
@@ -259,10 +324,16 @@ ALTER TABLE `tblcategorias`
   MODIFY `IdCategoria` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `tblentradasinsumos`
+--
+ALTER TABLE `tblentradasinsumos`
+  MODIFY `IdEntradaInsumo` int(5) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `tblinsumos`
 --
 ALTER TABLE `tblinsumos`
-  MODIFY `IdInsumo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `IdInsumo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `tblproductos`
@@ -275,6 +346,12 @@ ALTER TABLE `tblproductos`
 --
 ALTER TABLE `tblproveedores`
   MODIFY `IdProveedores` int(3) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tblsalidasinsumos`
+--
+ALTER TABLE `tblsalidasinsumos`
+  MODIFY `IdSalidaInsumo` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tblunidadesmedidas`
@@ -293,12 +370,24 @@ ALTER TABLE `tblusuario`
 --
 
 --
+-- Filtros para la tabla `tblentradasinsumos`
+--
+ALTER TABLE `tblentradasinsumos`
+  ADD CONSTRAINT `entradasIns` FOREIGN KEY (`IdInsumo`) REFERENCES `tblinsumos` (`IdInsumo`);
+
+--
 -- Filtros para la tabla `tblfactura`
 --
 ALTER TABLE `tblfactura`
-  ADD CONSTRAINT `tblfactura_ibfk_1` FOREIGN KEY (`IdInsumo`) REFERENCES `tblinsumos` (`IdInsumo`),
   ADD CONSTRAINT `tblfactura_ibfk_2` FOREIGN KEY (`IdProveedor`) REFERENCES `tblproveedores` (`IdProveedores`),
   ADD CONSTRAINT `tblfactura_ibfk_3` FOREIGN KEY (`IdUnidadMedida`) REFERENCES `tblunidadesmedidas` (`IdUnidadMedida`);
+
+--
+-- Filtros para la tabla `tblinfac`
+--
+ALTER TABLE `tblinfac`
+  ADD CONSTRAINT `fac` FOREIGN KEY (`IdFactura`) REFERENCES `tblfactura` (`IdFactura`),
+  ADD CONSTRAINT `ins` FOREIGN KEY (`IdInsumo`) REFERENCES `tblinsumos` (`IdInsumo`);
 
 --
 -- Filtros para la tabla `tblinsumos`
@@ -313,6 +402,12 @@ ALTER TABLE `tblinsumos`
 ALTER TABLE `tblrecetas`
   ADD CONSTRAINT `tblrecetas_ibfk_1` FOREIGN KEY (`IdProducto`) REFERENCES `tblproductos` (`IdProducto`),
   ADD CONSTRAINT `tblrecetas_ibfk_2` FOREIGN KEY (`IdInsumo`) REFERENCES `tblinsumos` (`IdInsumo`);
+
+--
+-- Filtros para la tabla `tblsalidasinsumos`
+--
+ALTER TABLE `tblsalidasinsumos`
+  ADD CONSTRAINT `salidasIns` FOREIGN KEY (`IdInsumo`) REFERENCES `tblinsumos` (`IdInsumo`);
 
 --
 -- Filtros para la tabla `tblusuario`

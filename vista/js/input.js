@@ -12,3 +12,6 @@ document.getElementById("agregar-input").addEventListener("click", function() {
     container.appendChild(newInput);
     container.appendChild(document.createElement("br"));
 }); 
+
+
+//input insumos
