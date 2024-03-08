@@ -89,59 +89,70 @@ include '../../modelo/conexion.php' ;
         </ul>
 
     </div>
+
     <section class="home-section">
+        <div class="container">
+            <h2>Editar Usuario</h2>
 
-    <div class="container">
-        <h2>Editar Usuario</h2>
-
-        <?php
-        include '../../modelo/conexion.php';
-
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $sql = "SELECT * FROM tblusuario INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol WHERE IdUsuario=$id";
-            $resultado = $conexion->query($sql);
-
-            if ($resultado->num_rows > 0) {
-                $fila = $resultado->fetch_assoc();
-            } else {
-                echo "<p>No se encontraron resultados para el ID proporcionado.</p>";
-                exit;
-            }
-        } else {
-            echo "<p>Ingrese un ID para realizar la consulta.</p>";
-            exit;
-        }
-        ?>
-
-        <form action="actualizar.php" method="post" class="form">
-            <input type="hidden" name="id" value="<?php echo $fila['IdUsuario']; ?>" class="input">
-            Nombres: <input type="text" name="nombres" value="<?php echo $fila['Nombres']; ?>"class="input"><br>
-            Apellidos: <input type="text" name="apellidos" value="<?php echo $fila['Apellidos']; ?>" class="input"><br>
             <?php
-            include '../../modelo/conexion.php';
-            $sql = "SELECT * FROM tblroles";
-            $result = $conexion->query($sql);
+                include '../../modelo/conexion.php';
 
-            // Recorrer datos y crear options
-            echo "<label for='rol'>Rol:</label>
-    
-            <select name='rol' id='opcion' class='input'>";
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row["IdRol"] . "' >" . $row["Rol"] . "</option>";
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $sql = "SELECT * FROM tblusuario INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol WHERE IdUsuario=$id";
+                    $resultado = $conexion->query($sql);
+
+                    if ($resultado->num_rows > 0) {
+                        $fila = $resultado->fetch_assoc();
+                    } else {
+                        echo "<p>No se encontraron resultados para el ID proporcionado.</p>";
+                        exit;
+                    }
+                } else {
+                    echo "<p>Ingrese un ID para realizar la consulta.</p>";
+                    exit;
                 }
-            } else {
-                echo "0 results";
-            }
-            echo "</select>";
             ?>
-            Cedula: <input type="text" name="cedula" value="<?php echo $fila['Cedula']; ?>" class="input"><br>
-            Telefono: <input type="text" name="telefono" value="<?php echo $fila['Telefono']; ?>" class="input"><br>
-            <input type="submit" value="Actualizar" class="btn">
-        </form>
-    </div>
+
+            <form action="actualizar.php" method="post" class="form">
+                <input type="hidden" name="id" value="<?php echo $fila['IdUsuario']; ?>" class="input">
+
+                <label for="nombres">Nombres:</label>
+                <input type="text" name="nombres" value="<?php echo $fila['Nombres']; ?>" class="input"><br>
+                
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" name="apellidos" value="<?php echo $fila['Apellidos']; ?>" class="input"><br>
+                            
+                <?php
+                    include '../../modelo/conexion.php';
+                    $sql = "SELECT * FROM tblroles";
+                    $result = $conexion->query($sql);
+
+                    // Recorrer datos y crear options
+                    echo "<label for='rol'>Rol:</label>
+            
+                    <select name='rol' id='opcion' class='input'>";
+                    if ($result->num_rows > 0) {
+                        // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                            echo "<option value='" . $row["IdRol"] . "' >" . $row["Rol"] . "</option>";
+                        }
+                    } else {
+                        echo "0 results";
+                    }
+                    echo "</select>";
+                ?>
+                <br>
+
+                <label for="cedula">Cedula:</label>
+                <input type="text" name="cedula" value="<?php echo $fila['Cedula']; ?>" class="input"><br>
+                
+                <label for="telefono">Telefono:</label>
+                <input type="text" name="telefono" value="<?php echo $fila['Telefono']; ?>" class="input"><br>
+
+                <input type="submit" value="Actualizar" class="btn">
+            </form>
+        </div>
     </section>
     <script src="../../vista/js/main.js"></script>
 </body>

@@ -23,77 +23,76 @@
             <i class='bx bx-menu' id="btn" ></i>
         </div>
         <ul class="nav-list">
-        
-        <li>
-        <a href="./usuarios.php">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Usuario</span>
-        </a>
-        <span class="tooltip">Usuarios</span>
-        </li>
+            <li>
+                <a href="./usuarios.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Usuario</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
+            </li>
 
-        <li>
-            <a href="./insumos.php">
-                <i class='bx bx-cart-alt' ></i>
-                <span class="links_name">Insumos</span>
-            </a>
-            <span class="tooltip">Insumos</span>
-        </li>
+            <li>
+                <a href="./insumos.php">
+                    <i class='bx bx-cart-alt' ></i>
+                    <span class="links_name">Insumos</span>
+                </a>
+                <span class="tooltip">Insumos</span>
+            </li>
 
-        <li>
-        <a href="./recetas.php">
-            <i class='bx bx-folder' ></i>
-            <span class="links_name">Recetas</span>
-        </a>
-        <span class="tooltip">Recetas</span>
-        </li>
+            <li>
+                <a href="./recetas.php">
+                    <i class='bx bx-folder' ></i>
+                    <span class="links_name">Recetas</span>
+                </a>
+                <span class="tooltip">Recetas</span>
+            </li>
 
-        <li>
-            <a href="./productos.php">
-                <i class='bx bx-grid-alt'></i>
-                <span class="links_name">Productos</span>
-            </a>
+            <li>
+                <a href="./productos.php">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Productos</span>
+                </a>
                 <span class="tooltip">Productos</span>
-        </li>
+            </li>
 
-        <li>
-            <a href="./proveedores.php">
-                <i class='bx bx-pie-chart-alt-2' ></i>
-                <span class="links_name">Proveedores</span>
-            </a>
-            <span class="tooltip">Proveedores</span>
-        </li>
+            <li>
+                <a href="./proveedores.php">
+                    <i class='bx bx-pie-chart-alt-2' ></i>
+                    <span class="links_name">Proveedores</span>
+                </a>
+                <span class="tooltip">Proveedores</span>
+            </li>
 
-        <li>
-        <a href="./facturas.php">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Facturas</span>
-        </a>
-        <span class="tooltip">Facturas</span>
-        </li>
+            <li>
+                <a href="./facturas.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Facturas</span>
+                </a>
+                <span class="tooltip">Facturas</span>
+            </li>
 
-        <li>
-            <a href="./calculadora.php">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Calculadora</span>
-            </a>
-            <span class="tooltip">Calculadora</span>
-        </li>
+            <li>
+                <a href="./calculadora.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Calculadora</span>
+                </a>
+                <span class="tooltip">Calculadora</span>
+            </li>
 
 
-        <li class="profile">
-            <div class="profile-details">
-            <img src="profile.jpg" alt="profileImg">
-            <div class="name_job">
-                <div class="name">Prem Shahi</div>
-                <div class="job">Web designer</div>
-            </div>
-            </div>
-            <i class='bx bx-log-out' id="log_out" ></i>
-        </li>
+            <li class="profile">
+                <div class="profile-details">
+                <img src="profile.jpg" alt="profileImg">
+                <div class="name_job">
+                    <div class="name">Prem Shahi</div>
+                    <div class="job">Web designer</div>
+                </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out" ></i>
+            </li>
         
         </ul>
-     </div>
+    </div>
 
     <!-- Formulario para agregar una nueva receta -->
 
@@ -102,7 +101,7 @@
         <h2 class="titleContainer">Agregar Receta</h2>
             <form action="../../controlador/recetas/insertar.php" method="post" class="form" id="receta-form">
                 <label for="NombreReceta" class="label">Nombre Receta:</label> 
-                    <input type="text" name="NombreProducto" class="input" required><br>
+                <input type="text" name="NombreProducto" class="input" required><br>
                     
                 <div id="contenedor-insumos">
                     <?php
@@ -124,6 +123,7 @@
                         }
                     ?>
                 </div>
+
                 <button type="button" onclick="agregarElemento()">Agregar Insumo y Cantidad</button>
                 <br>
                 <br>
@@ -133,34 +133,34 @@
     </section>
 
     <script>
-    var index = <?php echo $result->num_rows + 1; ?>; // Inicializar el índice para los nuevos elementos
+        var index = <?php echo $result->num_rows + 1; ?>; // Inicializar el índice para los nuevos elementos
 
-    function agregarElemento() {
-        var contenedorInsumos = document.getElementById("contenedor-insumos");
-        var contenedorNuevoInsumo = document.createElement("div");
+        function agregarElemento() {
+            var contenedorInsumos = document.getElementById("contenedor-insumos");
+            var contenedorNuevoInsumo = document.createElement("div");
 
-        // Selector de insumo
-        var nuevoSelect = document.createElement("select");
-        nuevoSelect.name = "NombreInsumo[" + index + "]"; // Aquí se utiliza el índice
-        nuevoSelect.className = "input";
-        nuevoSelect.innerHTML = contenedorInsumos.querySelector("select").innerHTML;
-        contenedorNuevoInsumo.appendChild(nuevoSelect);
+            // Selector de insumo
+            var nuevoSelect = document.createElement("select");
+            nuevoSelect.name = "NombreInsumo[" + index + "]"; // Aquí se utiliza el índice
+            nuevoSelect.className = "input";
+            nuevoSelect.innerHTML = contenedorInsumos.querySelector("select").innerHTML;
+            contenedorNuevoInsumo.appendChild(nuevoSelect);
 
-        // Campo de cantidad
-        var nuevoInput = document.createElement("input");
-        nuevoInput.type = "text";
-        nuevoInput.name = "cantidadInsumo[" + index + "]"; // Aquí se utiliza el índice
-        nuevoInput.placeholder = "Cantidad";
-        nuevoInput.className = "input";
-        nuevoInput.required = true;
-        contenedorNuevoInsumo.appendChild(nuevoInput);
+            // Campo de cantidad
+            var nuevoInput = document.createElement("input");
+            nuevoInput.type = "text";
+            nuevoInput.name = "cantidadInsumo[" + index + "]"; // Aquí se utiliza el índice
+            nuevoInput.placeholder = "Cantidad";
+            nuevoInput.className = "input";
+            nuevoInput.required = true;
+            contenedorNuevoInsumo.appendChild(nuevoInput);
 
-        contenedorInsumos.appendChild(contenedorNuevoInsumo);
-        contenedorInsumos.appendChild(document.createElement("br"));
+            contenedorInsumos.appendChild(contenedorNuevoInsumo);
+            contenedorInsumos.appendChild(document.createElement("br"));
 
-        index++;
-    }
-</script>
+            index++;
+        }
+    </script>
 
 </body>
 </html>

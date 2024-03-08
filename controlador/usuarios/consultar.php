@@ -9,8 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fugaz+One&family=Inter:wght@100&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
 
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../vista/style/styles.css">
     <link rel="shortcut icon" href="../../vista/img/logo.svg" type="image/x-icon">
 </head>
@@ -79,7 +78,7 @@
                     <span class="links_name">Calculadora</span>
                 </a>
                 <span class="tooltip">Calculadora</span>
-             </li>
+                </li>
 
 
             <li class="profile">
@@ -100,42 +99,40 @@
     <section class="home-section">
         <div class="container">
             <h2 class="titleContainer">Resultado de la Consulta de Usuario</h2>
-            
-            
+
             <?php
-            include '../../modelo/conexion.php';
+                include '../../modelo/conexion.php';
                 $sql = "SELECT * FROM tblusuario INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol";
                 $resultado = $conexion->query($sql);
-            ?>
-            <?php if ($resultado->num_rows > 0) { ?>
-                <table border="1">
-                    <tr>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>Rol</th>
-                        <th>Cedula</th>
-                        <th>Telefono</th>
-                        <th>Acciones</th>
-                    </tr>
-                    <?php while ($fila = $resultado->fetch_assoc()) { ?>
+                if ($resultado->num_rows > 0) {
+                    echo "<table border='1'>
                         <tr>
-                            <td><?php echo $fila["Nombres"]; ?></td>
-                            <td><?php echo $fila["Apellidos"]; ?></td>
-                            <td><?php echo $fila["Rol"]; ?></td>
-                            <td><?php echo $fila["Cedula"]; ?></td>
-                            <td><?php echo $fila["Telefono"]; ?></td>
-                            <td>
-                                <a href='editar.php?id=<?php echo $fila['IdUsuario']; ?>'><img src="../../vista/img/editar.png" alt="editar"></a>
-                                <a href='eliminar.php?id=<?php echo $fila['IdUsuario']; ?>'><img src="../../vista/img/eliminar.png" alt="eliminar"></a> 
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </table>
-            <?php } else { ?>
-                <p>No se encontraron resultados para el ID proporcionado.</p>
-            <?php } ?>
-
-            <?php $conexion->close(); ?>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Rol</th>
+                            <th>Cedula</th>
+                            <th>Telefono</th>
+                            <th>Acciones</th>
+                        </tr>";
+                    while ($fila = $resultado->fetch_assoc()) {
+                        echo "<tr>
+                                <td>".$fila["Nombres"]."</td>
+                                <td>".$fila["Apellidos"]."</td>
+                                <td>".$fila["Rol"]."</td>
+                                <td>".$fila["Cedula"]."</td>
+                                <td>".$fila["Telefono"]."</td>
+                                <td>
+                                    <a href='editar.php?id=".$fila['IdUsuario']."'><img src='../../vista/img/editar.png' alt='editar'></a>
+                                    <a href='eliminar.php?id=".$fila['IdUsuario']."'><img src='../../vista/img/eliminar.png' alt='eliminar'></a>
+                                </td>
+                            </tr>";
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<p>No se encontraron resultados para el ID proporcionado.</p>";
+                }
+                $conexion->close();
+            ?>
             <br>
             <a href="../../dashboard.php" class="volverConsultar">VOLVER</a>
         </div>
