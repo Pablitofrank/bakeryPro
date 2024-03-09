@@ -93,7 +93,7 @@
                 <i class='bx bx-log-out' id="log_out" ></i>
             </li>
         </ul>
-     </div>
+    </div>
 
     <!-- Formulario para agregar un nuevo usuario -->
     <section class="home-section">
@@ -139,6 +139,7 @@
                     ?>
                 <label for="cedula" class="label">Cedula:</label> <input type="text" name="cedula" required class="input"><br>
                 <label for="telefono" class="label">Telefono:</label> <input type="text" name="telefono" required class="input"><br>
+                
                 <input type="submit" value="Agregar" class="btn">
             </form>
 

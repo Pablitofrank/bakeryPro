@@ -1,3 +1,14 @@
+<?php
+
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+
+
+    include '../../modelo/conexion.php';
+    $sql = "SELECT * FROM tblinsumos";
+    $result = $conexion->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,13 +33,14 @@
             </a>
             <i class='bx bx-menu' id="btn" ></i>
         </div>
+
         <ul class="nav-list">
             <li>
-                <a href="./usuarios.php">
-                    <i class='bx bx-user' ></i>
-                    <span class="links_name">Usuario</span>
-                </a>
-                <span class="tooltip">Usuarios</span>
+            <a href="./usuarios.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Usuario</span>
+            </a>
+            <span class="tooltip">Usuarios</span>
             </li>
 
             <li>
@@ -40,11 +52,11 @@
             </li>
 
             <li>
-                <a href="./recetas.php">
-                    <i class='bx bx-folder' ></i>
-                    <span class="links_name">Recetas</span>
-                </a>
-                <span class="tooltip">Recetas</span>
+            <a href="./recetas.php">
+                <i class='bx bx-folder' ></i>
+                <span class="links_name">Recetas</span>
+            </a>
+            <span class="tooltip">Recetas</span>
             </li>
 
             <li>
@@ -52,7 +64,7 @@
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Productos</span>
                 </a>
-                <span class="tooltip">Productos</span>
+                    <span class="tooltip">Productos</span>
             </li>
 
             <li>
@@ -60,15 +72,16 @@
                     <i class='bx bx-pie-chart-alt-2' ></i>
                     <span class="links_name">Proveedores</span>
                 </a>
+                
                 <span class="tooltip">Proveedores</span>
             </li>
 
             <li>
-                <a href="./facturas.php">
-                    <i class='bx bx-user' ></i>
-                    <span class="links_name">Facturas</span>
-                </a>
-                <span class="tooltip">Facturas</span>
+            <a href="./facturas.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Facturas</span>
+            </a>
+            <span class="tooltip">Facturas</span>
             </li>
 
             <li>
@@ -79,49 +92,42 @@
                 <span class="tooltip">Calculadora</span>
             </li>
 
-
             <li class="profile">
                 <div class="profile-details">
-                <img src="profile.jpg" alt="profileImg">
-                <div class="name_job">
-                    <div class="name">Prem Shahi</div>
-                    <div class="job">Web designer</div>
-                </div>
+                    <img src="profile.jpg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Prem Shahi</div>
+                        <div class="job">Web designer</div>
+                    </div>
                 </div>
                 <i class='bx bx-log-out' id="log_out" ></i>
             </li>
-        
         </ul>
     </div>
 
-    <!-- Formulario para agregar una nueva receta -->
-
     <section class="home-section">
-    <div class="container">
-        <h2 class="titleContainer">Agregar Receta</h2>
-            <form action="../../controlador/recetas/insertar.php" method="post" class="form" id="receta-form">
+        <div class="container">
+            <h2 class="titleContainer">Agregar Receta</h2>
+            <form action="../../controlador/Recetas/insertar.php" method="post" class="form" id="receta-form">
                 <label for="NombreReceta" class="label">Nombre Receta:</label> 
                 <input type="text" name="NombreProducto" class="input" required><br>
                     
                 <div id="contenedor-insumos">
-                    <?php
-                        include '../../modelo/conexion.php';
-                        $sql = "SELECT * FROM tblInsumos";
-                        $result = $conexion->query($sql);
-                        
-                        if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
-                                echo "<div>";
-                                echo "<select name='NombreInsumo[]' class='input'>";
-                                echo "<option value='" . $row["IdInsumo"] . "'>" . $row["NombreInsumo"] . "</option>";
-                                echo "</select>";
-                                echo "<input type='text' name='cantidadInsumo[]' placeholder='Cantidad' class='input' required>";
-                                echo "</div>";
-                            }
-                        } else {
-                            echo "0 results";
-                        }
-                    ?>
+                    <!-- Selector de insumo inicial -->
+                    <div>
+                        <select name="NombreInsumo[]" class="input">
+                            <?php
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        echo "<option value='" . $row["IdInsumo"] . "'>" . $row["NombreInsumo"] . "</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>No hay insumos disponibles</option>";
+                                }
+                            ?>
+                        </select>
+                        <input type='text' name='cantidadInsumo[]' placeholder='Cantidad' class='input' required>
+                    </div>
                 </div>
 
                 <button type="button" onclick="agregarElemento()">Agregar Insumo y Cantidad</button>
@@ -133,35 +139,15 @@
     </section>
 
     <script>
-        var index = <?php echo $result->num_rows + 1; ?>; // Inicializar el índice para los nuevos elementos
+        var contenedorInsumos = document.getElementById("contenedor-insumos");
+        var selectInicial = contenedorInsumos.querySelector("select").cloneNode(true);
 
         function agregarElemento() {
-            var contenedorInsumos = document.getElementById("contenedor-insumos");
             var contenedorNuevoInsumo = document.createElement("div");
-
-            // Selector de insumo
-            var nuevoSelect = document.createElement("select");
-            nuevoSelect.name = "NombreInsumo[" + index + "]"; // Aquí se utiliza el índice
-            nuevoSelect.className = "input";
-            nuevoSelect.innerHTML = contenedorInsumos.querySelector("select").innerHTML;
-            contenedorNuevoInsumo.appendChild(nuevoSelect);
-
-            // Campo de cantidad
-            var nuevoInput = document.createElement("input");
-            nuevoInput.type = "text";
-            nuevoInput.name = "cantidadInsumo[" + index + "]"; // Aquí se utiliza el índice
-            nuevoInput.placeholder = "Cantidad";
-            nuevoInput.className = "input";
-            nuevoInput.required = true;
-            contenedorNuevoInsumo.appendChild(nuevoInput);
+            contenedorNuevoInsumo.innerHTML = selectInicial.outerHTML;
 
             contenedorInsumos.appendChild(contenedorNuevoInsumo);
-            contenedorInsumos.appendChild(document.createElement("br"));
-
-            index++;
         }
     </script>
-
 </body>
 </html>
-  
