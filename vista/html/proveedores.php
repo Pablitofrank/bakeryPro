@@ -22,8 +22,8 @@
             </a>
             <i class='bx bx-menu' id="btn" ></i>
         </div>
-            <ul class="nav-list">
-        
+
+        <ul class="nav-list">
             <li>
             <a href="./usuarios.php">
                 <i class='bx bx-user' ></i>
@@ -49,18 +49,11 @@
             </li>
 
             <li>
-                <a href="./productos.php">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Productos</span>
-                </a>
-                    <span class="tooltip">Productos</span>
-            </li>
-
-            <li>
                 <a href="./proveedores.php">
                     <i class='bx bx-pie-chart-alt-2' ></i>
                     <span class="links_name">Proveedores</span>
                 </a>
+                
                 <span class="tooltip">Proveedores</span>
             </li>
 
@@ -73,27 +66,25 @@
             </li>
 
             <li>
-            <a href="./calculadora.php">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Calculadora</span>
-            </a>
-            <span class="tooltip">Calculadora</span>
+                <a href="./calculadora.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Calculadora</span>
+                </a>
+                <span class="tooltip">Calculadora</span>
             </li>
 
             <li class="profile">
                 <div class="profile-details">
-                <img src="profile.jpg" alt="profileImg">
-                <div class="name_job">
-                    <div class="name">Prem Shahi</div>
-                    <div class="job">Web designer</div>
-                </div>
+                    <img src="profile.jpg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Prem Shahi</div>
+                        <div class="job">Web designer</div>
+                    </div>
                 </div>
                 <i class='bx bx-log-out' id="log_out" ></i>
             </li>
-            
-            </ul>
-        </div>
-     </div>
+        </ul>
+    </div>
   
     <section class="home-section">
         <div class="container">

@@ -49,27 +49,20 @@
             </li>
 
             <li>
-                <a href="./productos.php">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Productos</span>
-                </a>
-                    <span class="tooltip">Productos</span>
-            </li>
-
-            <li>
                 <a href="./proveedores.php">
                     <i class='bx bx-pie-chart-alt-2' ></i>
                     <span class="links_name">Proveedores</span>
                 </a>
+                
                 <span class="tooltip">Proveedores</span>
             </li>
 
             <li>
-                <a href="./facturas.php">
-                    <i class='bx bx-user' ></i>
-                    <span class="links_name">Facturas</span>
-                </a>
-                <span class="tooltip">Facturas</span>
+            <a href="./facturas.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Facturas</span>
+            </a>
+            <span class="tooltip">Facturas</span>
             </li>
 
             <li>
@@ -79,7 +72,7 @@
                 </a>
                 <span class="tooltip">Calculadora</span>
             </li>
-            
+
             <li class="profile">
                 <div class="profile-details">
                     <img src="profile.jpg" alt="profileImg">
@@ -94,10 +87,10 @@
     </div>
     
     <section class="home-section">
-    <div class="container">
-        <h2 class="titleContainer">Calculadora</h2>
+        <div class="container">
+            <h2 class="titleContainer">Calculadora</h2>
 
-    </div> 
+        </div> 
 
      <script src="../../vista/js/main.js"></script>
 </body>

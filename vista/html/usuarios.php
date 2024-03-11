@@ -50,14 +50,6 @@
             </li>
 
             <li>
-                <a href="./productos.php">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Productos</span>
-                </a>
-                    <span class="tooltip">Productos</span>
-            </li>
-
-            <li>
                 <a href="./proveedores.php">
                     <i class='bx bx-pie-chart-alt-2' ></i>
                     <span class="links_name">Proveedores</span>
