@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <div class="sidebar open">
+<div class="sidebar open">
         <div class="logo-details">
             <a href="../../dashboard.php" class="logo_link">
                 <span class="logo_name">BakeryPro</span>
@@ -98,21 +98,24 @@
     
     <section class="home-section">
         <div class="container">
-        <form action="" method="GET">
-                <label for="search">Buscar:</label>
-                <input type="text" id="search" name="search">
+            <h2>Resultado de la Consulta de Facturas</h2>
+            
+            <!-- Formulario de búsqueda y filtro -->
+            <form action="" method="GET">
+                <label for="date">Fecha:</label>
+                <input type="date" id="date" name="date">
                 
-                <label for="category">Filtrar por categoría:</label>
-                <select id="category" name="category">
-                    <option value="">Todas las categorías</option>
+                <label for="provider">Proveedor:</label>
+                <select id="provider" name="provider">
+                    <option value="">Todos los proveedores</option>
                     <!-- Aquí debes generar opciones dinámicas con los datos de tu base de datos -->
                     <?php
                         include '../../modelo/conexion.php';
-                        $sql = "SELECT * FROM tblcategorias";
+                        $sql = "SELECT * FROM tblproveedores";
                         $result = $conexion->query($sql);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
-                                echo "<option value='".$row['IdCategoria']."'>".$row['Categoria']."</option>";
+                                echo "<option value='".$row['IdProveedor']."'>".$row['NombreProveedor']."</option>";
                             }
                         }
                         $conexion->close();
@@ -127,19 +130,21 @@
                 include '../../modelo/conexion.php';
                 
                 // Construir la consulta SQL dinámica
-                $sql = "SELECT tblinsumos.IdInsumo, tblinsumos.NombreInsumo, tblinsumos.Stock, tblunidadesmedidas.medida
-                        FROM tblinsumos
-                        INNER JOIN tblunidadesmedidas ON tblinsumos.IdUnidadMedida = tblunidadesmedidas.IdUnidadMedida";
+                $sql = "SELECT * FROM tblfactura";
 
                 // Agregar condiciones según los valores de búsqueda y filtro
-                if(isset($_GET['search']) && !empty($_GET['search'])) {
-                    $search = $_GET['search'];
-                    $sql .= " WHERE tblinsumos.NombreInsumo LIKE '%$search%'";
+                if(isset($_GET['date']) && !empty($_GET['date'])) {
+                    $date = $_GET['date'];
+                    $sql .= " WHERE Fecha = '$date'";
                 }
                 
-                if(isset($_GET['category']) && !empty($_GET['category'])) {
-                    $category = $_GET['category'];
-                    $sql .= " AND tblinsumos.IdCategoria = $category";
+                if(isset($_GET['provider']) && !empty($_GET['provider'])) {
+                    $provider = $_GET['provider'];
+                    if(strpos($sql, 'WHERE') !== false) {
+                        $sql .= " AND IdProveedor = $provider";
+                    } else {
+                        $sql .= " WHERE IdProveedor = $provider";
+                    }
                 }
 
                 $resultado = $conexion->query($sql);
@@ -147,22 +152,21 @@
                 if ($resultado->num_rows > 0) {
                     echo "<table border='1'>
                             <tr>
-                                <th>ID Insumo</th>
-                                <th>Nombre Insumo</th>
-                                <th>Stock</th>
+                                <th>ID Factura</th>
+                                <th>Cantidad de Insumo</th>
+                                <th>Número de Factura</th>
+                                <th>Fecha</th>
+                                <th>Proveedor</th>
                                 <th>Unidad de Medida</th>
-                                <th>Acciones</th>
                             </tr>";
                     while ($fila = $resultado->fetch_assoc()) {
                         echo "<tr>
-                                <td>{$fila['IdInsumo']}</td>
-                                <td>{$fila["NombreInsumo"]}</td>
-                                <td>{$fila["Stock"]}</td>
-                                <td>{$fila["medida"]}</td>
-                                <td>
-                                    <a href='editar.php?idInsumo={$fila["IdInsumo"]}'><img src='../../vista/img/editar.png' alt='editar'></a>
-                                    <a href='eliminar.php?idInsumo={$fila["IdInsumo"]}'><img src='../../vista/img/eliminar.png' alt='eliminar'></a>
-                                </td>
+                                <td>{$fila['IdFactura']}</td>
+                                <td>{$fila["CantidadInsumo"]}</td>
+                                <td>{$fila["NumeroFactura"]}</td>
+                                <td>{$fila["Fecha"]}</td>
+                                <td>{$fila["IdProveedor"]}</td>
+                                <td>{$fila["IdUnidadMedida"]}</td>
                             </tr>";
                     }
                     echo "</table>";
@@ -172,8 +176,6 @@
                 $conexion->close(); 
             ?>
         </div>
-            
-        
     </section>
 </body>
 </html>
