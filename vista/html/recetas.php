@@ -1,5 +1,4 @@
 <?php
-
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
@@ -121,7 +120,7 @@
                         <input type='text' name='cantidadInsumo[]' placeholder='Cantidad' class='input' required>
                     </div>
                 </div>
-
+                <button type="button" onclick="eliminarUltimoElemento()">Eliminar Último</button>
                 <button type="button" onclick="agregarElemento()">Agregar Insumo y Cantidad</button>
                 <br>
                 <br>
@@ -133,12 +132,39 @@
     <script>
         var contenedorInsumos = document.getElementById("contenedor-insumos");
         var selectInicial = contenedorInsumos.querySelector("select").cloneNode(true);
+        var contador = 1; // Inicializar contador
 
         function agregarElemento() {
             var contenedorNuevoInsumo = document.createElement("div");
-            contenedorNuevoInsumo.innerHTML = selectInicial.outerHTML;
+
+            // Clonar el select inicial y asignar un nuevo nombre con el contador
+            var nuevoSelect = selectInicial.cloneNode(true);
+            nuevoSelect.name = "NombreInsumo[" + contador + "]";
+            
+            // Crear un nuevo input para la cantidad con nombre correspondiente
+            var nuevoInputCantidad = document.createElement("input");
+            nuevoInputCantidad.type = "text";
+            nuevoInputCantidad.name = "cantidadInsumo[" + contador + "]";
+            nuevoInputCantidad.placeholder = "Cantidad";
+            nuevoInputCantidad.className = "input";
+            nuevoInputCantidad.required = true;
+
+            // Agregar el nuevo select e input al contenedor
+            contenedorNuevoInsumo.appendChild(nuevoSelect);
+            contenedorNuevoInsumo.appendChild(nuevoInputCantidad);
+
+            // Incrementar el contador para el próximo elemento
+            contador++;
 
             contenedorInsumos.appendChild(contenedorNuevoInsumo);
+        }
+
+        function eliminarUltimoElemento() {
+            var elementos = contenedorInsumos.children;
+            if (elementos.length > 1) {
+                contenedorInsumos.removeChild(elementos[elementos.length - 1]);
+                contador--; // Decrementar el contador al eliminar el último elemento
+            }
         }
     </script>
 </body>
