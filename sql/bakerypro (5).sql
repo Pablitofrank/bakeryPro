@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-03-2024 a las 17:14:00
+-- Tiempo de generación: 12-03-2024 a las 16:55:29
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -98,7 +98,8 @@ CREATE TABLE `tblinsumos` (
 --
 
 INSERT INTO `tblinsumos` (`IdInsumo`, `NombreInsumo`, `Stock`, `IdUnidadMedida`, `IdCategoria`) VALUES
-(8, 'leche', 2, 1, 1);
+(8, 'leche', 2, 1, 1),
+(9, 'harina', 1000, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +118,40 @@ CREATE TABLE `tblproductos` (
 --
 
 INSERT INTO `tblproductos` (`IdProducto`, `NombreProducto`, `Stock`) VALUES
-(3, 'pan rollo', 300);
+(3, 'pan rollo', 300),
+(4, 'panochon', 0),
+(5, 'panochon', 0),
+(6, 'panochon', 0),
+(7, 'panc', 0),
+(8, 'panc', 0),
+(9, 'paaaaa', 0),
+(10, 'q', 0),
+(11, 'qq', 0),
+(12, 'aaaa', 0),
+(13, 'apapapa', 0),
+(14, 'qw', 0),
+(15, 'qqqq', 0),
+(16, 'w', 0),
+(17, 'qdasd', 0),
+(18, 'we', 0),
+(19, 'panc', 0),
+(20, 'sdasd', 0),
+(21, 'pancqwe', 0),
+(22, 'asdasda', 0),
+(23, 'asdasda', 0),
+(24, 'asdasda', 0),
+(25, 'weeee', 0),
+(26, 'wasda', 0),
+(27, 'asdasd', 0),
+(28, 'qqqqq', 0),
+(29, 'asdasdasdas', 0),
+(30, 'pan rolloooo', 0),
+(31, 'aaaaaaaa', 0),
+(32, 'pon', 0),
+(33, 'pon', 0),
+(34, 'qqwe', 0),
+(35, 'panochon', 0),
+(36, 'galleta ', 0);
 
 -- --------------------------------------------------------
 
@@ -144,8 +178,27 @@ CREATE TABLE `tblproveedores` (
 CREATE TABLE `tblrecetas` (
   `CantidadInsumo` decimal(5,0) NOT NULL,
   `IdProducto` int(3) NOT NULL,
-  `IdInsumo` int(3) NOT NULL
+  `IdInsumo` int(3) NOT NULL,
+  `IdUnidadMedida` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tblrecetas`
+--
+
+INSERT INTO `tblrecetas` (`CantidadInsumo`, `IdProducto`, `IdInsumo`, `IdUnidadMedida`) VALUES
+(1, 4, 8, 2),
+(10, 12, 8, 1),
+(32, 27, 9, 3),
+(11, 28, 9, 2),
+(21, 29, 9, 2),
+(23, 30, 9, 2),
+(12, 31, 9, 2),
+(2, 35, 9, 1),
+(23, 35, 8, 2),
+(1, 36, 8, 1),
+(2, 36, 9, 2),
+(3, 36, 8, 3);
 
 -- --------------------------------------------------------
 
@@ -333,13 +386,13 @@ ALTER TABLE `tblentradasinsumos`
 -- AUTO_INCREMENT de la tabla `tblinsumos`
 --
 ALTER TABLE `tblinsumos`
-  MODIFY `IdInsumo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `IdInsumo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `tblproductos`
 --
 ALTER TABLE `tblproductos`
-  MODIFY `IdProducto` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `IdProducto` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `tblproveedores`
@@ -401,7 +454,8 @@ ALTER TABLE `tblinsumos`
 --
 ALTER TABLE `tblrecetas`
   ADD CONSTRAINT `tblrecetas_ibfk_1` FOREIGN KEY (`IdProducto`) REFERENCES `tblproductos` (`IdProducto`),
-  ADD CONSTRAINT `tblrecetas_ibfk_2` FOREIGN KEY (`IdInsumo`) REFERENCES `tblinsumos` (`IdInsumo`);
+  ADD CONSTRAINT `tblrecetas_ibfk_2` FOREIGN KEY (`IdInsumo`) REFERENCES `tblinsumos` (`IdInsumo`),
+  ADD CONSTRAINT `tblrecetas_ibfk_3` FOREIGN KEY (`IdUnidadMedida`) REFERENCES `tblunidadesmedidas` (`IdUnidadMedida`);
 
 --
 -- Filtros para la tabla `tblsalidasinsumos`
