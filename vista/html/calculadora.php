@@ -1,3 +1,13 @@
+<?php
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+
+
+    include '../../modelo/conexion.php';
+    $sql = "SELECT * FROM tblproductos";
+    $result = $conexion->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,7 +100,27 @@
         <div class="container">
             <h2 class="titleContainer">Calculadora</h2>
 
+            <p>Seleccione la cantidad que desea producir</p><br>
+
+            <div>
+                <select name="NombreProducto[]" class="input">
+                    <?php
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo "<option value='" . $row["IdProducto"] . "'>" . $row["NombreProducto"] . "</option>";
+                            }
+                        } else {
+                            echo "<option value=''>No hay productos disponibles</option>";
+                        }
+                    ?>
+                </select>
+
+                <input type='text' name='cantidadInsumo[]' placeholder='Cantidad' class='input' required>
+                <input type="submit" value="Calcular" class="btn"> <br>
+            </div>
+
         </div> 
+    </section>
 
      <script src="../../vista/js/main.js"></script>
 </body>

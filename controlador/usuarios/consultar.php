@@ -126,7 +126,7 @@
                 $conexion->close();
             ?>
             <br>
-            <a href="../../dashboard.php" class="volverConsultar">VOLVER</a>
+            <a href="../../vista/html/usuarios.php" class="volverConsultar">VOLVER</a>
         </div>
     </section>
 

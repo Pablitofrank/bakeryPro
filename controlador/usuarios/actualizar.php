@@ -11,7 +11,7 @@ $telefono = $_POST['telefono']; // Match with the HTML form input names
 $sql = "UPDATE tblusuario SET Nombres='$nombres', Apellidos='$apellidos', IdRol='$rol', Cedula='$cedula', Telefono='$telefono' WHERE IdUsuario=$id";
 
 if ($conexion->query($sql) === TRUE) {
-    header('Location: ../../vista/html/usuarios.php');
+    header('Location: ./consultar.php');
 } else {
     echo "Error al actualizar el registro: " . $conexion->error;
 }

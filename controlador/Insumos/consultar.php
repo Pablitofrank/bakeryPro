@@ -99,6 +99,7 @@
     <section class="home-section">
         <div class="container">
             <h2>Resultado de la Consulta de Insumos</h2>
+
             <?php
                 include '../../modelo/conexion.php';
 
@@ -123,13 +124,13 @@
                 if (!isset($_POST['buscar'])){$_POST['buscar']='';}
                 if (!isset($_POST['buscarcategoria'])){$_POST['buscarcategoria']='';}
             ?>
-            <form class="form" name="form" method="POST"action="index.php">
+            <form class="formDetails" name="form" method="POST"action="index.php">
                 <div>
                     <label class="label">Nombre</label>
                     <input type="text" class="input" id="buscar" name="buscar" value=" <?php echo $_POST["buscar"] ?>">
                 </div>
             
-                <p>Bucar por categoria</p>
+                <p>Buscar por categoria</p>
                 <table class="table">
                     <thead>
                         <tr class="filters">
