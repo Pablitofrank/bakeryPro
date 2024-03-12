@@ -23,6 +23,11 @@
                     <label for="new-password" class="label">Password</label>
                     <input type="password" placeholder="*********" name="Password" class="input" required></p><br>
                 
+
+
+
+
+                    
                     <input type="submit" value="Ingresar" class="btn">
             </form>
         </div>
