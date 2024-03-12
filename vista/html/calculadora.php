@@ -13,7 +13,10 @@
         $cantidadDeseada = $_POST['cantidadDeseada'];
 
         // Consultar la receta del producto seleccionado
-        $queryReceta = "SELECT IdInsumo, CantidadInsumo FROM tblrecetas WHERE IdProducto = IdProducto";
+        $queryReceta = "SELECT r.IdInsumo, r.CantidadInsumo, i.IdUnidadMedida
+                        FROM tblrecetas r
+                        INNER JOIN tblinsumos i ON r.IdInsumo = i.IdInsumo
+                        WHERE IdProducto = IdProducto";
         $resultReceta = $conexion->query($queryReceta);
 
         if ($resultReceta->num_rows > 0) {
@@ -24,26 +27,38 @@
             while($rowReceta = $resultReceta->fetch_assoc()) {
                 $idInsumo = $rowReceta['IdInsumo'];
                 $cantidadInsumo = $rowReceta['CantidadInsumo'] * $cantidadDeseada;
+                $idUnidadMedida = $rowReceta['IdUnidadMedida'];
 
-                // Almacenar el insumo y su cantidad en el array
-                $insumosRequeridos[$idInsumo] = $cantidadInsumo;
+                // Obtener el nombre de la unidad de medida del insumo
+                $queryUnidadMedida = "SELECT medida FROM tblunidadesmedidas WHERE IdUnidadMedida = $idUnidadMedida";
+                $resultUnidadMedida = $conexion->query($queryUnidadMedida);
+                $rowUnidadMedida = $resultUnidadMedida->fetch_assoc();
+                $unidadMedida = $rowUnidadMedida['medida'];
+
+                // Almacenar el insumo, su cantidad y unidad de medida en el array
+                $insumosRequeridos[$idInsumo] = array(
+                    'cantidad' => $cantidadInsumo,
+                    'unidad' => $unidadMedida
+                );
             }
 
             // Ahora puedes mostrar los insumos requeridos al usuario
-            foreach ($insumosRequeridos as $idInsumo => $cantidad) {
+            foreach ($insumosRequeridos as $idInsumo => $infoInsumo) {
                 // Realizar consulta para obtener el nombre del insumo
                 $queryNombreInsumo = "SELECT NombreInsumo FROM tblinsumos WHERE IdInsumo = $idInsumo";
                 $resultNombreInsumo = $conexion->query($queryNombreInsumo);
                 $rowNombreInsumo = $resultNombreInsumo->fetch_assoc();
                 $nombreInsumo = $rowNombreInsumo['NombreInsumo'];
 
-                echo "Se necesitan $cantidad unidades de $nombreInsumo <br>";
+                // Mostrar los insumos requeridos con su cantidad y unidad de medida
+                echo "Se necesitan {$infoInsumo['cantidad']} {$infoInsumo['unidad']} de $nombreInsumo <br>";
             }
         } else {
             echo "No hay receta disponible para este producto.";
         }
     }
 ?>
+
 
 
 
