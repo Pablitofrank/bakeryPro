@@ -104,68 +104,94 @@
                 <input type="text" name="Producto" class="input" required><br>
                     
                 <div id="contenedor-insumos">
-                    <!-- Selector de insumo inicial -->
-                    <div>
-                        <select name="NombreInsumo[]" class="input">
-                            <?php
-                                if ($result->num_rows > 0) {
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "<option value='" . $row["IdInsumo"] . "'>" . $row["NombreInsumo"] . "</option>";
-                                    }
-                                } else {
-                                    echo "<option value=''>No hay insumos disponibles</option>";
+                <!-- Selector de insumo inicial -->
+                <div>
+                    <select name="NombreInsumo[]" class="input">
+                        <?php
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row["IdInsumo"] . "'>" . $row["NombreInsumo"] . "</option>";
                                 }
-                            ?>
-                        </select>
-                        <input type='text' name='cantidadInsumo[]' placeholder='Cantidad' class='input' required>
-                    </div>
+                            } else {
+                                echo "<option value=''>No hay insumos disponibles</option>";
+                            }
+                        ?>
+                    </select>
+                    <input type='text' name='cantidadInsumo[]' placeholder='Cantidad' class='input' required>
+                    <?php
+                        include '../../modelo/conexion.php';
+                        $sql = "SELECT * FROM tblunidadesmedidas";
+                        $result = $conexion->query($sql);
+
+                        // Recorrer datos y crear options
+                        echo "<label for='medida' class='label'></label>
+                        <select name='idUnidadMedida[]' id='medida' class='input'>";
+
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                                echo "<option value='" . $row["IdUnidadMedida"] . "'>" . $row["medida"] . "</option>";
+                            }
+                        } else {
+                            echo "<option value=''>No hay unidades de medida disponibles</option>";
+                        }
+                        echo "</select>";
+                    ?>
                 </div>
-                <button type="button" onclick="eliminarUltimoElemento()">Eliminar Último</button>
-                <button type="button" onclick="agregarElemento()">Agregar Insumo y Cantidad</button>
-                <br>
-                <br>
-                <input type="submit" value="Agregar" class="btn"> <br>
-            </form>
-        </div>
+            </div>
+            <button type="button" onclick="eliminarUltimoElemento()">Eliminar Último</button>
+            <button type="button" onclick="agregarElemento()">Agregar Insumo y Cantidad</button>
+            <br>
+            <br>
+            <input type="submit" value="Agregar" class="btn"> <br>
+        </form>
+    </div>
+
     </section>
 
     <script>
-        var contenedorInsumos = document.getElementById("contenedor-insumos");
-        var selectInicial = contenedorInsumos.querySelector("select").cloneNode(true);
-        var contador = 1; // Inicializar contador
+    var contenedorInsumos = document.getElementById("contenedor-insumos");
+    var selectInicial = contenedorInsumos.querySelector("select").cloneNode(true);
+    var unidadMedidaSelect = document.getElementById("medida").cloneNode(true); // Clonar el select de unidades de medida
+    var contador = 1; // Inicializar contador
 
-        function agregarElemento() {
-            var contenedorNuevoInsumo = document.createElement("div");
+    function agregarElemento() {
+        var contenedorNuevoInsumo = document.createElement("div");
 
-            // Clonar el select inicial y asignar un nuevo nombre con el contador
-            var nuevoSelect = selectInicial.cloneNode(true);
-            nuevoSelect.name = "NombreInsumo[" + contador + "]";
-            
-            // Crear un nuevo input para la cantidad con nombre correspondiente
-            var nuevoInputCantidad = document.createElement("input");
-            nuevoInputCantidad.type = "text";
-            nuevoInputCantidad.name = "cantidadInsumo[" + contador + "]";
-            nuevoInputCantidad.placeholder = "Cantidad";
-            nuevoInputCantidad.className = "input";
-            nuevoInputCantidad.required = true;
+        // Clonar el select inicial y asignar un nuevo nombre con el contador
+        var nuevoSelect = selectInicial.cloneNode(true);
+        nuevoSelect.name = "NombreInsumo[" + contador + "]";
 
-            // Agregar el nuevo select e input al contenedor
-            contenedorNuevoInsumo.appendChild(nuevoSelect);
-            contenedorNuevoInsumo.appendChild(nuevoInputCantidad);
+        // Clonar el select de unidades de medida y asignar un nuevo nombre con el contador
+        var nuevoUnidadMedidaSelect = unidadMedidaSelect.cloneNode(true);
+        nuevoUnidadMedidaSelect.name = "idUnidadMedida[" + contador + "]";
 
-            // Incrementar el contador para el próximo elemento
-            contador++;
+        // Crear un nuevo input para la cantidad con nombre correspondiente
+        var nuevoInputCantidad = document.createElement("input");
+        nuevoInputCantidad.type = "text";
+        nuevoInputCantidad.name = "cantidadInsumo[" + contador + "]";
+        nuevoInputCantidad.placeholder = "Cantidad";
+        nuevoInputCantidad.className = "input";
+        nuevoInputCantidad.required = true;
 
-            contenedorInsumos.appendChild(contenedorNuevoInsumo);
+        // Agregar el nuevo select, input y select de unidad de medida al contenedor
+        contenedorNuevoInsumo.appendChild(nuevoSelect);
+        contenedorNuevoInsumo.appendChild(nuevoInputCantidad);
+        contenedorNuevoInsumo.appendChild(nuevoUnidadMedidaSelect);
+
+        // Incrementar el contador para el próximo elemento
+        contador++;
+
+        contenedorInsumos.appendChild(contenedorNuevoInsumo);
+    }
+
+    function eliminarUltimoElemento() {
+        var elementos = contenedorInsumos.children;
+        if (elementos.length > 1) {
+            contenedorInsumos.removeChild(elementos[elementos.length - 1]);
+            contador--; // Decrementar el contador al eliminar el último elemento
         }
-
-        function eliminarUltimoElemento() {
-            var elementos = contenedorInsumos.children;
-            if (elementos.length > 1) {
-                contenedorInsumos.removeChild(elementos[elementos.length - 1]);
-                contador--; // Decrementar el contador al eliminar el último elemento
-            }
-        }
-    </script>
+    }
+</script>
 </body>
 </html>
