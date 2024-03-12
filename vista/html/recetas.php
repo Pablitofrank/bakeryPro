@@ -100,8 +100,8 @@
         <div class="container">
             <h2 class="titleContainer">Agregar Receta</h2>
             <form action="../../controlador/Recetas/insertar.php" method="post" class="form" id="receta-form">
-                <label for="NombreReceta" class="label">Nombre Producto:</label> 
-                <input type="text" name="NombreProducto" class="input" required><br>
+                <label for="Producto" class="label">Producto:</label> 
+                <input type="text" name="Producto" class="input" required><br>
                     
                 <div id="contenedor-insumos">
                     <!-- Selector de insumo inicial -->
