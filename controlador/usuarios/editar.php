@@ -154,6 +154,5 @@ include '../../modelo/conexion.php' ;
             </form>
         </div>
     </section>
-    <script src="../../vista/js/main.js"></script>
 </body>
 </html>
