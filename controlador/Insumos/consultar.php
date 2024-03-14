@@ -66,7 +66,7 @@
         <ul class="nav-list">
         
         <li>
-        <a href="./vista/html/usuarios.php">
+        <a href="../../vista/html/usuarios.php">
             <i class='bx bx-user' ></i>
             <span class="links_name">Usuario</span>
         </a>

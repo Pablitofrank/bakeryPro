@@ -1,28 +1,52 @@
 <?php
-include '../../modelo/conexion.php';
+// Verificar si se han enviado datos por el método POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Verificar si se ha proporcionado un IdProducto
+    if(isset($_POST['IdProducto'])) {
+        $idProducto = $_POST['IdProducto'];
 
-$IdProducto = $_POST['IdProducto'];
-$NombreProducto = $_POST['NombreProducto'];
-$IdInsumo = $_POST['IdInsumo'];
-$NombreInsumo = $_POST['NombreInsumo'];
-$CantidadInsumo = $_POST['CantidadInsumo'];
-$medida = $_POST['medida'];
-$medidaIdUnidadMedida = $_POST['medidaIdUnidadMedida']; // Obtener el ID de la unidad de medida seleccionada
+        // Incluir el archivo de conexión a la base de datos
+        include '../../modelo/conexion.php';
 
-// Actualizar tabla de recetas
-$sqlRecetas = "UPDATE tblrecetas SET CantidadInsumo='$CantidadInsumo', IdInsumo='$IdInsumo' WHERE IdProducto=$IdProducto";
+        // Recorrer los datos enviados para actualizar cada insumo
+        foreach ($_POST as $key => $value) {
+            // Verificar si el nombre del campo comienza con "cantidad_"
+            if (strpos($key, 'cantidad_') === 0) {
+                // Extraer el IdInsumo del nombre del campo
+                $idInsumo = substr($key, strlen('cantidad_'));
 
-// Actualizar tabla de productos
-$sqlProductos = "UPDATE tblproductos SET NombreProducto='$NombreProducto' WHERE IdProducto=$IdProducto";
+                // Obtener la cantidad y unidad de medida del insumo
+                $cantidad = $_POST[$key];
+                $unidad = $_POST['unidad_'.$idInsumo];
 
-$sqlMedida = "UPDATE tblrecetas SET IdUnidadMedida='$medidaIdUnidadMedida' WHERE IdProducto=$IdProducto";
+                // Consultar el IdUnidadMedida correspondiente a la unidad seleccionada
+                $sqlUnidad = "SELECT IdUnidadMedida FROM tblunidadesmedidas WHERE medida = '$unidad'";
+                $resultadoUnidad = $conexion->query($sqlUnidad);
+                if ($resultadoUnidad->num_rows > 0) {
+                    $filaUnidad = $resultadoUnidad->fetch_assoc();
+                    $idUnidad = $filaUnidad['IdUnidadMedida'];
 
-// Ejecutar consultas
-if ($conexion->query($sqlRecetas) === TRUE && $conexion->query($sqlProductos) === TRUE && $conexion->query($sqlMedida) === TRUE) {
-    header('Location: ./consultar.php');
+                    // Actualizar la cantidad del insumo en la tabla tblrecetas
+                    $sqlActualizar = "UPDATE tblrecetas SET CantidadInsumo = $cantidad, IdUnidadMedida = $idUnidad WHERE IdProducto = $idProducto AND IdInsumo = $idInsumo";
+                    $conexion->query($sqlActualizar);
+                }
+            }
+        }
+
+        // Cerrar la conexión a la base de datos
+        $conexion->close();
+
+        // Redireccionar a la página de consulta de recetas con un mensaje de éxito
+        header("Location: consultar.php?mensaje=Insumos actualizados correctamente");
+        exit();
+    } else {
+        // Redireccionar a la página de consulta de recetas con un mensaje de error
+        header("Location: recetas.php?error=No se proporcionó un IdProducto para actualizar");
+        exit();
+    }
 } else {
-    echo "Error al actualizar el registro: " . $conexion->error;
+    // Redireccionar a la página de consulta de recetas si no se ha enviado por POST
+    header("Location: recetas.php");
+    exit();
 }
-
-$conexion->close();
 ?>
