@@ -89,7 +89,8 @@
     <section class="home-section">
         <div class="container">
             <h2 class="titleContainer">Agregar Proveedores</h2>
-                <form action="../../controlador/proveedores/insertar.php" method="post" class="form">
+
+            <form action="../../controlador/Proveedores/insertar.php" method="post" class="form">
                 
                 <label for="nit" class="label">NIT:</label>
                     <input type="text" name="NIT" required class="input"><br>
@@ -112,13 +113,16 @@
                 <!-- Nuevo campo para el rol -->
                 <input type="submit" value="Agregar" class="btn-agr">
             </form>
+
             <div>
-            <h2 class="titleContainer">Consulta Proveedores</h2>
-            <form action="../../controlador/proveedores/consultar.php" method="post">
-                <input type="submit" value="Consultar" class="btn">
-            </form>
-        </div>
+                <h2 class="titleContainer">Consulta Proveedores</h2>
+
+                <form action="../../controlador/Proveedores/consultar.php" method="post">
+                    <input type="submit" value="Consultar" class="btn">
+                </form>
             </div>
+        
+        </div>
 
 
     </section>
