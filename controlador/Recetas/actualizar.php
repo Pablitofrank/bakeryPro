@@ -1,15 +1,25 @@
 <?php
 include '../../modelo/conexion.php';
 
-$idReceta = $_POST['idReceta']; // Change 'id' to the correct name used in your HTML form
-$cantidadInsumo = $_POST['cantidadInsumo']; // Match with the HTML form input names
-$idProducto = $_POST['idProducto']; // Match with the HTML form input names
-$idInsumo = $_POST['idInsumo'];
+$IdProducto = $_POST['IdProducto'];
+$NombreProducto = $_POST['NombreProducto'];
+$IdInsumo = $_POST['IdInsumo'];
+$NombreInsumo = $_POST['NombreInsumo'];
+$CantidadInsumo = $_POST['CantidadInsumo'];
+$medida = $_POST['medida'];
+$medidaIdUnidadMedida = $_POST['medidaIdUnidadMedida']; // Obtener el ID de la unidad de medida seleccionada
 
-$sql = "UPDATE tblrecetas SET CantidadInsumo='$cantidadInsumo', IdProducto='$idProducto', IdInsumo='$idInsumo' WHERE IdReceta=$idReceta";
+// Actualizar tabla de recetas
+$sqlRecetas = "UPDATE tblrecetas SET CantidadInsumo='$CantidadInsumo', IdInsumo='$IdInsumo' WHERE IdProducto=$IdProducto";
 
-if ($conexion->query($sql) === TRUE) {
-    header('Location: ../../vista/html/recetas.php');
+// Actualizar tabla de productos
+$sqlProductos = "UPDATE tblproductos SET NombreProducto='$NombreProducto' WHERE IdProducto=$IdProducto";
+
+$sqlMedida = "UPDATE tblrecetas SET IdUnidadMedida='$medidaIdUnidadMedida' WHERE IdProducto=$IdProducto";
+
+// Ejecutar consultas
+if ($conexion->query($sqlRecetas) === TRUE && $conexion->query($sqlProductos) === TRUE && $conexion->query($sqlMedida) === TRUE) {
+    header('Location: ./consultar.php');
 } else {
     echo "Error al actualizar el registro: " . $conexion->error;
 }
