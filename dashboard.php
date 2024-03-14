@@ -133,6 +133,5 @@ mysqli_close($conexion);
       <div class="text">Dashboard</div>
   </section>
 
-  <script src="./vista/js/main.js"></script>
 </body>
 </html>

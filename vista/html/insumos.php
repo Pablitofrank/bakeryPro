@@ -135,7 +135,6 @@
 
                 <label for="stock" class='label'>Stock:</label>
                 <input type="text" name="stock" required class="input"><br>
-                
                 <?php
                     include '../../modelo/conexion.php';
                     $sql = "SELECT * FROM tblunidadesmedidas";
@@ -152,6 +151,26 @@
                         }
                     } else {
                         echo "<option value=''>No hay unidades de medida disponibles</option>";
+                    }
+                    echo "</select>";
+                ?>
+                <?php
+                    include '../../modelo/conexion.php';
+                    // Consultar las categorías de insumos disponibles
+                    $sql = "SELECT * FROM tblcategorias";
+                    $result = $conexion->query($sql);
+                    
+                    // Crear opciones para las categorías
+                    echo "<label for='categoria' class='label'>Categoría:</label>
+                    <select name='idCategoria' id='categoria' class='input'>";
+                    
+                    if ($result->num_rows > 0) {
+                        // Mostrar opciones de categorías
+                        while($row = $result->fetch_assoc()) {
+                            echo "<option value='" . $row["IdCategoria"] . "'>" . $row["Categoria"] . "</option>";
+                        }
+                    } else {
+                        echo "<option value=''>No hay categorías disponibles</option>";
                     }
                     echo "</select>";
                 ?>

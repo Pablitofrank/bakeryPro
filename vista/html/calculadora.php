@@ -103,7 +103,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora| BakeryPro</title>
+    <title>Calculadora | BakeryPro</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,33 +187,76 @@
     </div>
     
     <section class="home-section">
-
         <form method="post">
             <div class="container">
                 <h2 class="titleContainer">Calculadora</h2>
-
-                <p>Seleccione la cantidad que desea producir</p><br>
+                <p>Seleccione el producto y la cantidad que desea producir</p><br>
 
                 <div>
                     <select name="NombreProducto" class="input">
                         <?php
-                            if ($result->num_rows > 0) {
-                                while($row = $result->fetch_assoc()) {
-                                    echo "<option value='" . $row["IdProducto"] . "'>" . $row["NombreProducto"] . "</option>";
-                                }
-                            } else {
-                                echo "<option value=''>No hay productos disponibles</option>";
+                        include '../../modelo/conexion.php';
+
+                        $sql = "SELECT IdProducto, NombreProducto FROM tblproductos";
+                        $result = $conexion->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo "<option value='" . $row["IdProducto"] . "'>" . $row["NombreProducto"] . "</option>";
                             }
+                        } else {
+                            echo "<option value=''>No hay productos disponibles</option>";
+                        }
+
+                        $conexion->close();
                         ?>
                     </select>
 
                     <input type='number' name='cantidadDeseada' placeholder='Cantidad' class='input' required>
                     <input type="submit" value="Calcular" class="btn"> <br>
+                            
+                    <?php
+                    include '../../modelo/conexion.php';
+
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        $cantidadDeseada = $_POST['cantidadDeseada'];
+                        $productoId = $_POST['NombreProducto'];
+
+                        $sql = "SELECT rp.CantidadInsumo, i.NombreInsumo, u.medida 
+                                FROM tblrecetas rp 
+                                INNER JOIN tblinsumos i ON rp.IdInsumo = i.IdInsumo 
+                                INNER JOIN tblunidadesmedidas u ON rp.IdUnidadMedida = u.IdUnidadMedida 
+                                WHERE rp.IdProducto = $productoId";
+                        $result = $conexion->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // Guardar los resultados en una variable de sesión
+                            session_start();
+                            $_SESSION['resultados'] = array();
+                            while($row = $result->fetch_assoc()) {
+                                $cantidadInsumo = $row["CantidadInsumo"] * $cantidadDeseada;
+                                $_SESSION['resultados'][] = array(
+                                    'NombreInsumo' => $row["NombreInsumo"],
+                                    'Cantidad' => $cantidadInsumo,
+                                    'Unidad' => $row["medida"]
+                                );
+                            }
+                            session_write_close();
+
+                            // Redireccionar a otra página para mostrar los resultados
+                            header("Location: ../../controlador/calculadora/resultados.php");
+                            exit();
+                        } else {
+                            echo "No se encontraron recetas para este producto.";
+                        }
+                    }
+                    ?>
+
                 </div>
             </div> 
         </form>
     </section>
 
-     <script src="../../vista/js/main.js"></script>
+    <script src="../../vista/js/main.js"></script>
 </body>
 </html>

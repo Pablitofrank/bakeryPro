@@ -131,73 +131,8 @@
      <div class="container">
         <h2 class="titleContainer">Agregar Factura</h2>
         <form action="../../controlador/facturas/insertar.php" method="post" class="form">
-         <?php
-            include '../../modelo/conexion.php';
-            $sql = "SELECT * FROM tblInsumos";
-            $result = $conexion->query($sql);
-            
-            // Recorrer datos y crear options
-            echo "<label for='NombreInsumo'>Insumo:</label>
-            
-            <select name='NombreInsumo' id='opcion' class='input'>";
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row["IdInsumo"] . "'>" . $row["NombreInsumo"] . "</option>";
-                }
-            } else {
-                echo "0 results";
-            }
-            echo "</select><br>";
-            
-            // Actualizar valor del option en la base de datos
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                // Actualizar valor del option en la base de datos
-                $sql = "UPDATE tblfactura SET IdInsumo = " . $_POST['NombreInsumo'] . " WHERE IdInsumo = 1";
-
-                if ($conexion->query($sql) === TRUE) {
-                    echo "Record updated successfully";
-                } else {
-                    echo "Error updating record: " . $conexion->error;
-                }
-            }
-            ?>
-    
-            <label for="cantidadInsumo">Cantidad de Insumo:</label> <input type="text" name="cantidadInsumo" required class="input"><br>
-            <label for="numeroFactura">Número de Factura:</label> <input type="text" name="numeroFactura" required class="input"><br>
+        <label for="numeroFactura">Número de Factura:</label> <input type="text" name="numeroFactura" required class="input"><br>
             <label for="fecha">Fecha:</label> <input type="date" name="fecha" required class="input"><br>
-            <?php
-            include '../../modelo/conexion.php';
-            $sql = "SELECT * FROM tblinsumos";
-            $result = $conexion->query($sql);
-            
-            // Recorrer datos y crear options
-            echo "<label for='insumo'>Insumo:</label>
-            
-            <select name='insumo' id='opcion' class='input'>";
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row["IdInsumo"] . "'>" . $row["Insumo"] . "</option>";
-                }
-            } else {
-                echo "0 results";
-            }
-            echo "</select>";
-            
-            // Actualizar valor del option en la base de datos
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                // Actualizar valor del option en la base de datos
-                $sql = "UPDATE tblinsumos SET IdInsumo = " . $_POST['insumo'] . " WHERE IdInsumo = 1";
-
-                if ($conexion->query($sql) === TRUE) {
-                    echo "Record updated successfully";
-                } else {
-                    echo "Error updating record: " . $conexion->error;
-                }
-            }
-            ?>
-
 
             <?php
             include '../../modelo/conexion.php';
@@ -207,11 +142,11 @@
             // Recorrer datos y crear options
             echo "<label for='razonSocial'>RazonSocial:</label>
             
-            <select name='insumo' id='opcion' class='input'>";
+            <select name='razonSocial' id='opcion' class='input'>";
             if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row["IdProveedor"] . "'>" . $row["RazonSocial"] . "</option>";
+                    echo "<option value='" . $row["IdProveedores"] . "'>" . $row["RazonSocial"] . "</option>";
                 }
             } else {
                 echo "0 results";
@@ -221,7 +156,7 @@
             // Actualizar valor del option en la base de datos
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Actualizar valor del option en la base de datos
-                $sql = "UPDATE tblProveedores SET IdProveedor = " . $_POST['razonSocial'] . " WHERE IdProveedor = 1";
+                $sql = "UPDATE tblProveedores SET IdProveedores = " . $_POST['razonSocial'] . " WHERE IdProveedores = 1";
 
                 if ($conexion->query($sql) === TRUE) {
                     echo "Record updated successfully";
@@ -231,38 +166,49 @@
             }
             
             ?>
-          
-           <?php
-            include '../../modelo/conexion.php';
-            $sql = "SELECT * FROM tblunidadesmedidas";
-            $result = $conexion->query($sql);
-            
-            // Recorrer datos y crear options
-            echo "<label for='medida' >medida:</label>
-            
-            <select name='insumo' id='opcion' class='input'>";
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row["IdUnidadMedida"] . "' class='input'>" . $row["medida"] . "</option>";
-                }
-            } else {
-                echo "0 results";
-            }
-            echo "</select>";
-            
-            // Actualizar valor del option en la base de datos
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                // Actualizar valor del option en la base de datos
-                $sql = "UPDATE tblunidadesmedidas SET IdUnidadMedida = " . $_POST['medida'] . " WHERE IdUnidadMedida = 1";
 
-                if ($conexion->query($sql) === TRUE) {
-                    echo "Record updated successfully";
-                } else {
-                    echo "Error updating record: " . $conexion->error;
-                }
-            }
-            ?>
+            <div id="contenedor-insumos">
+                <!-- Selector de insumo inicial -->
+                <div>
+                    <select name="NombreInsumo[]" class="input">
+                        <?php   
+                            include '../../modelo/conexion.php';
+                            $sql = "SELECT * FROM tblInsumos";
+                            $result = $conexion->query($sql);
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row["IdInsumo"] . "'>" . $row["NombreInsumo"] . "</option>";
+                                }
+                            } else {
+                                echo "<option value=''>No hay insumos disponibles</option>";
+                            }
+                        ?>
+                    </select>
+                    <input type='text' name='cantidadInsumo[]' placeholder='Cantidad' class='input' required>
+                    <?php
+                        include '../../modelo/conexion.php';
+                        $sql = "SELECT * FROM tblunidadesmedidas";
+                        $result = $conexion->query($sql);
+
+                        // Recorrer datos y crear options
+                        echo "<label for='medida' class='label'></label>
+                        <select name='idUnidadMedida[]' id='medida' class='input'>";
+
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                                echo "<option value='" . $row["IdUnidadMedida"] . "'>" . $row["medida"] . "</option>";
+                            }
+                        } else {
+                            echo "<option value=''>No hay unidades de medida disponibles</option>";
+                        }
+                        echo "</select>";
+                    ?>
+                </div>
+            </div> 
+            <button type="button" onclick="eliminarUltimoElemento()">Eliminar Último</button>
+            <button type="button" onclick="agregarElemento()">Agregar Insumo y Cantidad</button>
+            
             <input type="submit" value="Agregar" class="btn">
         </form>
         <div class="consulta">
@@ -273,7 +219,50 @@
             </div>
     </section>
     
+    <script>
+    var contenedorInsumos = document.getElementById("contenedor-insumos");
+    var selectInicial = contenedorInsumos.querySelector("select").cloneNode(true);
+    var unidadMedidaSelect = document.getElementById("medida").cloneNode(true); // Clonar el select de unidades de medida
+    var contador = 1; // Inicializar contador
 
+    function agregarElemento() {
+        var contenedorNuevoInsumo = document.createElement("div");
+
+        // Clonar el select inicial y asignar un nuevo nombre con el contador
+        var nuevoSelect = selectInicial.cloneNode(true);
+        nuevoSelect.name = "NombreInsumo[" + contador + "]";
+
+        // Clonar el select de unidades de medida y asignar un nuevo nombre con el contador
+        var nuevoUnidadMedidaSelect = unidadMedidaSelect.cloneNode(true);
+        nuevoUnidadMedidaSelect.name = "idUnidadMedida[" + contador + "]";
+
+        // Crear un nuevo input para la cantidad con nombre correspondiente
+        var nuevoInputCantidad = document.createElement("input");
+        nuevoInputCantidad.type = "text";
+        nuevoInputCantidad.name = "cantidadInsumo[" + contador + "]";
+        nuevoInputCantidad.placeholder = "Cantidad";
+        nuevoInputCantidad.className = "input";
+        nuevoInputCantidad.required = true;
+
+        // Agregar el nuevo select, input y select de unidad de medida al contenedor
+        contenedorNuevoInsumo.appendChild(nuevoSelect);
+        contenedorNuevoInsumo.appendChild(nuevoInputCantidad);
+        contenedorNuevoInsumo.appendChild(nuevoUnidadMedidaSelect);
+
+        // Incrementar el contador para el próximo elemento
+        contador++;
+
+        contenedorInsumos.appendChild(contenedorNuevoInsumo);
+    }
+
+    function eliminarUltimoElemento() {
+        var elementos = contenedorInsumos.children;
+        if (elementos.length > 1) {
+            contenedorInsumos.removeChild(elementos[elementos.length - 1]);
+            contador--; // Decrementar el contador al eliminar el último elemento
+        }
+    }
+</script>
     <script src="../../vista/js/main.js"></script>
 </body>
 </html>

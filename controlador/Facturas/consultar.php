@@ -141,40 +141,61 @@
                 if(isset($_GET['provider']) && !empty($_GET['provider'])) {
                     $provider = $_GET['provider'];
                     if(strpos($sql, 'WHERE') !== false) {
-                        $sql .= " AND IdProveedor = $provider";
+                        $sql .= " AND IdProveedores = $provider";
                     } else {
-                        $sql .= " WHERE IdProveedor = $provider";
+                        $sql .= " WHERE IdProveedores = $provider";
                     }
                 }
 
                 $resultado = $conexion->query($sql);
 
+                        
+               
+                include '../../modelo/conexion.php';
+                $sql = "SELECT f.IdFactura, f.CantidadInsumo, f.NumeroFactura, f.Fecha, 
+                               i.NombreInsumo AS NombreInsumo, 
+                               p.RazonSocial AS Proveedor,
+                               u.medida AS UnidadMedida
+                        FROM tblfactura f
+                        INNER JOIN tblinsumos i ON f.idInsumo = i.IdInsumo
+                        INNER JOIN tblproveedores p ON f.IdProveedores = p.IdProveedores
+                        INNER JOIN tblunidadesmedidas u ON f.IdUnidadMedida = u.IdUnidadMedida";
+                $resultado = $conexion->query($sql);
                 if ($resultado->num_rows > 0) {
                     echo "<table border='1'>
-                            <tr>
-                                <th>ID Factura</th>
-                                <th>Cantidad de Insumo</th>
-                                <th>Número de Factura</th>
-                                <th>Fecha</th>
-                                <th>Proveedor</th>
-                                <th>Unidad de Medida</th>
-                            </tr>";
+                        <tr>
+                            <th>ID Factura</th>
+                            <th>Cantidad Insumo</th>
+                            <th>Número de Factura</th>
+                            <th>Fecha</th>
+                            <th>Insumo</th>
+                            <th>Proveedor</th>
+                            <th>Unidad de Medida</th>
+                            <th>Acciones</th>
+                        </tr>";
                     while ($fila = $resultado->fetch_assoc()) {
                         echo "<tr>
-                                <td>{$fila['IdFactura']}</td>
-                                <td>{$fila["CantidadInsumo"]}</td>
-                                <td>{$fila["NumeroFactura"]}</td>
-                                <td>{$fila["Fecha"]}</td>
-                                <td>{$fila["IdProveedor"]}</td>
-                                <td>{$fila["IdUnidadMedida"]}</td>
+                                <td>".$fila["IdFactura"]."</td>
+                                <td>".$fila["CantidadInsumo"]."</td>
+                                <td>".$fila["NumeroFactura"]."</td>
+                                <td>".$fila["Fecha"]."</td>
+                                <td>".$fila["NombreInsumo"]."</td>
+                                <td>".$fila["Proveedor"]."</td>
+                                <td>".$fila["UnidadMedida"]."</td>
+                                <td>
+                                    <a href='editar.php?NumeroFactura=".$fila['NumeroFactura']."'><img src='../../vista/img/editar.png' alt='editar'></a>
+                                    <a href='eliminar.php?numero_factura=".$fila['NumeroFactura']."'><img src='../../vista/img/eliminar.png' alt='eliminar'></a>
+                                </td>
                             </tr>";
                     }
                     echo "</table>";
                 } else {
-                    echo "<p>No se encontraron resultados para la búsqueda y filtro proporcionados.</p>";
+                    echo "<p>No se encontraron resultados para la tabla de facturas.</p>";
                 }
-                $conexion->close(); 
+                $conexion->close();
             ?>
+            
+
         </div>
     </section>
 </body>
