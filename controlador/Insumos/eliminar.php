@@ -1,6 +1,10 @@
 <?php
 include '../../modelo/conexion.php';
 
+// Desactivar las restricciones de clave externa
+$sql_disable_fk_checks = "SET FOREIGN_KEY_CHECKS=0";
+$conexion->query($sql_disable_fk_checks);
+
 if (isset($_GET['idInsumo'])) {
     $idInsumo = $_GET['idInsumo'];
 
@@ -14,6 +18,10 @@ if (isset($_GET['idInsumo'])) {
 } else {
     echo "No se encontraron usuarios registrados.";
 }
+
+// Volver a activar las restricciones de clave externa
+$sql_enable_fk_checks = "SET FOREIGN_KEY_CHECKS=1";
+$conexion->query($sql_enable_fk_checks);
 
 $conexion->close();
 ?>

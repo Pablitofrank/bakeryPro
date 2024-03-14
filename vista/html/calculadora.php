@@ -1,73 +1,9 @@
-<?php
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-
-    include '../../modelo/conexion.php';
-    $sql = "SELECT * FROM tblproductos";
-    $result = $conexion->query($sql);
-
-    // Verificar si se ha enviado el formulario
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Obtener los datos del formulario
-        $IdProducto = $_POST['NombreProducto']; // Cambiado de IdProducto a NombreProducto
-        $cantidadDeseada = $_POST['cantidadDeseada'];
-
-        // Consultar la receta del producto seleccionado
-        $queryReceta = "SELECT r.IdInsumo, r.CantidadInsumo, i.IdUnidadMedida
-                        FROM tblrecetas r
-                        INNER JOIN tblinsumos i ON r.IdInsumo = i.IdInsumo
-                        WHERE IdProducto = IdProducto";
-        $resultReceta = $conexion->query($queryReceta);
-
-        if ($resultReceta->num_rows > 0) {
-            // Inicializar un array para almacenar los insumos y sus cantidades
-            $insumosRequeridos = array();
-
-            // Calcular la cantidad total de cada insumo requerido
-            while($rowReceta = $resultReceta->fetch_assoc()) {
-                $idInsumo = $rowReceta['IdInsumo'];
-                $cantidadInsumo = $rowReceta['CantidadInsumo'] * $cantidadDeseada;
-                $idUnidadMedida = $rowReceta['IdUnidadMedida'];
-
-                // Obtener el nombre de la unidad de medida del insumo
-                $queryUnidadMedida = "SELECT medida FROM tblunidadesmedidas WHERE IdUnidadMedida = $idUnidadMedida";
-                $resultUnidadMedida = $conexion->query($queryUnidadMedida);
-                $rowUnidadMedida = $resultUnidadMedida->fetch_assoc();
-                $unidadMedida = $rowUnidadMedida['medida'];
-
-                // Almacenar el insumo, su cantidad y unidad de medida en el array
-                $insumosRequeridos[$idInsumo] = array(
-                    'cantidad' => $cantidadInsumo,
-                    'unidad' => $unidadMedida
-                );
-            }
-
-            // Ahora puedes mostrar los insumos requeridos al usuario
-            foreach ($insumosRequeridos as $idInsumo => $infoInsumo) {
-                // Realizar consulta para obtener el nombre del insumo
-                $queryNombreInsumo = "SELECT NombreInsumo FROM tblinsumos WHERE IdInsumo = $idInsumo";
-                $resultNombreInsumo = $conexion->query($queryNombreInsumo);
-                $rowNombreInsumo = $resultNombreInsumo->fetch_assoc();
-                $nombreInsumo = $rowNombreInsumo['NombreInsumo'];
-
-                // Mostrar los insumos requeridos con su cantidad y unidad de medida
-                echo "Se necesitan {$infoInsumo['cantidad']} {$infoInsumo['unidad']} de $nombreInsumo <br>";
-            }
-        } else {
-            echo "No hay receta disponible para este producto.";
-        }
-    }
-?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora| BakeryPro</title>
+    <title>Calculadora | BakeryPro</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -151,33 +87,76 @@
     </div>
     
     <section class="home-section">
-
         <form method="post">
             <div class="container">
                 <h2 class="titleContainer">Calculadora</h2>
-
-                <p>Seleccione la cantidad que desea producir</p><br>
+                <p>Seleccione el producto y la cantidad que desea producir</p><br>
 
                 <div>
                     <select name="NombreProducto" class="input">
                         <?php
-                            if ($result->num_rows > 0) {
-                                while($row = $result->fetch_assoc()) {
-                                    echo "<option value='" . $row["IdProducto"] . "'>" . $row["NombreProducto"] . "</option>";
-                                }
-                            } else {
-                                echo "<option value=''>No hay productos disponibles</option>";
+                        include '../../modelo/conexion.php';
+
+                        $sql = "SELECT IdProducto, NombreProducto FROM tblproductos";
+                        $result = $conexion->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo "<option value='" . $row["IdProducto"] . "'>" . $row["NombreProducto"] . "</option>";
                             }
+                        } else {
+                            echo "<option value=''>No hay productos disponibles</option>";
+                        }
+
+                        $conexion->close();
                         ?>
                     </select>
 
                     <input type='number' name='cantidadDeseada' placeholder='Cantidad' class='input' required>
                     <input type="submit" value="Calcular" class="btn"> <br>
+                            
+                    <?php
+                    include '../../modelo/conexion.php';
+
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        $cantidadDeseada = $_POST['cantidadDeseada'];
+                        $productoId = $_POST['NombreProducto'];
+
+                        $sql = "SELECT rp.CantidadInsumo, i.NombreInsumo, u.medida 
+                                FROM tblrecetas rp 
+                                INNER JOIN tblinsumos i ON rp.IdInsumo = i.IdInsumo 
+                                INNER JOIN tblunidadesmedidas u ON rp.IdUnidadMedida = u.IdUnidadMedida 
+                                WHERE rp.IdProducto = $productoId";
+                        $result = $conexion->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // Guardar los resultados en una variable de sesión
+                            session_start();
+                            $_SESSION['resultados'] = array();
+                            while($row = $result->fetch_assoc()) {
+                                $cantidadInsumo = $row["CantidadInsumo"] * $cantidadDeseada;
+                                $_SESSION['resultados'][] = array(
+                                    'NombreInsumo' => $row["NombreInsumo"],
+                                    'Cantidad' => $cantidadInsumo,
+                                    'Unidad' => $row["medida"]
+                                );
+                            }
+                            session_write_close();
+
+                            // Redireccionar a otra página para mostrar los resultados
+                            header("Location: ../../controlador/calculadora/resultados.php");
+                            exit();
+                        } else {
+                            echo "No se encontraron recetas para este producto.";
+                        }
+                    }
+                    ?>
+
                 </div>
             </div> 
         </form>
     </section>
 
-     <script src="../../vista/js/main.js"></script>
+    <script src="../../vista/js/main.js"></script>
 </body>
 </html>

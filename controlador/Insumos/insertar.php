@@ -5,6 +5,7 @@ include '../../modelo/conexion.php';
 $nombreInsumo = $_POST['nombreInsumo'];
 $stock = $_POST['stock'];
 $idUnidadMedida = $_POST['idUnidadMedida'];
+$idCategoria = $_POST['idCategoria']; // Se agregó para incluir la categoría
 
 // Perform input validation if needed
 
@@ -14,7 +15,7 @@ $resultadoUnidadMedida = $conexion->query($consultaUnidadMedida);
 
 if ($resultadoUnidadMedida->num_rows > 0) {
     // Insert the new insumo
-    $sql = "INSERT INTO tblInsumos (NombreInsumo, Stock, IdUnidadMedida) VALUES ('$nombreInsumo', '$stock', '$idUnidadMedida')";
+    $sql = "INSERT INTO tblInsumos (NombreInsumo, Stock, IdUnidadMedida, IdCategoria) VALUES ('$nombreInsumo', '$stock', '$idUnidadMedida', '$idCategoria')";
 
     if ($conexion->query($sql) === TRUE) {
         // Redirect after successful insertion
@@ -31,3 +32,4 @@ if ($resultadoUnidadMedida->num_rows > 0) {
 
 $conexion->close();
 ?>
+S
