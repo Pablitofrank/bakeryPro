@@ -111,7 +111,7 @@
                     <input type="text" name="Direccion" required class="input"><br>
 
                 <!-- Nuevo campo para el rol -->
-                <input type="submit" value="Agregar" class="btn">
+                <input type="submit" value="Agregar" class="btn-agr">
             </form>
 
             <div>
@@ -127,6 +127,5 @@
 
     </section>
 
-    <script src="../../vista/js/main.js"></script>
 </body>
 </html>
