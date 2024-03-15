@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-03-2024 a las 16:55:29
+-- Tiempo de generación: 15-03-2024 a las 13:20:55
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -337,7 +337,8 @@ ALTER TABLE `tblproveedores`
 --
 ALTER TABLE `tblrecetas`
   ADD KEY `IdProducto` (`IdProducto`,`IdInsumo`),
-  ADD KEY `IdInsumo` (`IdInsumo`);
+  ADD KEY `IdInsumo` (`IdInsumo`),
+  ADD KEY `tblrecetas_ibfk_3` (`IdUnidadMedida`);
 
 --
 -- Indices de la tabla `tblroles`
