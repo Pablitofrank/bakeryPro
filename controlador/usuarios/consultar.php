@@ -118,7 +118,7 @@
                         <div class="job"><?php echo $rol; ?></div>
                     </div>
                 </div>
-                <a href="./controlador/login/logout.php" id="log_out">
+                <a href="../login/logout.php" id="log_out">
                     <i class='bx bx-log-out'></i>
                 </a>
             </li>

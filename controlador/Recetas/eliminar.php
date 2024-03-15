@@ -13,7 +13,7 @@
             $sqlEliminarProducto = "DELETE FROM tblproductos WHERE IdProducto = $idProducto";
             if ($conexion->query($sqlEliminarProducto) === TRUE) {
                 // Redireccionar a la página de consulta de recetas con un mensaje de éxito
-                header("Location: recetas.php?mensaje=Receta eliminada correctamente");
+                header("Location: ./consultar.php");
                 exit();
             } else {
                 // Redireccionar a la página de consulta de recetas con un mensaje de error
