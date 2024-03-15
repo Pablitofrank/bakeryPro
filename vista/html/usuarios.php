@@ -133,7 +133,7 @@
     <section class="home-section">
         <div class="container">
             <h2 class="titleContainer">Agregar usuarios</h2>
-            <form action="../../controlador/usuarios/insertar.php" method="post" class="form">
+
                 <label for="nombres" class="label">Nombres:</label>
                 <input type="text" name="nombres" required class="input"><br> 
 
@@ -173,9 +173,10 @@
                     ?>
                 <label for="cedula" class="label">Cedula:</label> <input type="text" name="cedula" required class="input"><br>
                 <label for="telefono" class="label">Telefono:</label> <input type="text" name="telefono" required class="input"><br>
-                
+                            
+            <a href="../../controlador/usuarios/insertar.php">
                 <input type="submit" value="Agregar" class="btn">
-            </form>
+            </a>
 
             <a href="../../controlador/usuarios/consultar.php">
                 <input type="submit" value="Consultar" class="btn2">
