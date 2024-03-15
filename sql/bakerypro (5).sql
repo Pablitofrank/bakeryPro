@@ -59,10 +59,11 @@ CREATE TABLE `tblentradasinsumos` (
 --
 
 CREATE TABLE `tblfactura` (
-  `IdFactura` int(5) NOT NULL,
+  `IdFactura` int(3) NOT NULL,
   `CantidadInsumo` decimal(5,0) NOT NULL,
   `NumeroFactura` varchar(20) NOT NULL,
   `Fecha` date NOT NULL,
+  `idInsumo` int(3) NOT NULL,
   `IdProveedor` int(3) NOT NULL,
   `IdUnidadMedida` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -117,41 +118,6 @@ CREATE TABLE `tblproductos` (
 -- Volcado de datos para la tabla `tblproductos`
 --
 
-INSERT INTO `tblproductos` (`IdProducto`, `NombreProducto`, `Stock`) VALUES
-(3, 'pan rollo', 300),
-(4, 'panochon', 0),
-(5, 'panochon', 0),
-(6, 'panochon', 0),
-(7, 'panc', 0),
-(8, 'panc', 0),
-(9, 'paaaaa', 0),
-(10, 'q', 0),
-(11, 'qq', 0),
-(12, 'aaaa', 0),
-(13, 'apapapa', 0),
-(14, 'qw', 0),
-(15, 'qqqq', 0),
-(16, 'w', 0),
-(17, 'qdasd', 0),
-(18, 'we', 0),
-(19, 'panc', 0),
-(20, 'sdasd', 0),
-(21, 'pancqwe', 0),
-(22, 'asdasda', 0),
-(23, 'asdasda', 0),
-(24, 'asdasda', 0),
-(25, 'weeee', 0),
-(26, 'wasda', 0),
-(27, 'asdasd', 0),
-(28, 'qqqqq', 0),
-(29, 'asdasdasdas', 0),
-(30, 'pan rolloooo', 0),
-(31, 'aaaaaaaa', 0),
-(32, 'pon', 0),
-(33, 'pon', 0),
-(34, 'qqwe', 0),
-(35, 'panochon', 0),
-(36, 'galleta ', 0);
 
 -- --------------------------------------------------------
 
@@ -186,19 +152,7 @@ CREATE TABLE `tblrecetas` (
 -- Volcado de datos para la tabla `tblrecetas`
 --
 
-INSERT INTO `tblrecetas` (`CantidadInsumo`, `IdProducto`, `IdInsumo`, `IdUnidadMedida`) VALUES
-(1, 4, 8, 2),
-(10, 12, 8, 1),
-(32, 27, 9, 3),
-(11, 28, 9, 2),
-(21, 29, 9, 2),
-(23, 30, 9, 2),
-(12, 31, 9, 2),
-(2, 35, 9, 1),
-(23, 35, 8, 2),
-(1, 36, 8, 1),
-(2, 36, 9, 2),
-(3, 36, 8, 3);
+
 
 -- --------------------------------------------------------
 

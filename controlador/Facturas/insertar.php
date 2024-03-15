@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idProveedores = $_POST['razonSocial'];
 
     // Insertar la factura en la tabla tblfactura
-    $sqlFactura = "INSERT INTO tblfactura (CantidadInsumo, NumeroFactura, Fecha, idInsumo, IdProveedores, IdUnidadMedida) VALUES ";
+    $sqlFactura = "INSERT INTO tblfactura (CantidadInsumo, NumeroFactura, Fecha, IdInsumo, IdProveedor, IdUnidadMedida) VALUES ";
 
     // Verificar si se recibieron insumos y cantidades del formulario
     if (isset($_POST['NombreInsumo']) && isset($_POST['cantidadInsumo']) && isset($_POST['idUnidadMedida'])) {
