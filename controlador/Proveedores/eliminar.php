@@ -1,8 +1,8 @@
 <?php
 include '../../modelo/conexion.php';
 
-if (isset($_GET['IdProveedores'])) {
-    $IdProveedores = $_GET['IdProveedores'];
+if (isset($_POST['IdProveedores'])) {
+    $IdProveedores = $_POST['IdProveedores'];
 
     $sql = "DELETE FROM tblproveedores WHERE IdProveedores = $IdProveedores";
 

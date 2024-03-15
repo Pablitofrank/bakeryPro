@@ -458,6 +458,25 @@
     background: var(--yellow);
     cursor: pointer;
 }
+
+.btn3{
+    height:  40px;
+    border:  none;
+    border-radius: 5px;
+    transition: 1s;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.btn-eli{
+    background: var(--hospital-green);
+}
+
+.btn-eli:hover{
+    background: var(--hospital-green);
+    color: var(--text-input-field);
+}
+
 .consulta{
     margin: 20px;
 }
@@ -505,6 +524,15 @@ tbody tr td img {
     margin: 0 6px;
 }
 
+/* Estilos para los modales */
+
+.modal-footeer form{
+    display: flex;
+}
+
+.modal-footeer .btn{
+    margin: 0px 10px 10px 10px ;
+}
 /* Seletores para eliminar los botones de input number */
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
