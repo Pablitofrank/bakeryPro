@@ -5,10 +5,10 @@ include '../../modelo/conexion.php';
 $sql_disable_fk_checks = "SET FOREIGN_KEY_CHECKS=0";
 $conexion->query($sql_disable_fk_checks);
 
-if (isset($_GET['idInsumo'])) {
-    $idInsumo = $_GET['idInsumo'];
+if (isset($_GET['IdInsumo'])) {
+    $IdInsumo = $_GET['IdInsumo'];
 
-    $sql = "DELETE FROM tblinsumos WHERE idInsumo = $idInsumo";
+    $sql = "DELETE FROM tblinsumos WHERE IdInsumo = $IdInsumo";
 
     if ($conexion->query($sql) === TRUE) {
         echo "Insumo eliminado con éxito.";
@@ -16,7 +16,7 @@ if (isset($_GET['idInsumo'])) {
         echo "Error al eliminar el Insumo: " . $conexion->error;
     }
 } else {
-    echo "No se encontraron usuarios registrados.";
+    echo "No se encontraron insumos registrados.";
 }
 
 // Volver a activar las restricciones de clave externa

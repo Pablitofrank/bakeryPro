@@ -1,98 +1,83 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['cedula'])) {
-        header("Location: ../../index.php");
-        exit;
-    }
+session_start();
+if (!isset($_SESSION['cedula'])) {
+    header("Location: ../../index.php");
+    exit;
+}
 
-    // Conexión a la base de datos (reemplaza los valores de conexión con los tuyos)
-    $servername = "localhost";
-    $username = "root"; // Cambia esto por tu nombre de usuario de MySQL
-    $password = ""; // Cambia esto por tu contraseña de MySQL
-    $dbname = "bakerypro";
+include '../../modelo/conexion.php';
 
-    // Crear conexión
-    $conexion = mysqli_connect($servername, $username, $password, $dbname);
+// Consulta para obtener el nombre del usuario y su rol
+$cedula = $_SESSION['cedula'];
+$sql = "SELECT Nombres, Apellidos, Rol FROM tblusuario INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol WHERE Cedula = $cedula";
+$resultado = mysqli_query($conexion, $sql);
 
-    // Verificar la conexión
-    if (!$conexion) {
-        die("Conexión fallida: " . mysqli_connect_error());
-    }
+if (mysqli_num_rows($resultado) > 0) {
+    // Mostrar los datos del usuario
+    $fila = mysqli_fetch_assoc($resultado);
+    $nombre = $fila["Nombres"] . " " . $fila["Apellidos"];
+    $rol = $fila["Rol"];
+} else {
+    $nombre = "Nombre de usuario";
+    $rol = "Rol de usuario";
+}
 
-    // Consulta para obtener el nombre del usuario y su rol
-    $cedula = $_SESSION['cedula'];
-    $sql = "SELECT Nombres, Apellidos, Rol FROM tblusuario INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol WHERE Cedula = $cedula";
-    $resultado = mysqli_query($conexion, $sql);
-
-    if (mysqli_num_rows($resultado) > 0) {
-        // Mostrar los datos del usuario
-        $fila = mysqli_fetch_assoc($resultado);
-        $nombre = $fila["Nombres"] . " " . $fila["Apellidos"];
-        $rol = $fila["Rol"];
-    } else {
-        $nombre = "Nombre de usuario";
-        $rol = "Rol de usuario";
-    }
-
-    mysqli_close($conexion);
+mysqli_close($conexion);
 ?>
 
 <?php
-    include '../../modelo/conexion.php';
+include '../../modelo/conexion.php';
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $cantidadDeseada = $_POST['cantidadDeseada'];
-        $productoId = $_POST['NombreProducto'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $cantidadDeseada = $_POST['cantidadDeseada'];
+    $productoId = $_POST['NombreProducto'];
 
-        // Consulta para obtener la receta del producto seleccionado
-        $sql = "SELECT rp.CantidadInsumo, i.NombreInsumo, u.medida, i.Stock 
-                FROM tblrecetas rp 
-                INNER JOIN tblinsumos i ON rp.IdInsumo = i.IdInsumo 
-                INNER JOIN tblunidadesmedidas u ON rp.IdUnidadMedida = u.IdUnidadMedida 
-                WHERE rp.IdProducto = $productoId";
-        $result = $conexion->query($sql);
+    $sql = "SELECT rp.CantidadInsumo, i.IdInsumo, i.NombreInsumo, u.medida, i.Stock 
+            FROM tblrecetas rp 
+            INNER JOIN tblinsumos i ON rp.IdInsumo = i.IdInsumo 
+            INNER JOIN tblunidadesmedidas u ON rp.IdUnidadMedida = u.IdUnidadMedida 
+            WHERE rp.IdProducto = $productoId";
+    $result = $conexion->query($sql);
 
-        if ($result->num_rows > 0) {
-            // Guardar los resultados en una variable de sesión
-            session_start();
-            $_SESSION['resultados'] = array();
-            while($row = $result->fetch_assoc()) {
-                $cantidadInsumo = $row["CantidadInsumo"] * $cantidadDeseada;
-                $insumoId = $row["IdInsumo"];
-                $stockActual = $row["Stock"];
-                $nombreInsumo = $row["NombreInsumo"];
-                $unidad = $row["medida"];
+    if ($result->num_rows > 0) {
+        // Guardar los resultados en una variable de sesión
+        $_SESSION['resultados'] = array();
+        while ($row = $result->fetch_assoc()) {
+            $cantidadInsumo = $row["CantidadInsumo"] * $cantidadDeseada;
+            $insumoId = $row["IdInsumo"];
+            $stockActual = $row["Stock"];
+            $nombreInsumo = $row["NombreInsumo"];
+            $unidad = $row["medida"];
 
-                // Actualizar el stock de insumos
-                $nuevoStock = $stockActual - $cantidadInsumo;
-                $updateStockQuery = "UPDATE tblinsumos SET Stock = $nuevoStock WHERE IdInsumo = $insumoId";
-                if ($conexion->query($updateStockQuery) === TRUE) {
-                    // Registrar el movimiento en tblsalidasinsumos
-                    $fecha = date("Y-m-d");
-                    $insertSalidaQuery = "INSERT INTO tblsalidasinsumos (fecha, IdInsumo, cantidadInsumo) VALUES ('$fecha', $insumoId, $cantidadInsumo)";
-                    if ($conexion->query($insertSalidaQuery) === TRUE) {
-                        // Guardar los resultados en la variable de sesión
-                        $_SESSION['resultados'][] = array(
-                            'NombreInsumo' => $nombreInsumo,
-                            'Cantidad' => $cantidadInsumo,
-                            'Unidad' => $unidad
-                        );
-                    } else {
-                        echo "Error al registrar el movimiento en tblsalidasinsumos: " . $conexion->error;
-                    }
+            // Actualizar el stock de insumos
+            $nuevoStock = $stockActual - $cantidadInsumo;
+            $updateStockQuery = "UPDATE tblinsumos SET Stock = $nuevoStock WHERE IdInsumo = $insumoId";
+            if ($conexion->query($updateStockQuery) === TRUE) {
+                // Registrar el movimiento en tblsalidasinsumos
+                $fecha = date("Y-m-d");
+                $insertSalidaQuery = "INSERT INTO tblsalidasinsumos (fecha, IdInsumo, cantidadInsumo) VALUES ('$fecha', $insumoId, $cantidadInsumo)";
+                if ($conexion->query($insertSalidaQuery) === TRUE) {
+                    // Guardar los resultados en la variable de sesión
+                    $_SESSION['resultados'][] = array(
+                        'NombreInsumo' => $nombreInsumo,
+                        'Cantidad' => $cantidadInsumo,
+                        'Unidad' => $unidad
+                    );
                 } else {
-                    echo "Error al actualizar el stock de insumos: " . $conexion->error;
+                    echo "Error al registrar el movimiento en tblsalidasinsumos: " . $conexion->error;
                 }
+            } else {
+                echo "Error al actualizar el stock de insumos: " . $conexion->error;
             }
-            session_write_close();
-
-            // Redireccionar a otra página para mostrar los resultados
-            header("Location: ../../controlador/calculadora/resultados.php");
-            exit();
-        } else {
-            echo "No se encontraron recetas para este producto.";
         }
+
+        // Redireccionar a otra página para mostrar los resultados
+        header("Location: ../../controlador/calculadora/resultados.php");
+        exit();
+    } else {
+        echo "No se encontraron recetas para este producto.";
     }
+}
 ?>
 
 

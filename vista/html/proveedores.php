@@ -152,11 +152,11 @@
                     <input type="text" name="Direccion" required class="input"><br>
 
                 <!-- Nuevo campo para el rol -->
-                <input type="submit" value="Agregar" class="btn-agr">
+                <input type="submit" value="Agregar" class="btn">
             </form>
 
             <div>
-                <h2 class="titleContainer">Consulta Recetas</h2>
+                <h2 class="titleContainer">Consulta Proveedores</h2>
 
                 <form action="../../controlador/Proveedores/consultar.php" method="post">
                     <input type="submit" value="Consultar" class="btn">
