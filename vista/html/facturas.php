@@ -64,11 +64,11 @@
 
         <ul class="nav-list">
             <li>
-            <a href="./usuarios.php">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Usuario</span>
-            </a>
-            <span class="tooltip">Usuarios</span>
+                <a href="./usuarios.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Usuario</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
             </li>
 
             <li>
@@ -80,11 +80,11 @@
             </li>
 
             <li>
-            <a href="./recetas.php">
-                <i class='bx bx-folder' ></i>
-                <span class="links_name">Recetas</span>
-            </a>
-            <span class="tooltip">Recetas</span>
+                <a href="./recetas.php">
+                    <i class='bx bx-folder' ></i>
+                    <span class="links_name">Recetas</span>
+                </a>
+                <span class="tooltip">Recetas</span>
             </li>
 
             <li>
@@ -92,16 +92,15 @@
                     <i class='bx bx-pie-chart-alt-2' ></i>
                     <span class="links_name">Proveedores</span>
                 </a>
-                
                 <span class="tooltip">Proveedores</span>
             </li>
 
             <li>
-            <a href="./facturas.php">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Facturas</span>
-            </a>
-            <span class="tooltip">Facturas</span>
+                <a href="./facturas.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Facturas</span>
+                </a>
+                <span class="tooltip">Facturas</span>
             </li>
 
             <li>
@@ -116,12 +115,15 @@
                 <div class="profile-details">
                     <img src="profile.jpg" alt="profileImg">
                     <div class="name_job">
-                        <div class="name">Prem Shahi</div>
-                        <div class="job">Web designer</div>
+                        <div class="name"><?php echo $nombre; ?></div>
+                        <div class="job"><?php echo $rol; ?></div>
                     </div>
                 </div>
-                <i class='bx bx-log-out' id="log_out" ></i>
+                <a href="../../controlador/login/logout.php" id="log_out">
+                    <i class='bx bx-log-out'></i>
+                </a>
             </li>
+            
         </ul>
     </div>
 
@@ -135,35 +137,35 @@
             <label for="fecha">Fecha:</label> <input type="date" name="fecha" required class="input"><br>
 
             <?php
-            include '../../modelo/conexion.php';
-            $sql = "SELECT * FROM tblProveedores";
-            $result = $conexion->query($sql);
-            
-            // Recorrer datos y crear options
-            echo "<label for='razonSocial'>RazonSocial:</label>
-            
-            <select name='razonSocial' id='opcion' class='input'>";
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row["IdProveedores"] . "'>" . $row["RazonSocial"] . "</option>";
-                }
-            } else {
-                echo "0 results";
-            }
-            echo "</select>";
-            
-            // Actualizar valor del option en la base de datos
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                // Actualizar valor del option en la base de datos
-                $sql = "UPDATE tblProveedores SET IdProveedores = " . $_POST['razonSocial'] . " WHERE IdProveedores = 1";
-
-                if ($conexion->query($sql) === TRUE) {
-                    echo "Record updated successfully";
+                include '../../modelo/conexion.php';
+                $sql = "SELECT * FROM tblProveedores";
+                $result = $conexion->query($sql);
+                
+                // Recorrer datos y crear options
+                echo "<label for='razonSocial'>RazonSocial:</label>
+                
+                <select name='razonSocial' id='opcion' class='input'>";
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                        echo "<option value='" . $row["IdProveedores"] . "'>" . $row["RazonSocial"] . "</option>";
+                    }
                 } else {
-                    echo "Error updating record: " . $conexion->error;
+                    echo "0 results";
                 }
-            }
+                echo "</select>";
+                
+                // Actualizar valor del option en la base de datos
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    // Actualizar valor del option en la base de datos
+                    $sql = "UPDATE tblProveedores SET IdProveedores = " . $_POST['razonSocial'] . " WHERE IdProveedores = 1";
+
+                    if ($conexion->query($sql) === TRUE) {
+                        echo "Record updated successfully";
+                    } else {
+                        echo "Error updating record: " . $conexion->error;
+                    }
+                }
             
             ?>
 

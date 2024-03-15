@@ -35,10 +35,8 @@
     }
 
     mysqli_close($conexion);
-?>
 
-<?php
-    include '../../modelo/conexion.php' ;
+    include '../../modelo/conexion.php';
 ?>
 
 <!DOCTYPE html>
@@ -60,74 +58,75 @@
 <body>
     <div class="sidebar open">
         <div class="logo-details">
-            <a href="../../dashboard.php">
+            <a href="../../dashboard.php" class="logo_link">
                 <span class="logo_name">BakeryPro</span>
             </a>
             <i class='bx bx-menu' id="btn" ></i>
         </div>
+
         <ul class="nav-list">
-        
-        <li>
-        <a href="../../vista/html/usuarios.php">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Usuario</span>
-        </a>
-        <span class="tooltip">Usuarios</span>
-        </li>
+            <li>
+                <a href="../../vista/html/usuarios.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Usuario</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
+            </li>
 
-        <li>
-            <a href="../../vista/html/insumos.php">
-                <i class='bx bx-cart-alt' ></i>
-                <span class="links_name">Insumos</span>
-            </a>
-            <span class="tooltip">Insumos</span>
-        </li>
+            <li>
+                <a href="../../vista/html/insumos.php">
+                    <i class='bx bx-cart-alt' ></i>
+                    <span class="links_name">Insumos</span>
+                </a>
+                <span class="tooltip">Insumos</span>
+            </li>
 
-        <li>
-        <a href="../../vista/html/recetas.php">
-            <i class='bx bx-folder' ></i>
-            <span class="links_name">Recetas</span>
-        </a>
-        <span class="tooltip">Recetas</span>
-        </li>
+            <li>
+                <a href="../../vista/html/recetas.php">
+                    <i class='bx bx-folder' ></i>
+                    <span class="links_name">Recetas</span>
+                </a>
+                <span class="tooltip">Recetas</span>
+            </li>
 
-        <li>
-            <a href="../../vista/html/productos.php">
-                <i class='bx bx-grid-alt'></i>
-                <span class="links_name">Productos</span>
-            </a>
-                <span class="tooltip">Productos</span>
-        </li>
+            <li>
+                <a href="../../vista/html/proveedores.php">
+                    <i class='bx bx-pie-chart-alt-2' ></i>
+                    <span class="links_name">Proveedores</span>
+                </a>
+                <span class="tooltip">Proveedores</span>
+            </li>
 
-        <li>
-            <a href="../../vista/html/proveedores.php">
-                <i class='bx bx-pie-chart-alt-2' ></i>
-                <span class="links_name">Proveedores</span>
-            </a>
-            <span class="tooltip">Proveedores</span>
-        </li>
+            <li>
+                <a href="../../vista/html/facturas.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Facturas</span>
+                </a>
+                <span class="tooltip">Facturas</span>
+            </li>
 
-        <li>
-        <a href="../../vista/html/facturas.php">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Facturas</span>
-        </a>
-        <span class="tooltip">Facturas</span>
-        </li>
+            <li>
+                <a href="../../vista/html/calculadora.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Calculadora</span>
+                </a>
+                <span class="tooltip">Calculadora</span>
+            </li>
 
-
-        <li class="profile">
-            <div class="profile-details">
-            <img src="profile.jpg" alt="profileImg">
-            <div class="name_job">
-                <div class="name">Prem Shahi</div>
-                <div class="job">Web designer</div>
-            </div>
-            </div>
-            <i class='bx bx-log-out' id="log_out" ></i>
-        </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="profile.jpg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name"><?php echo $nombre; ?></div>
+                        <div class="job"><?php echo $rol; ?></div>
+                    </div>
+                </div>
+                <a href="../login/logout.php" id="log_out">
+                    <i class='bx bx-log-out'></i>
+                </a>
+            </li>
+            
         </ul>
-
     </div>
 
     <section class="home-section">

@@ -37,16 +37,6 @@
     mysqli_close($conexion);
 ?>
 
-<?php
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-
-
-    include '../../modelo/conexion.php';
-    $sql = "SELECT * FROM tblinsumos";
-    $result = $conexion->query($sql);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,11 +64,11 @@
 
         <ul class="nav-list">
             <li>
-            <a href="./usuarios.php">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Usuario</span>
-            </a>
-            <span class="tooltip">Usuarios</span>
+                <a href="./usuarios.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Usuario</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
             </li>
 
             <li>
@@ -90,11 +80,11 @@
             </li>
 
             <li>
-            <a href="./recetas.php">
-                <i class='bx bx-folder' ></i>
-                <span class="links_name">Recetas</span>
-            </a>
-            <span class="tooltip">Recetas</span>
+                <a href="./recetas.php">
+                    <i class='bx bx-folder' ></i>
+                    <span class="links_name">Recetas</span>
+                </a>
+                <span class="tooltip">Recetas</span>
             </li>
 
             <li>
@@ -102,16 +92,15 @@
                     <i class='bx bx-pie-chart-alt-2' ></i>
                     <span class="links_name">Proveedores</span>
                 </a>
-                
                 <span class="tooltip">Proveedores</span>
             </li>
 
             <li>
-            <a href="./facturas.php">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Facturas</span>
-            </a>
-            <span class="tooltip">Facturas</span>
+                <a href="./facturas.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Facturas</span>
+                </a>
+                <span class="tooltip">Facturas</span>
             </li>
 
             <li>
@@ -126,12 +115,15 @@
                 <div class="profile-details">
                     <img src="profile.jpg" alt="profileImg">
                     <div class="name_job">
-                        <div class="name">Prem Shahi</div>
-                        <div class="job">Web designer</div>
+                        <div class="name"><?php echo $nombre; ?></div>
+                        <div class="job"><?php echo $rol; ?></div>
                     </div>
                 </div>
-                <i class='bx bx-log-out' id="log_out" ></i>
+                <a href="../../controlador/login/logout.php" id="log_out">
+                    <i class='bx bx-log-out'></i>
+                </a>
             </li>
+            
         </ul>
     </div>
 
@@ -177,11 +169,12 @@
                         echo "</select>";
                     ?>
                 </div>
-            </div>
-            <button type="button" onclick="eliminarUltimoElemento()">Eliminar Último</button>
-            <button type="button" onclick="agregarElemento()">Agregar Insumo y Cantidad</button>
-            <br>
-            <br>
+            </div><br>
+            <button type="button" onclick="eliminarUltimoElemento()" class="btn">Eliminar Último</button><br>
+            <button type="button" onclick="agregarElemento()" class="btn">Agregar Insumo y Cantidad</button>
+            <br><br>
+
+
             <input type="submit" value="Agregar" class="btn"> <br>
         </form>
         <div>

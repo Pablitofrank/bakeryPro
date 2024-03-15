@@ -1,20 +1,20 @@
 <?php
-include '../../modelo/conexion.php';
+    include '../../modelo/conexion.php';
 
-if (isset($_GET['id'])) {
-    $idUsuario = $_GET['id'];
+    if (isset($_GET['id'])) {
+        $idUsuario = $_GET['id'];
 
-    $sql = "DELETE FROM tblusuario WHERE IdUsuario = $idUsuario";
+        $sql = "DELETE FROM tblusuario WHERE IdUsuario = $idUsuario";
 
-    if ($conexion->query($sql) === TRUE) {
-        echo "Usuario eliminado con éxito.";
-        header('Location: consultar.php');
+        if ($conexion->query($sql) === TRUE) {
+            echo "Usuario eliminado con éxito.";
+            header('Location: consultar.php');
+        } else {
+            echo "Error al eliminar el usuario: " . $conexion->error;
+        }
     } else {
-        echo "Error al eliminar el usuario: " . $conexion->error;
+        echo "No se proporcionó un ID de usuario para eliminar.";
     }
-} else {
-    echo "No se proporcionó un ID de usuario para eliminar.";
-}
 
-$conexion->close();
+    $conexion->close();
 ?>

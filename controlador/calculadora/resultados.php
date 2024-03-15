@@ -1,3 +1,42 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['cedula'])) {
+        header("Location: ../../index.php");
+        exit;
+    }
+
+    // Conexión a la base de datos (reemplaza los valores de conexión con los tuyos)
+    $servername = "localhost";
+    $username = "root"; // Cambia esto por tu nombre de usuario de MySQL
+    $password = ""; // Cambia esto por tu contraseña de MySQL
+    $dbname = "bakerypro";
+
+    // Crear conexión
+    $conexion = mysqli_connect($servername, $username, $password, $dbname);
+
+    // Verificar la conexión
+    if (!$conexion) {
+        die("Conexión fallida: " . mysqli_connect_error());
+    }
+
+    // Consulta para obtener el nombre del usuario y su rol
+    $cedula = $_SESSION['cedula'];
+    $sql = "SELECT Nombres, Apellidos, Rol FROM tblusuario INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol WHERE Cedula = $cedula";
+    $resultado = mysqli_query($conexion, $sql);
+
+    if (mysqli_num_rows($resultado) > 0) {
+        // Mostrar los datos del usuario
+        $fila = mysqli_fetch_assoc($resultado);
+        $nombre = $fila["Nombres"] . " " . $fila["Apellidos"];
+        $rol = $fila["Rol"];
+    } else {
+        $nombre = "Nombre de usuario";
+        $rol = "Rol de usuario";
+    }
+
+    mysqli_close($conexion);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,11 +64,11 @@
 
         <ul class="nav-list">
             <li>
-            <a href="../../vista/html/usuarios.php">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Usuario</span>
-            </a>
-            <span class="tooltip">Usuarios</span>
+                <a href="../../vista/html/usuarios.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Usuario</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
             </li>
 
             <li>
@@ -41,11 +80,11 @@
             </li>
 
             <li>
-            <a href="../../vista/html/recetas.php">
-                <i class='bx bx-folder' ></i>
-                <span class="links_name">Recetas</span>
-            </a>
-            <span class="tooltip">Recetas</span>
+                <a href="../../vista/html/recetas.php">
+                    <i class='bx bx-folder' ></i>
+                    <span class="links_name">Recetas</span>
+                </a>
+                <span class="tooltip">Recetas</span>
             </li>
 
             <li>
@@ -53,16 +92,15 @@
                     <i class='bx bx-pie-chart-alt-2' ></i>
                     <span class="links_name">Proveedores</span>
                 </a>
-                
                 <span class="tooltip">Proveedores</span>
             </li>
 
             <li>
-            <a href="../../vista/html/facturas.php">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Facturas</span>
-            </a>
-            <span class="tooltip">Facturas</span>
+                <a href="../../vista/html/facturas.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Facturas</span>
+                </a>
+                <span class="tooltip">Facturas</span>
             </li>
 
             <li>
@@ -77,12 +115,15 @@
                 <div class="profile-details">
                     <img src="profile.jpg" alt="profileImg">
                     <div class="name_job">
-                        <div class="name">Prem Shahi</div>
-                        <div class="job">Web designer</div>
+                        <div class="name"><?php echo $nombre; ?></div>
+                        <div class="job"><?php echo $rol; ?></div>
                     </div>
                 </div>
-                <i class='bx bx-log-out' id="log_out" ></i>
+                <a href="./controlador/login/logout.php" id="log_out">
+                    <i class='bx bx-log-out'></i>
+                </a>
             </li>
+            
         </ul>
     </div>
     

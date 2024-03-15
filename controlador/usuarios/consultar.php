@@ -53,22 +53,21 @@
     <link rel="shortcut icon" href="../../vista/img/logo.svg" type="image/x-icon">
 </head>
 <body>
-    <form action="./dashboard.php" method="post">
-        <div class="sidebar open">
-            <div class="logo-details">
-                <a href="../../dashboard.php" class="logo_link">
-                    <span class="logo_name">BakeryPro</span>
-                </a>
-                <i class='bx bx-menu' id="btn" ></i>
-            </div>
-            <ul class="nav-list">
-            
-            <li>
-            <a href="../../vista/html/usuarios.php">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Usuario</span>
+    <div class="sidebar open">
+        <div class="logo-details">
+            <a href="../../dashboard.php" class="logo_link">
+                <span class="logo_name">BakeryPro</span>
             </a>
-            <span class="tooltip">Usuarios</span>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+
+        <ul class="nav-list">
+            <li>
+                <a href="../../vista/html/usuarios.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="links_name">Usuario</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
             </li>
 
             <li>
@@ -80,11 +79,11 @@
             </li>
 
             <li>
-            <a href="../../vista/html/recetas.php">
-                <i class='bx bx-folder' ></i>
-                <span class="links_name">Recetas</span>
-            </a>
-            <span class="tooltip">Recetas</span>
+                <a href="../../vista/html/recetas.php">
+                    <i class='bx bx-folder' ></i>
+                    <span class="links_name">Recetas</span>
+                </a>
+                <span class="tooltip">Recetas</span>
             </li>
 
             <li>
@@ -104,28 +103,28 @@
             </li>
 
             <li>
-                <a href="./calculadora.php">
+                <a href="../../vista/html/calculadora.php">
                     <i class='bx bx-user' ></i>
                     <span class="links_name">Calculadora</span>
                 </a>
                 <span class="tooltip">Calculadora</span>
-                </li>
-
+            </li>
 
             <li class="profile">
                 <div class="profile-details">
-                <img src="profile.jpg" alt="profileImg">
-                <div class="name_job">
-                    <div class="name">Prem Shahi</div>
-                    <div class="job">Web designer</div>
+                    <img src="profile.jpg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name"><?php echo $nombre; ?></div>
+                        <div class="job"><?php echo $rol; ?></div>
+                    </div>
                 </div>
-                </div>
-                <i class='bx bx-log-out' id="log_out" ></i>
+                <a href="./controlador/login/logout.php" id="log_out">
+                    <i class='bx bx-log-out'></i>
+                </a>
             </li>
-            </ul>
-
-        </div>
-    </form>
+            
+        </ul>
+    </div>
 
     <section class="home-section">
         <div class="container">

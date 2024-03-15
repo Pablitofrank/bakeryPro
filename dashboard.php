@@ -1,40 +1,40 @@
 <?php
-session_start();
-if (!isset($_SESSION['cedula'])) {
-    header("Location: ../../index.php");
-    exit;
-}
+    session_start();
+    if (!isset($_SESSION['cedula'])) {
+        header("Location: ../../index.php");
+        exit;
+    }
 
-// Conexión a la base de datos (reemplaza los valores de conexión con los tuyos)
-$servername = "localhost";
-$username = "root"; // Cambia esto por tu nombre de usuario de MySQL
-$password = ""; // Cambia esto por tu contraseña de MySQL
-$dbname = "bakerypro";
+    // Conexión a la base de datos (reemplaza los valores de conexión con los tuyos)
+    $servername = "localhost";
+    $username = "root"; // Cambia esto por tu nombre de usuario de MySQL
+    $password = ""; // Cambia esto por tu contraseña de MySQL
+    $dbname = "bakerypro";
 
-// Crear conexión
-$conexion = mysqli_connect($servername, $username, $password, $dbname);
+    // Crear conexión
+    $conexion = mysqli_connect($servername, $username, $password, $dbname);
 
-// Verificar la conexión
-if (!$conexion) {
-    die("Conexión fallida: " . mysqli_connect_error());
-}
+    // Verificar la conexión
+    if (!$conexion) {
+        die("Conexión fallida: " . mysqli_connect_error());
+    }
 
-// Consulta para obtener el nombre del usuario y su rol
-$cedula = $_SESSION['cedula'];
-$sql = "SELECT Nombres, Apellidos, Rol FROM tblusuario INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol WHERE Cedula = $cedula";
-$resultado = mysqli_query($conexion, $sql);
+    // Consulta para obtener el nombre del usuario y su rol
+    $cedula = $_SESSION['cedula'];
+    $sql = "SELECT Nombres, Apellidos, Rol FROM tblusuario INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol WHERE Cedula = $cedula";
+    $resultado = mysqli_query($conexion, $sql);
 
-if (mysqli_num_rows($resultado) > 0) {
-    // Mostrar los datos del usuario
-    $fila = mysqli_fetch_assoc($resultado);
-    $nombre = $fila["Nombres"] . " " . $fila["Apellidos"];
-    $rol = $fila["Rol"];
-} else {
-    $nombre = "Nombre de usuario";
-    $rol = "Rol de usuario";
-}
+    if (mysqli_num_rows($resultado) > 0) {
+        // Mostrar los datos del usuario
+        $fila = mysqli_fetch_assoc($resultado);
+        $nombre = $fila["Nombres"] . " " . $fila["Apellidos"];
+        $rol = $fila["Rol"];
+    } else {
+        $nombre = "Nombre de usuario";
+        $rol = "Rol de usuario";
+    }
 
-mysqli_close($conexion);
+    mysqli_close($conexion);
 ?>
 
 <!DOCTYPE html>
@@ -65,11 +65,11 @@ mysqli_close($conexion);
         <ul class="nav-list">
         
         <li>
-        <a href="./vista/html/usuarios.php">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Usuario</span>
-        </a>
-        <span class="tooltip">Usuarios</span>
+            <a href="./vista/html/usuarios.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Usuario</span>
+            </a>
+            <span class="tooltip">Usuarios</span>
         </li>
 
         <li>
@@ -81,19 +81,11 @@ mysqli_close($conexion);
         </li>
 
         <li>
-        <a href="./vista/html/recetas.php">
-            <i class='bx bx-folder' ></i>
-            <span class="links_name">Recetas</span>
-        </a>
-        <span class="tooltip">Recetas</span>
-        </li>
-
-        <li>
-            <a href="./vista/html/productos.php">
-                <i class='bx bx-grid-alt'></i>
-                <span class="links_name">Productos</span>
+            <a href="./vista/html/recetas.php">
+                <i class='bx bx-folder' ></i>
+                <span class="links_name">Recetas</span>
             </a>
-                <span class="tooltip">Productos</span>
+            <span class="tooltip">Recetas</span>
         </li>
 
         <li>
@@ -103,22 +95,31 @@ mysqli_close($conexion);
             </a>
             <span class="tooltip">Proveedores</span>
         </li>
-
+        
         <li>
-        <a href="./vista/html/facturas.php">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Facturas</span>
-        </a>
-        <span class="tooltip">Facturas</span>
+            <a href="./vista/html/facturas.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Facturas</span>
+            </a>
+            <span class="tooltip">Facturas</span>
         </li>
 
+        <li>
+            <a href="./vista/html/calculadora.php">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Calculadora</span>
+            </a>
+            <span class="tooltip">Calculadora</span>
+        </li>
+
+        
         <li class="profile">
             <div class="profile-details">
-            <img src="profile.jpg" alt="profileImg">
-            <div class="name_job">
-                <div class="name"><?php echo $nombre; ?></div>
-                <div class="job"><?php echo $rol; ?></div>
-            </div>
+                <img src="profile.jpg" alt="profileImg">
+                <div class="name_job">
+                    <div class="name"><?php echo $nombre; ?></div>
+                    <div class="job"><?php echo $rol; ?></div>
+                </div>
             </div>
             <a href="./controlador/login/logout.php" id="log_out">
                 <i class='bx bx-log-out'></i>
