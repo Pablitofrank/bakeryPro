@@ -195,6 +195,8 @@
                                 <td>{$fila["medida"]}</td>
                                 <td>
                                     <a href='editar.php?idInsumo={$fila["IdInsumo"]}'><img src='../../vista/img/editar.png' alt='editar'></a>
+                                    <a href='eliminar.php?IdInsumo={$fila["IdInsumo"]}'><img src='../../vista/img/eliminar.png' alt='eliminar'></a>
+
                                 </td>
                             </tr>";
                     }
