@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-03-2024 a las 13:20:55
+-- Tiempo de generación: 15-03-2024 a las 14:27:31
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -68,6 +68,15 @@ CREATE TABLE `tblfactura` (
   `IdUnidadMedida` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `tblfactura`
+--
+
+INSERT INTO `tblfactura` (`IdFactura`, `CantidadInsumo`, `NumeroFactura`, `Fecha`, `idInsumo`, `IdProveedor`, `IdUnidadMedida`) VALUES
+(1, 2342, 'wr2', '2333-04-23', 9, 1, 1),
+(2, 100, '12', '1222-02-12', 8, 1, 1),
+(3, 100, '12', '1222-02-12', 8, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -99,8 +108,9 @@ CREATE TABLE `tblinsumos` (
 --
 
 INSERT INTO `tblinsumos` (`IdInsumo`, `NombreInsumo`, `Stock`, `IdUnidadMedida`, `IdCategoria`) VALUES
-(8, 'leche', 2, 1, 1),
-(9, 'harina', 1000, 1, 1);
+(8, 'leche', -10, 1, 1),
+(9, 'harina', 988, 1, 1),
+(11, 'a', 30, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -118,6 +128,8 @@ CREATE TABLE `tblproductos` (
 -- Volcado de datos para la tabla `tblproductos`
 --
 
+INSERT INTO `tblproductos` (`IdProducto`, `NombreProducto`, `Stock`) VALUES
+(37, 'Pan hojaldrado', 0);
 
 -- --------------------------------------------------------
 
@@ -134,6 +146,13 @@ CREATE TABLE `tblproveedores` (
   `Correo` varchar(20) NOT NULL,
   `Direccion` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tblproveedores`
+--
+
+INSERT INTO `tblproveedores` (`IdProveedores`, `NIT`, `RazonSocial`, `Contacto`, `Telefono`, `Correo`, `Direccion`) VALUES
+(1, 345, '3453', '4534', 5345, '53453', '45345');
 
 -- --------------------------------------------------------
 
@@ -152,7 +171,9 @@ CREATE TABLE `tblrecetas` (
 -- Volcado de datos para la tabla `tblrecetas`
 --
 
-
+INSERT INTO `tblrecetas` (`CantidadInsumo`, `IdProducto`, `IdInsumo`, `IdUnidadMedida`) VALUES
+(12, 37, 8, 2),
+(12, 37, 9, 4);
 
 -- --------------------------------------------------------
 
@@ -185,6 +206,14 @@ CREATE TABLE `tblsalidasinsumos` (
   `IdInsumo` int(3) NOT NULL,
   `cantidadInsumo` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tblsalidasinsumos`
+--
+
+INSERT INTO `tblsalidasinsumos` (`IdSalidaInsumo`, `fecha`, `IdInsumo`, `cantidadInsumo`) VALUES
+(1, '2024-03-15', 8, 12),
+(2, '2024-03-15', 9, 12);
 
 -- --------------------------------------------------------
 
@@ -263,7 +292,6 @@ ALTER TABLE `tblfactura`
 -- Indices de la tabla `tblinfac`
 --
 ALTER TABLE `tblinfac`
-  ADD KEY `fac` (`IdFactura`),
   ADD KEY `ins` (`IdInsumo`);
 
 --
@@ -338,28 +366,34 @@ ALTER TABLE `tblentradasinsumos`
   MODIFY `IdEntradaInsumo` int(5) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `tblfactura`
+--
+ALTER TABLE `tblfactura`
+  MODIFY `IdFactura` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `tblinsumos`
 --
 ALTER TABLE `tblinsumos`
-  MODIFY `IdInsumo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `IdInsumo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `tblproductos`
 --
 ALTER TABLE `tblproductos`
-  MODIFY `IdProducto` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `IdProducto` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `tblproveedores`
 --
 ALTER TABLE `tblproveedores`
-  MODIFY `IdProveedores` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdProveedores` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tblsalidasinsumos`
 --
 ALTER TABLE `tblsalidasinsumos`
-  MODIFY `IdSalidaInsumo` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdSalidaInsumo` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tblunidadesmedidas`
@@ -394,7 +428,6 @@ ALTER TABLE `tblfactura`
 -- Filtros para la tabla `tblinfac`
 --
 ALTER TABLE `tblinfac`
-  ADD CONSTRAINT `fac` FOREIGN KEY (`IdFactura`) REFERENCES `tblfactura` (`IdFactura`),
   ADD CONSTRAINT `ins` FOREIGN KEY (`IdInsumo`) REFERENCES `tblinsumos` (`IdInsumo`);
 
 --
