@@ -131,8 +131,6 @@
         <form method="post">
             <div class="container">
             <?php
-            // Iniciar sesión
-            session_start();
 
             // Verificar si existen resultados en la sesión
             if (isset($_SESSION['resultados'])) {

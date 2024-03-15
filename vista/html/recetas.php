@@ -143,6 +143,12 @@
                 <div>
                     <select name="NombreInsumo[]" class="input">
                         <?php
+                            include '../../modelo/conexion.php';
+                            $sql = "SELECT * FROM tblinsumos";
+                            $result = $conexion->query($sql);
+                            if ($result->num_rows > 0) 
+                                while($row = $result->fetch_assoc()) 
+                                    echo "<option value='" . $row["IdInsumo"] . "'>" . $row["NombreInsumo"] . "</option>";
                             if (mysqli_num_rows($resultadoInsumos) > 0) {
                                 while($rowInsumo = mysqli_fetch_assoc($resultadoInsumos)) {
                                     echo "<option value='" . $rowInsumo["IdInsumo"] . "'>" . $rowInsumo["NombreInsumo"] . "</option>";
