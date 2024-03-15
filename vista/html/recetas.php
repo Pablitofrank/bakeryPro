@@ -21,18 +21,22 @@
 
     // Consulta para obtener el nombre del usuario y su rol
     $cedula = $_SESSION['cedula'];
-    $sql = "SELECT Nombres, Apellidos, Rol FROM tblusuario INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol WHERE Cedula = $cedula";
-    $resultado = mysqli_query($conexion, $sql);
+    $sqlUsuario = "SELECT Nombres, Apellidos, Rol FROM tblusuario INNER JOIN tblroles ON tblusuario.IdRol = tblroles.IdRol WHERE Cedula = $cedula";
+    $resultadoUsuario = mysqli_query($conexion, $sqlUsuario);
 
-    if (mysqli_num_rows($resultado) > 0) {
+    if (mysqli_num_rows($resultadoUsuario) > 0) {
         // Mostrar los datos del usuario
-        $fila = mysqli_fetch_assoc($resultado);
-        $nombre = $fila["Nombres"] . " " . $fila["Apellidos"];
-        $rol = $fila["Rol"];
+        $filaUsuario = mysqli_fetch_assoc($resultadoUsuario);
+        $nombre = $filaUsuario["Nombres"] . " " . $filaUsuario["Apellidos"];
+        $rol = $filaUsuario["Rol"];
     } else {
         $nombre = "Nombre de usuario";
         $rol = "Rol de usuario";
     }
+
+    // Consulta para obtener los insumos
+    $sqlInsumos = "SELECT IdInsumo, NombreInsumo FROM tblinsumos";
+    $resultadoInsumos = mysqli_query($conexion, $sqlInsumos);
 
     mysqli_close($conexion);
 ?>
@@ -139,15 +143,16 @@
                 <div>
                     <select name="NombreInsumo[]" class="input">
                         <?php
-                            if ($result->num_rows > 0) {
-                                while($row = $result->fetch_assoc()) {
-                                    echo "<option value='" . $row["IdInsumo"] . "'>" . $row["NombreInsumo"] . "</option>";
+                            if (mysqli_num_rows($resultadoInsumos) > 0) {
+                                while($rowInsumo = mysqli_fetch_assoc($resultadoInsumos)) {
+                                    echo "<option value='" . $rowInsumo["IdInsumo"] . "'>" . $rowInsumo["NombreInsumo"] . "</option>";
                                 }
                             } else {
                                 echo "<option value=''>No hay insumos disponibles</option>";
                             }
                         ?>
                     </select>
+                    
                     <input type='text' name='cantidadInsumo[]' placeholder='Cantidad' class='input' required>
                     <?php
                         include '../../modelo/conexion.php';
