@@ -43,7 +43,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultar recetas</title>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fugaz+One&family=Inter:wght@100&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
@@ -165,7 +165,7 @@
                         <td><?php echo $fila["medida"]; ?></td>
                         <td>
                             <a href='editar.php?IdProducto=<?php echo $fila['IdProducto']; ?>'><img src="../../vista/img/editar.png" alt="editar"></a>
-                            <a href='eliminar.php?IdProducto=<?php echo $fila['IdProducto']; ?>'><img src="../../vista/img/eliminar.png" alt="eliminar"></a>  
+                            <a href="#" class="btn3 btn-sm " data-bs-toggle="modal" data-bs-target="#ModalEliminarReceta" data-bs-id="<?php echo $fila['IdProducto']; ?>"><img src="../../vista/img/eliminar.png" alt="eliminar"></a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -176,12 +176,60 @@
 
         <?php $conexion->close(); ?>
         <br>
-            <a href="../../dashboard.php" class="volverConsultar">VOLVER</a>
+            <a href="../../vista/html/recetas.php" class="volverConsultar">VOLVER</a>
         </div>
     </section>
+    <?php include 'ModalEliminarReceta.php'; ?>
+
+<script>
+    let ModalEliminarReceta = document.getElementById('ModalEliminarReceta')
+
+    ModalEliminarReceta.addEventListener('shown.bs.modal', event => {
+        let button = event.relatedTarget
+        let IdProducto = button.getAttribute('data-bs-id')
+
+        let inputIdProducto = ModalEliminarReceta.querySelector('.modal-body #IdProducto')
+        let inputNombreProducto = ModalEliminarReceta.querySelector('.modal-body #NombreProducto')
+        let inputIdInsumo = ModalEliminarReceta.querySelector('.modal-body #IdInsumo')
+        let inputNombreInsumo = ModalEliminarReceta.querySelector('.modal-body #NombreInsumo')
+        let inputCantidadInsumo = ModalEliminarReceta.querySelector('.modal-body #CantidadInsumo')
+        let inputmedida = ModalEliminarReceta.querySelector('.modal-body #medida')
+
+        let url = "editar.php"
+        let formData = new FormData();
+        formData.append('IdProducto', IdProducto);
+// Agrega otras líneas para los demás campos del formulario
+
+
+        fetch(url,{
+            method: "POST",
+            body: formData
+        }).then(response => response.json())
+        .then(data => {
+
+            inputIdProducto.value = data.IdProducto
+            inputNombreProducto.value = data.NombreProducto
+            inputIdInsumo.value = data.IdInsumo
+            inputNombreInsumo.value = data.NombreInsumo
+            inputCantidadInsumo.value = data.CantidadInsumo
+            inputmedida.value = data.medida
+
+        }).catch(err => console.log(err))
+
+    })
+
+    ModalEliminarReceta.addEventListener('shown.bs.modal', event => {
+let button = event.relatedTarget
+let IdProducto = button.getAttribute('data-bs-id')
+ModalEliminarReceta.querySelector('.modal-footeer #IdProducto').value = IdProducto
+})
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="buscador/buscador.js"></script>
 
 </body>
 </html>
-
 
 

@@ -1,10 +1,10 @@
 <?php
     include '../../modelo/conexion.php';
 
-    if (isset($_GET['id'])) {
-        $idUsuario = $_GET['id'];
+    if (isset($_POST['IdUsuario'])) {
+        $IdUsuario = $_POST['IdUsuario'];
 
-        $sql = "DELETE FROM tblusuario WHERE IdUsuario = $idUsuario";
+        $sql = "DELETE FROM tblusuario WHERE IdUsuario = $IdUsuario";
 
         if ($conexion->query($sql) === TRUE) {
             echo "Usuario eliminado con éxito.";

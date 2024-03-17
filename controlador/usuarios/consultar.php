@@ -43,7 +43,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuarios</title>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fugaz+One&family=Inter:wght@100&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
@@ -153,7 +153,7 @@
                                 <td>".$fila["Telefono"]."</td>
                                 <td>
                                     <a href='editar.php?id=".$fila['IdUsuario']."'><img src='../../vista/img/editar.png' alt='editar'></a>
-                                    <a href='eliminar.php?id=".$fila['IdUsuario']."'><img src='../../vista/img/eliminar.png' alt='eliminar'></a>
+                                    <a href='#' class='btn3 btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#ModalEliminarUsuario' data-bs-id='".$fila['IdUsuario']."'><img src='../../vista/img/eliminar.png' alt='eliminar'></a>
                                 </td>
                             </tr>";
                     }
@@ -167,6 +167,55 @@
             <a href="../../vista/html/usuarios.php" class="volverConsultar">VOLVER</a>
         </div>
     </section>
+    <?php include 'ModalEliminarUsuario.php'; ?>
+
+<script>
+    let ModalEliminarUsuario = document.getElementById('ModalEliminarUsuario')
+
+    ModalEliminarUsuario.addEventListener('shown.bs.modal', event => {
+        let button = event.relatedTarget
+        let IdUsuario = button.getAttribute('data-bs-id')
+
+        let inputIdUsuario = ModalEliminarUsuario.querySelector('.modal-body #IdUsuario')
+        let inputNombres = ModalEliminarUsuario.querySelector('.modal-body #Nombres')
+        let inputApellidos = ModalEliminarUsuario.querySelector('.modal-body #Apellidos')
+        let inputRol = ModalEliminarUsuario.querySelector('.modal-body #Rol')
+        let inputCedula = ModalEliminarUsuario.querySelector('.modal-body #Cedula')
+        let inputTelefono = ModalEliminarUsuario.querySelector('.modal-body #Telefono')
+
+        let url = "editar.php"
+        let formData = new FormData();
+        formData.append('IdUsuario', IdUsuario);
+// Agrega otras líneas para los demás campos del formulario
+
+
+        fetch(url,{
+            method: "POST",
+            body: formData
+        }).then(response => response.json())
+        .then(data => {
+
+            inputIdUsuario.value = data.IdUsuario
+            inputNombres.value = data.Nombres
+            inputApellidos.value = data.Apellidos
+            inputRol.value = data.Rol
+            inputCedula.value = data.Cedula
+            inputTelefono.value = data.Telefono
+
+        }).catch(err => console.log(err))
+
+    })
+
+    ModalEliminarUsuario.addEventListener('shown.bs.modal', event => {
+let button = event.relatedTarget
+let IdUsuario = button.getAttribute('data-bs-id')
+ModalEliminarUsuario.querySelector('.modal-footeer #IdUsuario').value = IdUsuario
+})
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="buscador/buscador.js"></script>
 
 </body>
 </html>

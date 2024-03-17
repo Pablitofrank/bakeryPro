@@ -208,17 +208,16 @@
                     ?>
                 </div>
             </div> 
-            <button type="button" onclick="eliminarUltimoElemento()">Eliminar Último</button>
-            <button type="button" onclick="agregarElemento()">Agregar Insumo y Cantidad</button>
+            <button type="button" onclick="eliminarUltimoElemento()" class="btn">Eliminar Último</button>
+            <button type="button" onclick="agregarElemento()" class="btn">Agregar Insumo y Cantidad</button>
             
             <input type="submit" value="Agregar" class="btn">
         </form>
         <div class="consulta">
-                <h2 class="titleContainer">Consultar facturas</h2>
-                <form action="../../controlador/facturas/consultar.php" method="post">
-                    <input type="submit" value="Consultar" class="btn">
-                </form>
-            </div>
+            <form action="../../controlador/facturas/consultar.php" method="post">
+                <input type="submit" value="Consultar" class="btn2">
+            </form>
+        </div>
     </section>
     
     <script>

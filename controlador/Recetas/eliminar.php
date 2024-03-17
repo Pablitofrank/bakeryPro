@@ -1,7 +1,7 @@
 <?php
     // Verificar si se ha proporcionado un IdProducto
-    if(isset($_GET['IdProducto'])) {
-        $idProducto = $_GET['IdProducto'];
+    if(isset($_POST['IdProducto'])) {
+        $idProducto = $_POST['IdProducto'];
 
         // Incluir el archivo de conexión a la base de datos
         include '../../modelo/conexion.php';

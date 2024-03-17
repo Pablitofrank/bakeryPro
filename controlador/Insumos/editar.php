@@ -165,12 +165,19 @@
                 <input type="text" name="medida" value="<?php echo $fila['IdUnidadMedida']; ?>" class="input"><br>
                 
                 <?php
-                    echo "<label for='categoria'>Categoría:</label>
-                    <select name='categoria' id='categoria' class='input'>";
+                    include '../../modelo/conexion.php';
+                    // Consultar las categorías de insumos disponibles
+                    $sql = "SELECT * FROM tblcategorias";
+                    $result = $conexion->query($sql);
+                    
+                    // Crear opciones para las categorías
+                    echo "<label for='categoria' class='label'>Categoría:</label>
+                    <select name='idCategoria' id='categoria' class='input'>";
+                    
                     if ($result->num_rows > 0) {
-                        // output data of each row
+                        // Mostrar opciones de categorías
                         while($row = $result->fetch_assoc()) {
-                            echo "<option value='" . $row["IdCategoria"] . "' >" . $row["NombreCategoria"] . "</option>"; // Cambiar 'NombreCategoria' por el nombre del campo de nombre de categoría en tu tabla
+                            echo "<option value='" . $row["IdCategoria"] . "'>" . $row["Categoria"] . "</option>";
                         }
                     } else {
                         echo "<option value=''>No hay categorías disponibles</option>";

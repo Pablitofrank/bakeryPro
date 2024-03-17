@@ -189,7 +189,6 @@
     <?php include 'ModalEliminarProveedor.php'; ?>
 
     <script>
-        let ModalEditarProveedores = document.getElementById('ModalEditarProveedores')
         let ModalEliminarProveedor = document.getElementById('ModalEliminarProveedor')
 
         ModalEliminarProveedor.addEventListener('shown.bs.modal', event => {

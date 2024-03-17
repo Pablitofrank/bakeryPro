@@ -178,11 +178,9 @@
                 ?>
                 <input type="submit" value="Agregar" class="btn">
             </form>
-            
-            <div class="consulta">
-                <h2 class="titleContainer">Consulta Insumos</h2>
+            <div>
                 <form action="../../controlador/Insumos/consultar.php" method="post">
-                    <input type="submit" value="Consultar" class="btn">
+                    <input type="submit" value="Consultar" class="btn2">
                 </form>
             </div>
         </div>

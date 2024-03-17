@@ -8,6 +8,7 @@ if (isset($_POST['IdProveedores'])) {
 
     if ($conexion->query($sql) === TRUE) {
         echo "Proveedor eliminado con éxito.";
+        header('Location: consultar.php');
     } else {
         echo "Error al eliminar el Proveedor: " . $conexion->error;
     }

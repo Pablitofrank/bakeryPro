@@ -8,7 +8,7 @@ $IdInsumo = $_POST['IdInsumo'];
 $sql = "UPDATE tblinsumos SET NombreInsumo='$NombreInsumo', Stock='$Stock' WHERE IdInsumo=$IdInsumo";
 
 if ($conexion->query($sql) === TRUE) {
-    header('Location: ../../vista/html/insumos.php');
+    header('Location: ./consultar.php');
 } else {
     echo "Error al actualizar el registro: " . $conexion->error;
 }

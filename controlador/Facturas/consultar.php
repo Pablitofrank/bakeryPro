@@ -98,15 +98,15 @@
     
     <section class="home-section">
         <div class="container">
-            <h2>Resultado de la Consulta de Facturas</h2>
+            <h2 class="titleContainer">Resultado de la Consulta de Facturas</h2>
             
             <!-- Formulario de búsqueda y filtro -->
             <form action="" method="GET">
                 <label for="date">Fecha:</label>
-                <input type="date" id="date" name="date">
+                <input type="date" id="date" name="date" class="input-filtro">
                 
                 <label for="provider">Proveedor:</label>
-                <select id="provider" name="provider">
+                <select id="provider" name="provider" class="select-filtro">
                     <option value="">Todos los proveedores</option>
                     <!-- Aquí debes generar opciones dinámicas con los datos de tu base de datos -->
                     <?php

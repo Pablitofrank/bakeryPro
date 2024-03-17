@@ -524,6 +524,27 @@ tbody tr td img {
     margin: 0 6px;
 }
 
+/* Estilos para los filtros */
+
+.input-filtro, .select-filtro{
+    background-color: var(--text-input-field);
+    border: none;
+    border-radius: 8px;
+    height: 32px;
+    font-size: var(--md);
+    padding: 6px 12px;
+    margin: 0px 18px 25px 6px;
+}
+
+.container button[type="submit"] {
+    padding: 8px 20px;
+    background-color: var(--official-black);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 /* Estilos para los modales */
 
 .modal-footeer form{
