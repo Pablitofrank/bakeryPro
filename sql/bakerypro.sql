@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-03-2024 a las 16:17:51
+-- Tiempo de generación: 18-03-2024 a las 23:22:48
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -59,13 +59,22 @@ CREATE TABLE `tblentradasinsumos` (
 --
 
 CREATE TABLE `tblfactura` (
-  `IdFactura` int(5) NOT NULL,
+  `IdFactura` int(3) NOT NULL,
   `CantidadInsumo` decimal(5,0) NOT NULL,
   `NumeroFactura` varchar(20) NOT NULL,
   `Fecha` date NOT NULL,
+  `idInsumo` int(3) NOT NULL,
   `IdProveedor` int(3) NOT NULL,
   `IdUnidadMedida` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tblfactura`
+--
+
+INSERT INTO `tblfactura` (`IdFactura`, `CantidadInsumo`, `NumeroFactura`, `Fecha`, `idInsumo`, `IdProveedor`, `IdUnidadMedida`) VALUES
+(2, 100, '12', '1222-02-12', 8, 1, 1),
+(3, 100, '12', '1222-02-12', 8, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -88,7 +97,7 @@ CREATE TABLE `tblinfac` (
 CREATE TABLE `tblinsumos` (
   `IdInsumo` int(3) NOT NULL,
   `NombreInsumo` varchar(30) NOT NULL,
-  `Stock` int(5) NOT NULL,
+  `Stock` decimal(5,0) NOT NULL,
   `IdUnidadMedida` int(3) NOT NULL,
   `IdCategoria` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -98,8 +107,10 @@ CREATE TABLE `tblinsumos` (
 --
 
 INSERT INTO `tblinsumos` (`IdInsumo`, `NombreInsumo`, `Stock`, `IdUnidadMedida`, `IdCategoria`) VALUES
-(16, 'HUEVO', 4076, 4, 1),
-(18, 'harina', -61, 1, 1);
+(8, 'leche', -1462, 1, 1),
+(9, 'harina', -464, 1, 1),
+(11, 'a', 30, 1, 1),
+(12, 'Levadura', 500, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -118,9 +129,7 @@ CREATE TABLE `tblproductos` (
 --
 
 INSERT INTO `tblproductos` (`IdProducto`, `NombreProducto`, `Stock`) VALUES
-(48, '45', 0),
-(49, 'pana', 0),
-(50, 'pan costeño', 0);
+(37, 'Pan hojaldrado', 0);
 
 -- --------------------------------------------------------
 
@@ -143,8 +152,9 @@ CREATE TABLE `tblproveedores` (
 --
 
 INSERT INTO `tblproveedores` (`IdProveedores`, `NIT`, `RazonSocial`, `Contacto`, `Telefono`, `Correo`, `Direccion`) VALUES
-(1, 1324, 'asdf', '938', 9383, '973', '23'),
-(2, 23423, 'aaa', '2', 2, 'asd', 'asd');
+(1, 345, 'Colgate', '4534', 30000, '53453', '45345'),
+(3, 0, '234234', '234234', 2342342342, '42342', '3423'),
+(4, 121212, 'BIMBO', 'JUANITO EL CARTERO', 3044286371, 'BIMBO@GMAIL.COM', 'LA CASA DE SU CUCHA');
 
 -- --------------------------------------------------------
 
@@ -164,11 +174,8 @@ CREATE TABLE `tblrecetas` (
 --
 
 INSERT INTO `tblrecetas` (`CantidadInsumo`, `IdProducto`, `IdInsumo`, `IdUnidadMedida`) VALUES
-(22, 48, 16, 4),
-(22, 49, 16, 4),
-(20, 50, 16, 5),
-(22, 50, 18, 1),
-(55, 50, 18, 5);
+(12, 37, 8, 1),
+(12, 37, 9, 5);
 
 -- --------------------------------------------------------
 
@@ -186,8 +193,8 @@ CREATE TABLE `tblroles` (
 --
 
 INSERT INTO `tblroles` (`IdRol`, `Rol`) VALUES
-(1, 'Administrador'),
-(2, 'Empleado');
+(1, 'ADMINISTRADOR'),
+(2, 'EMPLEADO');
 
 -- --------------------------------------------------------
 
@@ -207,40 +214,16 @@ CREATE TABLE `tblsalidasinsumos` (
 --
 
 INSERT INTO `tblsalidasinsumos` (`IdSalidaInsumo`, `fecha`, `IdInsumo`, `cantidadInsumo`) VALUES
-(1, '2024-03-15', 15, 220),
-(2, '2024-03-15', 15, 220),
-(3, '2024-03-15', 15, 220),
-(4, '2024-03-15', 15, 220),
-(5, '2024-03-15', 15, 220),
-(6, '2024-03-15', 15, 220),
-(7, '2024-03-15', 15, 220),
-(8, '2024-03-15', 15, 220),
-(9, '2024-03-15', 15, 220),
-(10, '2024-03-15', 15, 220),
-(11, '2024-03-15', 16, 484),
-(12, '2024-03-15', 16, 4664),
-(13, '2024-03-15', 16, 44),
-(14, '2024-03-15', 16, 20),
-(15, '2024-03-15', 18, 22),
-(16, '2024-03-15', 18, 55),
-(17, '2024-03-15', 16, 40),
-(18, '2024-03-15', 18, 44),
-(19, '2024-03-15', 18, 110),
-(20, '2024-03-15', 16, 44),
-(21, '2024-03-15', 16, 44),
-(22, '2024-03-15', 16, 40),
-(23, '2024-03-15', 18, 44),
-(24, '2024-03-15', 18, 110),
-(25, '2024-03-15', 16, 20),
-(26, '2024-03-15', 18, 22),
-(27, '2024-03-15', 18, 55),
-(28, '2024-03-15', 16, 20),
-(29, '2024-03-15', 18, 22),
-(30, '2024-03-15', 18, 55),
-(31, '2024-03-15', 16, 20),
-(32, '2024-03-15', 18, 22),
-(33, '2024-03-15', 18, 55),
-(34, '2024-03-15', 16, 484);
+(1, '2024-03-15', 8, 12),
+(2, '2024-03-15', 9, 12),
+(3, '2024-03-18', 8, 12),
+(4, '2024-03-18', 9, 12),
+(5, '2024-03-18', 8, 120),
+(6, '2024-03-18', 9, 120),
+(7, '2024-03-18', 8, 1200),
+(8, '2024-03-18', 9, 1200),
+(9, '2024-03-18', 8, 120),
+(10, '2024-03-18', 9, 120);
 
 -- --------------------------------------------------------
 
@@ -285,9 +268,7 @@ CREATE TABLE `tblusuario` (
 --
 
 INSERT INTO `tblusuario` (`IdUsuario`, `Nombres`, `Apellidos`, `IdRol`, `Cedula`, `Telefono`, `Password`) VALUES
-(25, 'Sergio ', 'G.', 1, 1010, '52741', '1010'),
-(26, 'ege2', 'w1gwsgdgefg', 1, 0, 'fgdfgd', ''),
-(27, 'wgsf', 'jhkjfbds', 2, 0, 'fhgsdjg', '');
+(30, 'Andrés', 'Martínez', 1, 1000862445, '3044286371', '');
 
 --
 -- Índices para tablas volcadas
@@ -319,7 +300,6 @@ ALTER TABLE `tblfactura`
 -- Indices de la tabla `tblinfac`
 --
 ALTER TABLE `tblinfac`
-  ADD KEY `fac` (`IdFactura`),
   ADD KEY `ins` (`IdInsumo`);
 
 --
@@ -347,7 +327,8 @@ ALTER TABLE `tblproveedores`
 --
 ALTER TABLE `tblrecetas`
   ADD KEY `IdProducto` (`IdProducto`,`IdInsumo`),
-  ADD KEY `IdInsumo` (`IdInsumo`);
+  ADD KEY `IdInsumo` (`IdInsumo`),
+  ADD KEY `tblrecetas_ibfk_3` (`IdUnidadMedida`);
 
 --
 -- Indices de la tabla `tblroles`
@@ -396,31 +377,31 @@ ALTER TABLE `tblentradasinsumos`
 -- AUTO_INCREMENT de la tabla `tblfactura`
 --
 ALTER TABLE `tblfactura`
-  MODIFY `IdFactura` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdFactura` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tblinsumos`
 --
 ALTER TABLE `tblinsumos`
-  MODIFY `IdInsumo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `IdInsumo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `tblproductos`
 --
 ALTER TABLE `tblproductos`
-  MODIFY `IdProducto` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `IdProducto` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `tblproveedores`
 --
 ALTER TABLE `tblproveedores`
-  MODIFY `IdProveedores` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IdProveedores` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tblsalidasinsumos`
 --
 ALTER TABLE `tblsalidasinsumos`
-  MODIFY `IdSalidaInsumo` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `IdSalidaInsumo` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `tblunidadesmedidas`
@@ -455,7 +436,6 @@ ALTER TABLE `tblfactura`
 -- Filtros para la tabla `tblinfac`
 --
 ALTER TABLE `tblinfac`
-  ADD CONSTRAINT `fac` FOREIGN KEY (`IdFactura`) REFERENCES `tblfactura` (`IdFactura`),
   ADD CONSTRAINT `ins` FOREIGN KEY (`IdInsumo`) REFERENCES `tblinsumos` (`IdInsumo`);
 
 --
