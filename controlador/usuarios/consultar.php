@@ -142,6 +142,7 @@
                             <th>Rol</th>
                             <th>Cedula</th>
                             <th>Telefono</th>
+                            <th>Contraseña</th>
                             <th>Acciones</th>
                         </tr>";
                     while ($fila = $resultado->fetch_assoc()) {
@@ -151,6 +152,7 @@
                                 <td>".$fila["Rol"]."</td>
                                 <td>".$fila["Cedula"]."</td>
                                 <td>".$fila["Telefono"]."</td>
+                                <td>".$fila["Contraseña"]."</td>
                                 <td>
                                     <a href='editar.php?id=".$fila['IdUsuario']."'><img src='../../vista/img/editar.png' alt='editar'></a>
                                     <a href='#' class='btn3 btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#ModalEliminarUsuario' data-bs-id='".$fila['IdUsuario']."'><img src='../../vista/img/eliminar.png' alt='eliminar'></a>

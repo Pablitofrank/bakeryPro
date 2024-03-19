@@ -6,13 +6,14 @@
     $rol = $_POST["rol"];
     $cedula = $_POST['cedula'];
     $telefono = $_POST['telefono'];
+    $contraseña = $_POST['contraseña'];
 
     // Verifica si el valor de $rol existe en la tabla tblroles antes de la inserción
     $consultaRol = "SELECT IdRol FROM tblroles WHERE IdRol = '$rol'";
     $resultadoRol = $conexion->query($consultaRol);
 
     if ($resultadoRol->num_rows > 0) {
-        $sql = "INSERT INTO tblusuario (Nombres, Apellidos, IdRol, Cedula, Telefono) VALUES ('$nombres', '$apellidos', '$rol', '$cedula', '$telefono')";
+        $sql = "INSERT INTO tblusuario (Nombres, Apellidos, IdRol, Cedula, Telefono, Contraseña) VALUES ('$nombres', '$apellidos', '$rol', '$cedula', '$telefono',  $contraseña)";
 
         if ($conexion->query($sql) === TRUE) {
             header('Location: ../../vista/html/usuarios.php');

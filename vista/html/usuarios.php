@@ -115,7 +115,7 @@
 
             <li class="profile">
                 <div class="profile-details">
-                    <img src="profile.jpg" alt="profileImg">
+                    <img src="../img/profile.png" alt="profileImg">
                     <div class="name_job">
                         <div class="name"><?php echo $nombre; ?></div>
                         <div class="job"><?php echo $rol; ?></div>
@@ -134,10 +134,10 @@
         <div class="container">
             <h2 class="titleContainer">Agregar usuarios</h2>
             <form action="../../controlador/usuarios/insertar.php" method="post" class="form">
-                <label for="nombres" class="label">Nombres:</label>
+                <label for="nombres">Nombres:</label>
                 <input type="text" name="nombres" required class="input"><br> 
 
-                <label for="apellidos" class="label">Apellidos:</label>
+                <label for="apellidos">Apellidos:</label>
                 <input type="text" name="apellidos" required class="input"><br>
 
                     <?php
@@ -146,7 +146,7 @@
                          $result = $conexion->query($sql);
      
                          // Recorrer datos y crear options
-                         echo "<label for='rol' class='label'>Rol:</label>
+                         echo "<label for='rol'>Rol:</label>
                              
                          <select name='rol' id='opcion' class='input'>";
                          if ($result->num_rows > 0) {
@@ -171,8 +171,9 @@
                              }
                          }
                     ?>
-                <label for="cedula" class="label">Cedula:</label> <input type="text" name="cedula" required class="input"><br>
-                <label for="telefono" class="label">Telefono:</label> <input type="text" name="telefono" required class="input"><br>
+                <label for="cedula">Cedula:</label> <input type="text" name="cedula" required class="input"><br>
+                <label for="telefono">Telefono:</label> <input type="text" name="telefono" required class="input"><br>
+                <label for="contraseña">Contraseña:</label> <input type="password" name="contraseña" required class="input"><br>
                 
                 <input type="submit" value="Agregar" class="btn">
             </form>

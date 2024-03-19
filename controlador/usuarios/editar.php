@@ -186,6 +186,9 @@
                 <label for="telefono">Telefono:</label>
                 <input type="text" name="telefono" value="<?php echo $fila['Telefono']; ?>" class="input"><br>
 
+                <label for="contraseña">Contraseña:</label>
+                <input type="text" name="contraseña" value="<?php echo $fila['Contraseña']; ?>" class="input"><br>
+
                 <input type="submit" value="Actualizar" class="btn">
             </form>
         </div>

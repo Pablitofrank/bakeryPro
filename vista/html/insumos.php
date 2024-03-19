@@ -113,7 +113,7 @@
 
             <li class="profile">
                 <div class="profile-details">
-                    <img src="profile.jpg" alt="profileImg">
+                    <img src="../img/profile.png" alt="profileImg">
                     <div class="name_job">
                         <div class="name"><?php echo $nombre; ?></div>
                         <div class="job"><?php echo $rol; ?></div>
@@ -135,8 +135,6 @@
                 <label for="nombreInsumo" class='label'>Nombre Insumo:</label>
                 <input type="text" name="nombreInsumo" required class="input"><br>
 
-                <label for="stock" class='label'>Stock:</label>
-                <input type="text" name="stock" required class="input"><br>
                 <?php
                     include '../../modelo/conexion.php';
                     $sql = "SELECT * FROM tblunidadesmedidas";

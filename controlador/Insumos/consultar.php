@@ -5,19 +5,8 @@
         exit;
     }
 
-    // Conexión a la base de datos (reemplaza los valores de conexión con los tuyos)
-    $servername = "localhost";
-    $username = "root"; // Cambia esto por tu nombre de usuario de MySQL
-    $password = ""; // Cambia esto por tu contraseña de MySQL
-    $dbname = "bakerypro";
+    include '../../modelo/conexion.php';
 
-    // Crear conexión
-    $conexion = mysqli_connect($servername, $username, $password, $dbname);
-
-    // Verificar la conexión
-    if (!$conexion) {
-        die("Conexión fallida: " . mysqli_connect_error());
-    }
 
     // Consulta para obtener el nombre del usuario y su rol
     $cedula = $_SESSION['cedula'];
@@ -35,8 +24,6 @@
     }
 
     mysqli_close($conexion);
-
-    include '../../modelo/conexion.php';
 ?>
 
 <!DOCTYPE html>
@@ -182,7 +169,6 @@
                 if ($resultado->num_rows > 0) {
                     echo "<table border='1'>
                             <tr>
-                                <th>ID Insumo</th>
                                 <th>Nombre Insumo</th>
                                 <th>Stock</th>
                                 <th>Unidad de Medida</th>
@@ -190,7 +176,6 @@
                             </tr>";
                     while ($fila = $resultado->fetch_assoc()) {
                         echo "<tr>
-                                <td>{$fila['IdInsumo']}</td>
                                 <td>{$fila["NombreInsumo"]}</td>
                                 <td>{$fila["Stock"]}</td>
                                 <td>{$fila["medida"]}</td>

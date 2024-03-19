@@ -5,19 +5,7 @@
         exit;
     }
 
-    // Conexión a la base de datos (reemplaza los valores de conexión con los tuyos)
-    $servername = "localhost";
-    $username = "root"; // Cambia esto por tu nombre de usuario de MySQL
-    $password = ""; // Cambia esto por tu contraseña de MySQL
-    $dbname = "bakerypro";
-
-    // Crear conexión
-    $conexion = mysqli_connect($servername, $username, $password, $dbname);
-
-    // Verificar la conexión
-    if (!$conexion) {
-        die("Conexión fallida: " . mysqli_connect_error());
-    }
+       include '../../modelo/conexion.php';
 
     // Consulta para obtener el nombre del usuario y su rol
     $cedula = $_SESSION['cedula'];
@@ -36,7 +24,6 @@
 
     mysqli_close($conexion);
 
-    include '../../modelo/conexion.php';
 ?>
 
 <!DOCTYPE html>
@@ -161,8 +148,25 @@
                 <label for="Stock">Stock:</label>
                 <input type="text" name="Stock" value="<?php echo $fila['Stock']; ?>" class="input"><br>
                 
-                <label for="medida">Medida:</label>
-                <input type="text" name="medida" value="<?php echo $fila['IdUnidadMedida']; ?>" class="input"><br>
+                <?php
+                    include '../../modelo/conexion.php';
+                    $sql = "SELECT * FROM tblunidadesmedidas";
+                    $result = $conexion->query($sql);
+                    
+                    // Recorrer datos y crear options
+                    echo "<label for='medida'>Medida:</label>
+                    <select name='idUnidadMedida' id='medida' class='input'>";
+                    
+                    if ($result->num_rows > 0) {
+                        // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                            echo "<option value='" . $row["IdUnidadMedida"] . "'>" . $row["medida"] . "</option>";
+                        }
+                    } else {
+                        echo "<option value=''>No hay unidades de medida disponibles</option>";
+                    }
+                    echo "</select>";
+                ?>
                 
                 <?php
                     include '../../modelo/conexion.php';
@@ -171,7 +175,7 @@
                     $result = $conexion->query($sql);
                     
                     // Crear opciones para las categorías
-                    echo "<label for='categoria' class='label'>Categoría:</label>
+                    echo "<label for='categoria'>Categoría:</label>
                     <select name='idCategoria' id='categoria' class='input'>";
                     
                     if ($result->num_rows > 0) {

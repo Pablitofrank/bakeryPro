@@ -143,7 +143,7 @@
 
             <li class="profile">
                 <div class="profile-details">
-                    <img src="profile.jpg" alt="profileImg">
+                    <img src="../img/profile.png" alt="profileImg">
                     <div class="name_job">
                         <div class="name"><?php echo $nombre; ?></div>
                         <div class="job"><?php echo $rol; ?></div>
