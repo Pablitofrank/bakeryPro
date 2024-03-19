@@ -58,7 +58,7 @@
 
 </head>
 <body>
-<div class="sidebar open">
+    <div class="sidebar open">
         <div class="logo-details">
             <a href="../../dashboard.php" class="logo_link">
                 <span class="logo_name">BakeryPro</span>
@@ -135,7 +135,7 @@
         <div class="container">
             <h2 class="titleContainer">Agregar Receta</h2>
             <form action="../../controlador/Recetas/insertar.php" method="post" class="form" id="receta-form">
-                <label for="Producto" class="label">Producto:</label> 
+                <label for="Producto">Producto:</label> 
                 <input type="text" name="Producto" class="input" required><br>
                     
                 <div id="contenedor-insumos">
@@ -163,7 +163,7 @@
                         $result = $conexion->query($sql);
 
                         // Recorrer datos y crear options
-                        echo "<label for='medida' class='label'></label>
+                        echo "<label for='medida'></label>
                         <select name='idUnidadMedida[]' id='medida' class='input'>";
 
                         if ($result->num_rows > 0) {
@@ -179,8 +179,8 @@
                 </div>
             </div><br>
             <div class="button-container">
-                <button type="button" onclick="eliminarUltimoElemento()" class="btnRecetas">Eliminar Último</button>
                 <button type="button" onclick="agregarElemento()" class="btnRecetas">Agregar Insumo y Cantidad</button>
+                <button type="button" onclick="eliminarUltimoElemento()" class="btnRecetas">Eliminar Último</button>
             </div>
 
             <br><br>
@@ -189,7 +189,7 @@
         </form>
         <div class="consultar-container">
             <form action="../../controlador/recetas/consultar.php" method="post">
-                <input type="submit" value="Consultar" class="btn-consultar">
+                <input type="submit" value="Consultar" class="btn2">
             </form>
         </div>
     </div>

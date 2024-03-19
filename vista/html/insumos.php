@@ -132,7 +132,7 @@
       <div class="container">
         <h2 class="titleContainer">Agregar Insumos</h2>
         <form action="../../controlador/insumos/insertar.php" method="post" class="form">
-                <label for="nombreInsumo" class='label'>Nombre Insumo:</label>
+                <label for="nombreInsumo">Nombre Insumo:</label>
                 <input type="text" name="nombreInsumo" required class="input"><br>
 
                 <?php
@@ -141,7 +141,7 @@
                     $result = $conexion->query($sql);
                     
                     // Recorrer datos y crear options
-                    echo "<label for='medida' class='label'>Medida:</label>
+                    echo "<label for='medida'>Medida:</label>
                     <select name='idUnidadMedida' id='medida' class='input'>";
                     
                     if ($result->num_rows > 0) {
@@ -154,6 +154,7 @@
                     }
                     echo "</select>";
                 ?>
+                <br>
                 <?php
                     include '../../modelo/conexion.php';
                     // Consultar las categorías de insumos disponibles
@@ -161,7 +162,7 @@
                     $result = $conexion->query($sql);
                     
                     // Crear opciones para las categorías
-                    echo "<label for='categoria' class='label'>Categoría:</label>
+                    echo "<label for='categoria'>Categoría:</label>
                     <select name='idCategoria' id='categoria' class='input'>";
                     
                     if ($result->num_rows > 0) {
@@ -174,6 +175,7 @@
                     }
                     echo "</select>";
                 ?>
+                <br>
                 <input type="submit" value="Agregar" class="btn">
             </form>
             <div>

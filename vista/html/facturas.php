@@ -153,7 +153,7 @@
                 } else {
                     echo "0 results";
                 }
-                echo "</select>";
+                echo "</select><br>";
                 
                 // Actualizar valor del option en la base de datos
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -207,13 +207,18 @@
                         echo "</select>";
                     ?>
                 </div>
-            </div> 
-            <button type="button" onclick="eliminarUltimoElemento()" class="btn">Eliminar Último</button>
-            <button type="button" onclick="agregarElemento()" class="btn">Agregar Insumo y Cantidad</button>
+            </div>
+            <br>
+            <div class="button-container">
+                <button type="button" onclick="agregarElemento()" class="btnRecetas">Agregar Insumo y Cantidad</button>
+                <button type="button" onclick="eliminarUltimoElemento()" class="btnRecetas">Eliminar Último</button>
+            </div>
             
+            <br><br>
+
             <input type="submit" value="Agregar" class="btn">
         </form>
-        <div class="consulta">
+        <div class="">
             <form action="../../controlador/facturas/consultar.php" method="post">
                 <input type="submit" value="Consultar" class="btn2">
             </form>

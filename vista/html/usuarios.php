@@ -177,7 +177,6 @@
                 
                 <input type="submit" value="Agregar" class="btn">
             </form>
-
             <a href="../../controlador/usuarios/consultar.php">
                 <input type="submit" value="Consultar" class="btn2">
             </a>

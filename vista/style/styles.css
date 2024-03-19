@@ -448,7 +448,7 @@
     font-size: var(--md);
     padding: 6px 12px;
     width: 100%;
-    margin-bottom: 16px;
+    margin: 4px;
 }
 
 .button-container {
@@ -483,15 +483,18 @@
 }
 /* Este input es el del boton negro de consultar */
 .btn2 {
-    width: 189px;
+    width: 180px; /* Ancho del 48% para dejar espacio entre los botones */
     height:  40px;
     border:  none;
     border-radius: 5px;
     transition: 1s;
     color: var(--white);
-
     background: var(--yellow);
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 .btn3{
@@ -504,7 +507,7 @@
 }
 
 .btn-eli{
-    background: var(--hospital-green);
+    background: var(--hospital-green)!important;
 }
 
 .btn-eli:hover{
@@ -533,7 +536,14 @@
 .consulta{
     margin: 20px;
 }
-
+#contenedor-insumos div {
+  display: flex;   
+}
+#contenedor-facturas {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Centra los elementos horizontalmente */
+}
 /* consultas */
 
 table {    
@@ -607,6 +617,24 @@ tbody tr td img {
 .modal-footeer .btn{
     margin: 0px 10px 10px 10px ;
 }
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Espacio igual entre los botones */
+    width: 100%; /* Ancho del contenedor */
+    margin-top: 20px; /* Ajuste de margen superior según sea necesario */
+}
+
+.btn {
+    width: 180px; /* Ancho del 48% para dejar espacio entre los botones */
+    height:  40px;
+    border:  none;
+    border-radius: 5px;
+    transition: 1s;
+    color: var(--white);
+    background: var(--official-black);
+    cursor: pointer;
+}
 /* Seletores para eliminar los botones de input number */
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -676,3 +704,4 @@ input[type=number] { -moz-appearance:textfield; }
         display: none;
     }
 }
+

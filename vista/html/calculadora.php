@@ -181,10 +181,10 @@
 
                             $conexion->close();
                         ?>
-                    </select>
+                    </select><br><br>
 
-                    <input type='number' name='cantidadDeseada' placeholder='Cantidad' class='input' required>
-                    <input type="submit" value="Calcular" class="btn"> <br>
+                    <input type='number' name='cantidadDeseada' placeholder='Cantidad' class='input' required><br><br>
+                    <input type="submit" value="Calcular" class="btn2"> <br>
                             
                     <?php
                         include '../../modelo/conexion.php';

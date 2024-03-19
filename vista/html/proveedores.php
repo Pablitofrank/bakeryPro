@@ -133,22 +133,22 @@
 
             <form action="../../controlador/Proveedores/insertar.php" method="post" class="form">
                 
-                <label for="nit" class="label">NIT:</label>
+                <label for="nit">NIT:</label>
                     <input type="text" name="NIT" required class="input"><br>
 
-                <label for="razonSocial" class="label">Razon social:</label>
+                <label for="razonSocial">Razon social:</label>
                     <input type="text" name="RazonSocial" required class="input"><br>
 
-                <label for="contacto" class="label">Contacto:</label>
+                <label for="contacto">Contacto:</label>
                     <input type="text" name="Contacto" required class="input"><br>
 
-                <label for="telefono" class="label">Telefono:</label>
+                <label for="telefono">Telefono:</label>
                     <input type="text" name="Telefono" required class="input"><br>
 
-                <label for="correo" class="label">Correo:</label>
+                <label for="correo">Correo:</label>
                     <input type="text" name="Correo" required class="input"><br>
 
-                <label for="direccion" class="label">Direccion:</label>
+                <label for="direccion">Direccion:</label>
                     <input type="text" name="Direccion" required class="input"><br>
 
                 <!-- Nuevo campo para el rol -->
