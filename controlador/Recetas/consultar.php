@@ -146,9 +146,7 @@
         <?php if ($resultado->num_rows > 0) { ?>
             <table border="1">
                 <tr>
-                <th>ID Producto</th>
                 <th>Nombre Producto</th>
-                <th>ID Insumo</th>
                 <th>Nombre Insumo</th>
                 <th>Cantidad</th>
                 <th>Unidad de Medida</th>
@@ -157,9 +155,7 @@
                 </tr>
                 <?php while ($fila = $resultado->fetch_assoc()) { ?>
                     <tr>
-                        <td><?php echo $fila['IdProducto']; ?></td>
                         <td><?php echo $fila["NombreProducto"]; ?></td>
-                        <td><?php echo $fila["IdInsumo"]; ?></td>
                         <td><?php echo $fila["NombreInsumo"]; ?></td>
                         <td><?php echo $fila["CantidadInsumo"]; ?></td>
                         <td><?php echo $fila["medida"]; ?></td>

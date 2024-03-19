@@ -170,7 +170,7 @@
                             echo "</tr>";
                         }
                         echo "</table>";
-                        echo "<input type='submit' value='Guardar Cambios'>";
+                        echo "<input type='submit' value='ACTUALIZAR' class='btn guardar-cambios'>";
                         echo "</form>";
                     } else {
                         echo "No se encontraron insumos asociados a este producto.";
@@ -181,6 +181,8 @@
                     echo "No se proporcionó un IdProducto para editar.";
                 }
             ?>
+            <br>
+            <a href="consultar.php" class="volverConsultar2">VOLVER</a>
         </div>
     </section>
 </body>

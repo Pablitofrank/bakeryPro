@@ -292,6 +292,22 @@
     align-items: center;
     margin: auto;
 }
+.volverConsultar2{
+    height: 40px;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    background: var(--yellow);
+    border-radius: 5px;
+    align-items: center;
+    margin: auto;
+}
+.guardar-cambios {
+    margin-top: 50px; /* Ajusta el margen superior según sea necesario */
+    display: block; /* Cambia a bloque para que ocupe todo el ancho disponible */
+    float: left; /* Utiliza float para colocarlo a la izquierda */
+}
+
 
 .login {
     display: flex;
@@ -435,6 +451,25 @@
     margin-bottom: 16px;
 }
 
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Espacio igual entre los botones */
+    width: 500px; /* Ancho del contenedor */
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+}
+
+.btnRecetas {
+    width: calc(50% - 20px); /* Ancho del 50% del contenedor menos un pequeño espacio entre botones */
+    height:  40px;
+    border:  none;
+    border-radius: 5px;
+    transition: 1s;
+    color: var(--white);
+    background: var(--official-black);
+    cursor: pointer;
+}
+
+
 .btn{
     width: 230px;
     height:  40px;
@@ -475,6 +510,24 @@
 .btn-eli:hover{
     background: var(--hospital-green);
     color: var(--text-input-field);
+}
+
+.consultar-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 40px; 
+}
+
+.btn-consultar {
+    width: 230px;
+    height:  40px;
+    border: none;
+    border-radius: 5px;
+    transition: 1s;
+    color: var(--white);
+    background: var(--yellow);
+    cursor: pointer;
 }
 
 .consulta{
