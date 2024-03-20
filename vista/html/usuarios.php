@@ -171,9 +171,14 @@
                              }
                          }
                     ?>
-                <label for="cedula">Cedula:</label> <input type="text" name="cedula" required class="input"><br>
-                <label for="telefono">Telefono:</label> <input type="text" name="telefono" required class="input"><br>
-                <label for="contraseña">Contraseña:</label> <input type="password" name="contraseña" required class="input"><br>
+                <label for="cedula">Cedula:</label>
+                <input type="number" name="cedula" required class="input"><br>
+
+                <label for="telefono">Telefono:</label>
+                <input type="number" name="telefono" required class="input"><br>
+
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" name="contraseña" required class="input"><br>
                 
                 <input type="submit" value="Agregar" class="btn">
             </form>

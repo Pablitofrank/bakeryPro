@@ -2,13 +2,13 @@
 include '../../modelo/conexion.php';
 
 $cedula = $_POST['cedula'];
-$password = $_POST['Password'];
+$Contraseña = $_POST['Contraseña'];
 session_start();
 $_SESSION['cedula'] = $cedula;
 
 $conexion = mysqli_connect("localhost", "root", "", "bakerypro");
 
-$consulta = "SELECT * FROM tblusuario WHERE cedula='$cedula' AND password='$password'";
+$consulta = "SELECT * FROM tblusuario WHERE cedula='$cedula' AND Contraseña='$Contraseña'";
 $resultado = mysqli_query($conexion, $consulta);
 
 $filas = mysqli_num_rows($resultado);

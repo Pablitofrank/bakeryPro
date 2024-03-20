@@ -21,7 +21,7 @@
                     <input type="number" placeholder="13245" name="cedula" class="input" required></><br>
                     
                     <label for="new-password" class="label">Password</label>
-                    <input type="password" placeholder="*********" name="Password" class="input" required></p><br>
+                    <input type="password" placeholder="*********" name="Contraseña" class="input" required></p><br>
                 
                     <input type="submit" value="Ingresar" class="btn">
             </form>
