@@ -268,7 +268,7 @@ CREATE TABLE `tblusuario` (
 --
 
 INSERT INTO `tblusuario` (`IdUsuario`, `Nombres`, `Apellidos`, `IdRol`, `Cedula`, `Telefono`, `Password`) VALUES
-(30, 'Andrés', 'Martínez', 1, 1000862445, '3044286371', '');
+(30, 'Andrés', 'Martínez', 1, 1000862445, '3044286371', '1000862445');
 
 --
 -- Índices para tablas volcadas
