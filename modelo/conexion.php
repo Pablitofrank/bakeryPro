@@ -1,17 +1,14 @@
 <?php
-// Railway inyecta estas variables automáticamente si las configuramos
-$servername = getenv('servername') ?: "localhost";
-$username   = getenv('username') ?: "root";
-$password   = getenv('password') ?: "";
-$dbname     = getenv('dbname') ?: "bakerypro";
-$port       = getenv('MYSQLPORT') ?: 3306; 
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bakerypro";
 
-// Es vital incluir el puerto para conexiones en la nube
-$conexion = new mysqli($servername, $username, $password, $dbname, $port);
+// Crear conexión
+$conexion = new mysqli($servername, $username, $password, $dbname);
 
+// Verificar la conexión
 if ($conexion->connect_error) {
-    // Esto te ayudará a ver el error real en los logs de Railway
-    error_log("Fallo de conexión: " . $conexion->connect_error);
-    die("Error interno del servidor.");
+    die("Conexión fallida: " . $conexion->connect_error);
 }
 ?>
